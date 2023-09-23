@@ -1,9 +1,12 @@
 package com.mycompany.oop;
-public class Slot {
+
+
+public class Slot{
     private String venue;
     private String desc;
     private String startTime;
     private String endTime;
+    private String slotDate;
     private int seatNo;
     private double price;
     
@@ -16,11 +19,12 @@ public class Slot {
         price = 0.00;
     }
     
-    public Slot(String venue, String desc, String startTime, String endTime, int seatNo, double price){
+    public Slot(String venue, String desc, String startTime, String endTime, String slotDate, int seatNo, double price){
         this.venue = venue;
         this.desc = desc;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.slotDate = slotDate;
         this.seatNo = seatNo; 
         this.price = price;
     }
@@ -39,6 +43,10 @@ public class Slot {
     public String getEndTime(){
         return endTime;
     }
+    
+   public String getSlotDate(){
+       return slotDate;
+   }
     public int getSeatNo(){
         return seatNo;
     }
@@ -46,11 +54,15 @@ public class Slot {
         return price;
     }
     public String toString(){
-        return String.format("\nVenue: %s"
+        return String.format
+                ( "\n=====================================================" 
+                + "\nVenue: %s"
                 + "\nDescription: %s"
-                + "\nStart time: %s"
-                + "\nEnd time: %s"
+                + "\nTime: %s - %s"            
+                + "\t\t\tDate: %s"
                 + "\nNumber of Seat: %d"
-                + "\nPrice: RM%.2f", venue, desc, startTime, endTime, seatNo, price);
+                + "\t\t\tPrice: RM%.2f"
+                + "\n=====================================================\n", 
+                venue, desc, startTime, endTime, slotDate, seatNo, price);
     }
 }

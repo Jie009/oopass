@@ -29,6 +29,9 @@ public class SlotBooking {
     public String getEndTime(){
         return slot.getEndTime();
     }
+    public String getSlotDate(){
+        return slot.getSlotDate();
+    }
     public int getSeatNo(){
         return slot.getSeatNo();
     }
@@ -53,14 +56,17 @@ public class SlotBooking {
     }
     
     public String toString() {
-        return String.format("\nVenue: %s"
-                + "\nStart time: %s"
-                + "\nEnd time: %s"
+        return String.format
+                ( "\n=====================================================" 
+                + "\nVenue: %s"               
+                + "\nTime: %s - %s"            
+                + "\t\t\tDate: %s"
                 + "\nNumber of Seat: %d"
-                + "\nPrice: RM%.2f"
+                + "\t\t\tPrice: RM%.2f"
                 + "\nPayment Method: %s"
-                + "\nSpeaker: %s",
-                slot.getVenue(), slot.getStartTime(), slot.getEndTime(), slot.getSeatNo(), slot.getPrice(), payment.getMethod(), speaker);
+                + "\nSpeaker: %s"
+                + "\n=====================================================" ,
+                slot.getVenue(), slot.getStartTime(), slot.getEndTime(), slot.getSlotDate(), slot.getSeatNo(), slot.getPrice(), payment.getMethod(), speaker);
         }
 }
 
