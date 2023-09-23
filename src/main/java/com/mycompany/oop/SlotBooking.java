@@ -2,6 +2,7 @@ package com.mycompany.oop;
 
 import static com.mycompany.oop.OOP.clScr;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.InputMismatchException;
@@ -13,16 +14,21 @@ public class SlotBooking {
     private String speaker;
     private Slot slot;
     private Payment payment;
+
     private static int numOfBooking = 0;
+    private ArrayList<SlotBooking> bookingList; //added
     
     private static Payment paymentClass = new Payment();
     
     public SlotBooking(String speaker, Slot slot, Payment payment){
+
         this.speaker = speaker;
         this.slot = slot;
         this.payment = payment;
         numOfBooking++;
+        bookingList = new ArrayList<>();
     }
+
     public String getSpeaker(){
         return speaker;
     }
@@ -63,6 +69,24 @@ public class SlotBooking {
     public static int getNumOfBooking(){
         return numOfBooking;
     }
+    
+    public void addSlotBooking(SlotBooking slotbooking){
+        
+        
+        bookingList.add(slotbooking);
+    }
+    
+    public void deleteSlotBooking(){
+        
+        bookingList.clear();
+    }    
+    
+    public ArrayList<SlotBooking> getBookingList(){
+        
+        return bookingList;
+    }    
+    
+    
     
     public String toString() {
         return String.format
@@ -184,7 +208,7 @@ public class SlotBooking {
                 }
             } 
         }
-    }
+    } 
     
     public static void contBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots){
         clScr();
