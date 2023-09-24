@@ -28,6 +28,17 @@ public class SlotBooking {
         numOfBooking++;
         bookingList = new ArrayList<>();
     }
+    
+    public void setSeatNo(int seatNo){
+        
+        slot.setSeatNo(seatNo);
+    }
+    
+    public String getID(){
+     
+        return slot.getID();
+    }
+
 
     public String getSpeaker(){
         return speaker;
@@ -38,6 +49,16 @@ public class SlotBooking {
     public String getDesc(){
         return slot.getDesc();
     }
+    
+    public Date getStartDate(){
+        
+        return slot.getStartDate();
+    }
+    public Date getEndDate(){
+        
+        return slot.getEndDate();
+    } 
+    
     public String getStartTime(){
         return slot.getStartTime();
     }
@@ -134,7 +155,7 @@ public class SlotBooking {
             }
 
             else if (choice == 0){
-                System.exit(0);
+                break;
             }
 
             else
