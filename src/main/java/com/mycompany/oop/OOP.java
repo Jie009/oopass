@@ -17,111 +17,15 @@ public class OOP {
         User admin = new User("test", "test", "Jason", "Admin", "admin@example.com");
         User speaker = new User("test2", "test2", "Jane", "Speaker", "speaker@example.com");
         User attendee = new User("test3", "test3", "Ali", "Attendee", "attendee@example.com");
- 
+        welcomePage wp = new welcomePage();
         // Add the sample users to the user list
         admin.updateUserList();
         speaker.updateUserList();
         attendee.updateUserList();
-        Scanner scanner = new Scanner(System.in);
-        boolean cont = true;
-        boolean bigLoop = true;
-        String category = "";
         
-        System.out.println("Welcome to the Login and Registration System!");
-        
-        while(bigLoop == true){
-            
-            do {
-
-                System.out.println("Menu:");
-                System.out.println("1. Login");
-                System.out.println("2. Register");
-                System.out.println("3. Exit");
-                System.out.print("Please enter the number: ");
-                int choice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline
-
-                switch (choice) {
-                    case 1:
-                        // Call the Login class
-                        Login login = new Login();
-                        category = login.loginProcess();
-                        if(category != null){
-
-                            cont = false;
-                        }
-                        break;
-
-                    case 2:
-                        // Call the Registration class
-                        Registration.main(new String[0]);
-
-                    case 3:
-                        System.out.println("Thank you. Goodbye!");
-                        System.exit(0);
-                    default:
-                        System.out.println("Invalid choice");
-                }          
-
-            }while (cont == true);
-
-
-            boolean userCont = true;
-            Date date;
-            Time time;
-            int choice;
-
-
-            while(userCont == true){
-
-                if(category.equals("Admin")){
-
-                    System.out.println("Admin Menu");
-                    System.out.println("---------------------");
-                    System.out.println("1 - Monitor");
-                    System.out.println("2 - Report");
-                    System.out.println("3 - Logout"); 
-                    System.out.println("---------------------");
-                    System.out.print("Choose an option: ");
-                    choice = scanner.nextInt();
-                    userCont = menu(choice, category, admin);
-
-
-                }else if(category.equals("Speaker")){
-
-                    System.out.println("Speaker Menu");
-                    System.out.println("---------------------");
-                    System.out.println("1 - Slot Booking");
-                    System.out.println("2 - Report");              
-                    System.out.println("3 - Advertisement");                
-                    System.out.println("4 - Logout");                
-                    System.out.println("---------------------");
-                    System.out.print("Choose an option: ");
-                    choice = scanner.nextInt();
-                    userCont = menu(choice, category, speaker);
-
-                }else if(category.equals("Attendee")){
-
-                    System.out.println("Attendee Menu");
-                    System.out.println("---------------------");
-                    System.out.println("1 - Enroll Seminar");
-                    System.out.println("2 - Logout");                
-                    System.out.println("---------------------");
-                    System.out.print("Choose an option: ");
-                    choice = scanner.nextInt();
-                    userCont = menu(choice, category, attendee);
-
-                }
-
-
-            }         
-        
-        
-        
-        }
-        
-
-    }
+        wp.welcomePage(admin, speaker, attendee);
+    }    
+    
 
     public static void clScr(){
         for (int i = 0; i < 40; i++) {
@@ -130,6 +34,7 @@ public class OOP {
     }
     
         
+    // Menu screen for speaker
     public static boolean menu(int choice, String category, User user){
         
 
@@ -257,7 +162,6 @@ public class OOP {
         }else if(category.equals("Attendee")){
             
             if(choice == 1){
-                
                 
                
                 

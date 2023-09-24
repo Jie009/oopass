@@ -278,14 +278,16 @@ public class SlotBooking {
                     availableSlots.remove(choice2);
 
                 }
+                else if (choice2 == 0){
+                    eventBooking(scanner, speaker, sb, payment, availableSlots);
+                }
                 else{
                     System.out.println("Payment canceled. Returning to booking...");
                 }
                 break;
             }
             else if (choice2 == quit){
-                System.out.print("Test ");
-                break;
+                eventBooking(scanner, speaker, sb, payment, availableSlots);
             }
             else
                 System.out.println("Invalid choice. Please try again.");
