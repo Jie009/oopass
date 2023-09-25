@@ -19,7 +19,7 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Report {
+public class Report extends ReportAbstract {
     
     private String title;
     private SeminarEnroll seminarEnroll;
