@@ -4,29 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserStore {
-    private List<User> userList;
+    private List<Admin> adminList;
+    private List<Speaker> speakerList;
+    private List<Attendee> attendeeList;
 
     public UserStore() {
-        this.userList = new ArrayList<>();
+        this.adminList = new ArrayList<>();
+        this.speakerList = new ArrayList<>();
+        this.attendeeList = new ArrayList<>();
     }
 
-    public void addUser(User user) {
-        userList.add(user);
+    public void addAdmin(Admin admin) {
+        adminList.add(admin);
     }
 
-    public User getUserById(String id) {
-        for (User user : userList) {
-            if (user.getid().equals(id)) {
-                return user;
-            }
-        }
-        return null;
+    public void addSpeaker(Speaker speaker) {
+        speakerList.add(speaker);
     }
 
-    // Implement other methods to manage users as needed
-
-    public List<User> getAllUsers() {
-        return userList;
+    public void addAttendee(Attendee attendee) {
+        attendeeList.add(attendee);
     }
 }
 

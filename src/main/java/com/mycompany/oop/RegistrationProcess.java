@@ -3,11 +3,11 @@ package com.mycompany.oop;
 import static com.mycompany.oop.OOP.clScr;
 import static com.mycompany.oop.welcomePage.welcomePage;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class RegistrationProcess {
-    public static void RegistrationProcess(UserStore userStore) {
-        Scanner scanner = new Scanner(System.in);              
+    public static void RegistrationProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner) {          
         clScr();
         System.out.println("Registration Options:");
         System.out.println("---------------------");
@@ -25,11 +25,10 @@ public class RegistrationProcess {
             scanner.nextLine();
         }
         if (choice == 0){
-            welcomePage(userStore);
+            welcomePage(admins, speakers, attendees, scanner);
 
         }
         else if (choice >0 && choice < 3){
-            User newUser = null;
             scanner.nextLine();
             clScr();
             System.out.print("Enter ID: ");
@@ -45,27 +44,23 @@ public class RegistrationProcess {
             String contactInfo = scanner.nextLine();
             switch (choice) {
                 case 1:
-                    newUser = new Speaker(id, password, name, contactInfo);
+                    Registration.registerUser(id, password, name, "Speaker",contactInfo, admins, speakers, attendees);
                     break;
                 case 2:
-                    newUser = new Attendee(id, password, name, contactInfo);
+                    Registration.registerUser(id, password, name, "Attendee",contactInfo, admins, speakers, attendees);
                     break;
                 default:
                     System.out.println("Invalid choice.");
                     break;
             }
-            if (newUser != null) {
-                        userStore.addUser(newUser);
-                        System.out.println("Registration successful!");
-                        
-                        System.out.println("\nPress any key to continue...");
-                        scanner.nextLine();
-                        welcomePage(userStore);
-                    }
+
+            System.out.println("Registration successful!");
+
+            System.out.println("\nPress any key to continue...");
+            scanner.nextLine();
+            welcomePage(admins, speakers, attendees, scanner);                   
         }
-        else{
-            System.out.println("Invalid choice, please try again");
-        }
+
 
     }
 }

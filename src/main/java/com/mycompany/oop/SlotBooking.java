@@ -1,6 +1,7 @@
 package com.mycompany.oop;
 
 import static com.mycompany.oop.OOP.clScr;
+import static com.mycompany.oop.welcomePage.welcomePage;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,6 +24,7 @@ public class SlotBooking {
     public SlotBooking(String speaker, Slot slot, Payment payment){
 
         this.speaker = speaker;
+        speaker = Login.userId();
         this.slot = slot;
         this.payment = payment;
         numOfBooking++;
@@ -123,7 +125,7 @@ public class SlotBooking {
                 slot.getVenue(), slot.getStartTime(), slot.getEndTime(), slot.getSlotDate(), slot.getSeatNo(), slot.getPrice(), payment.getMethod(), speaker);
         }
     
-    public static void eventBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots){
+    public static void eventBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees){
         
         while(true){
             clScr();
@@ -143,20 +145,20 @@ public class SlotBooking {
             }
             
             if (choice == 1){
-                bookingDetails(scanner, speaker, sb, payment, availableSlots);
+                bookingDetails(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
             }    
 
             else if (choice == 2){
-                contBooking(scanner, speaker, sb, payment, availableSlots);
+                contBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
             }
 
             else if (choice == 3){
-                choiceBookingManagement(scanner, speaker, sb, availableSlots, payment);
+                choiceBookingManagement(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
                 break;
             }
 
             else if (choice == 0){
-                OOP.menu(1, speaker);
+                welcomePage(admins, speakers, attendees, scanner);   
                 break;
             }
 
@@ -164,7 +166,7 @@ public class SlotBooking {
                 System.out.println("Invalid choice. Please try again");               
         }
     }
-    public static void bookingDetails(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots){
+    public static void bookingDetails(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees){
         clScr();
         boolean continueBooking = true;
         Comparator<Slot> currentComparator = new SlotDateComparator();
@@ -190,11 +192,11 @@ public class SlotBooking {
                 currentComparator = new SlotPriceComparator();
             }
             else if (choice5 == 3){
-                contBooking(scanner, speaker, sb, payment, availableSlots);
+                contBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
                 continueBooking = false;
             }  
             else if (choice5 == 0){
-                eventBooking(scanner, speaker, sb, payment, availableSlots);
+                eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
                 continueBooking = false;
             }
             else{
@@ -220,7 +222,7 @@ public class SlotBooking {
                     scanner.nextLine();
                 }
                 if (choice3 == 1){
-                    contBooking(scanner, speaker, sb, payment, availableSlots);
+                    contBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
                     continueBooking = false;
                 }
                 else if(choice3 == 0){
@@ -233,7 +235,7 @@ public class SlotBooking {
         }
     } 
     
-    public static void contBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots){
+    public static void contBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees){
         clScr();
         boolean indicate = true;
         while(indicate){
@@ -265,13 +267,13 @@ public class SlotBooking {
                 if(paymentClass.eventPayment(scanner, payment, slotPrice)){
                     int numOfBooking = SlotBooking.getNumOfBooking();
                     int numOfPayment = Payment.getNumOfPayment();
-                    sb[numOfBooking] = new SlotBooking(speaker, chosenSlot, payment[numOfPayment-1]);
+                    sb[numOfBooking-1] = new SlotBooking(speaker, chosenSlot, payment[numOfPayment-1]);
                     clScr();
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String formattedDate = dateFormat.format(payment[numOfPayment-1].getDate());
                     System.out.println("Receipt\t\t\t\t    "+ formattedDate);
                     System.out.println("-----------");                    
-                    System.out.print(sb[numOfBooking].toString());
+                    System.out.print(sb[numOfBooking-1].toString());
                     
                     System.out.println("\nPress any key to continue...");
                     scanner.nextLine();
@@ -281,7 +283,7 @@ public class SlotBooking {
 
                 }
                 else if (choice2 == 0){
-                    eventBooking(scanner, speaker, sb, payment, availableSlots);
+                    eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
                 }
                 else{
                     System.out.println("Payment canceled. Returning to booking...");
@@ -289,13 +291,13 @@ public class SlotBooking {
                 break;
             }
             else if (choice2 == quit){
-                eventBooking(scanner, speaker, sb, payment, availableSlots);
+                eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
             }
             else
                 System.out.println("Invalid choice. Please try again.");
         }
     }
-    public static void choiceBookingManagement(Scanner scanner,String speaker,SlotBooking[] sb, List<Slot> availableSlots, Payment[] payment){
+    public static void choiceBookingManagement(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees){
         clScr();
         System.out.println("\nBooking Management");
         System.out.println("---------------------");
@@ -311,15 +313,15 @@ public class SlotBooking {
             scanner.nextLine();
         }
         if (choice == 1){
-            viewBookedEvents(scanner,speaker,sb, availableSlots, payment);
+            viewBookedEvents(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
         }
         
         else if (choice == 2) {
-            cancelBookedEvents(scanner,speaker,sb, availableSlots, payment);
+            cancelBookedEvents(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
         }
         
         else if (choice == 0) {
-            eventBooking(scanner, speaker, sb, payment, availableSlots);
+            eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
         }
         
         else{
@@ -327,7 +329,7 @@ public class SlotBooking {
         }
     }
     
-    public static void viewBookedEvents(Scanner scanner,String speaker,SlotBooking[] sb, List<Slot> availableSlots, Payment[] payment) {
+    public static void viewBookedEvents(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees) {
         clScr();
         System.out.println("\nBooked Events");
         System.out.println("---------------");
@@ -350,7 +352,7 @@ public class SlotBooking {
             scanner.nextLine();
         }
         if (choice5 == 0) {
-            choiceBookingManagement(scanner, speaker, sb, availableSlots, payment);
+            choiceBookingManagement(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
         }
         else if (choice5 >0 && choice5 <= num){
             int num1 = venueNum[choice5-1];
@@ -360,14 +362,14 @@ public class SlotBooking {
             scanner.nextLine();
             scanner.nextLine();
             
-            choiceBookingManagement(scanner, speaker, sb, availableSlots, payment);               
+            choiceBookingManagement(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);               
                      
         }
         else
             System.out.println("Invalid choice. Please try again");
     }
 
-    public static void cancelBookedEvents(Scanner scanner,String speaker,SlotBooking[] sb, List<Slot> availableSlots, Payment[] payment) {
+    public static void cancelBookedEvents(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees) {
         clScr();
         while(true){
             System.out.println("\nBooked Events");
@@ -390,12 +392,15 @@ public class SlotBooking {
                 scanner.nextLine();
             }
 
-            if (eventNumber >= 1 && eventNumber <= sb.length && sb[eventNumber - 1] != null
-                    && sb[eventNumber - 1].getSpeaker().equals(speaker)) {            
-                Slot canceledSlot = sb[eventNumber - 1].getSlot();
-                double refund = sb[eventNumber - 1].getPrice();
+            if (eventNumber >= 1 && eventNumber <= sb.length && sb[eventNumber-1] != null && sb[eventNumber-1].getSpeaker().equals(speaker)) {  
+                Slot canceledSlot = sb[eventNumber-1].getSlot();
+                double refund = sb[eventNumber-1].getPrice();
                 availableSlots.add(canceledSlot);
-                sb[eventNumber - 1] = null;
+                for (int i = eventNumber - 1; i < sb.length - 1; i++) {
+                    sb[i] = sb[i + 1];
+                }
+
+                sb[sb.length - 1] = null;
 
                 System.out.println("Event canceled successfully.");
                 System.out.println("RM" + refund + " is refund successfully. ");
@@ -403,11 +408,11 @@ public class SlotBooking {
                 scanner.nextLine();
                 scanner.nextLine();
 
-                choiceBookingManagement(scanner, speaker, sb, availableSlots, payment);
+                choiceBookingManagement(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
 
             } 
             else if (eventNumber == 0){
-                choiceBookingManagement(scanner, speaker, sb, availableSlots, payment);
+                choiceBookingManagement(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
             }
             else {
                 System.out.println("Invalid event number or not your event. Please try again.");

@@ -1,23 +1,19 @@
 package com.mycompany.oop;
+
+import java.util.List;
+import java.util.Scanner;
+
 public class Registration {
-    public static User registerUser(String id, String password, String name, String category, String contactInfo) {
-        User newUser = null;
-
-        switch (category) {
-            case "Admin":
-                newUser = new Admin(id, password, name,contactInfo);
-                break;
-            case "Speaker":
-                newUser = new Speaker(id, password, name,contactInfo);
-                break;
-            case "Attendee":
-                newUser = new Attendee(id, password, name, contactInfo);
-                break;
-            default:
-                System.out.println("Invalid category.");
-                break;
+    public static void registerUser(String id, String password, String name, String category, String contactInfo, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees) {
+        if ("Admin".equals(category)) {
+            Admin newAdmin = new Admin(id, password, name, contactInfo);
+            admins.add(newAdmin);
+        } else if ("Speaker".equals(category)) {
+            Speaker newSpeaker = new Speaker(id, password, name, contactInfo);
+            speakers.add(newSpeaker);
+        } else if ("Attendee".equals(category)) {
+            Attendee newAttendee = new Attendee(id, password, name, contactInfo);
+            attendees.add(newAttendee);
         }
-
-        return newUser;
     }
 }

@@ -63,16 +63,6 @@ public class User {
         userCount++;
     }
 
-    // Validate Login
-    // Validation method (you can customize this based on your needs)
-    public String validateLogin(String enteredPassword) {
-        if (enteredPassword.equals(this.password)) {
-            return "Login Successful!";
-        } else {
-            return "Login Failed. Incorrect Password.";
-        }
-    }
-
     @Override
     public String toString() {
         return "User{" +
