@@ -22,7 +22,7 @@ public class OOP {
         wp.welcomePage(admins, speakers, attendees, scanner);
     }    
     
-
+    
     public static void clScr(){
         for (int i = 0; i < 40; i++) {
             System.out.println(); 

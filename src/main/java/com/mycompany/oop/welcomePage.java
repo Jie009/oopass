@@ -227,7 +227,6 @@ public class welcomePage {
                 
                 System.out.println("Thank you. Goodbye!");
                 System.out.println("\nPress any key to continue...");
-                UserStore userStores = new UserStore();
                 welcomePage(admins, speakers, attendees, scanner);
       
                 
