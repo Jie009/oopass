@@ -57,6 +57,30 @@ public class OOP {
         seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());
         
         
+        //Sample data for Report & Monitoring
+        
+        /*
+            payment[0] = new Payment("Credit card", 200);
+            payment[1] = new Payment("Online Banking", 200);
+            
+            attendee[0] = new Attendee("A1", "S1", payment[0]);
+            attendee[1] = new Attendee("A2", "S2", payment[1]);
+            attendee[2] = new Attendee("A3", "S2", payment[2]);
+        
+            seminarEnroll[0] = new SeminarEnroll(attendee[0], seminar[0]);
+            seminarEnroll[1] = new SeminarEnroll(attendee[1], seminar[1]);
+            seminarEnroll[2] = new SeminarEnroll(attendee[0], seminar[1]);
+            
+            
+            //change "test" to admin name
+            sb[0] = new SlotBooking("test", slot[0], payment[0]);
+            sb[1] = new SlotBooking("test", slot[0], payment[0]);
+        
+        */
+        
+        
+        
+        
         for(int i=0; i<5; i++){
         
             availableSlots.add(slot[i]);
