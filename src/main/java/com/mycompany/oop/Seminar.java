@@ -17,6 +17,8 @@ public class Seminar {
     private Speaker speaker;
     private ArrayList<SeminarEnroll> enrollList;
     
+    private static int seminarCount = 0;
+    
     
     public Seminar(String id, String desc, Date startDate, Date endDate, Time startTime, Time endTime, double price, String location, ArrayList<SeminarEnroll> enrollList){ 
          
@@ -29,6 +31,7 @@ public class Seminar {
         this.price = price;
         this.location = location;
         this.enrollList = enrollList;
+        seminarCount++;
         
     }
     
@@ -91,6 +94,16 @@ public class Seminar {
     public void associateSeminar(SeminarEnroll seminar){
         
         enrollList.add(seminar);
+    }
+    
+    public void setSeminarCount(int SC){
+        
+        seminarCount = SC;
+    }
+    
+    public static int getSeminarCount(){
+        
+        return seminarCount;
     }
     
     @Override

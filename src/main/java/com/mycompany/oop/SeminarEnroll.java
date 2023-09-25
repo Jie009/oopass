@@ -79,6 +79,11 @@ public class SeminarEnroll {
         return enrolledTime;
     }
     
+    public String getAttendeeName(){
+        
+        return attendee.getname();
+    }
+    
     public Date getDate(){
         
         return enrolledDate;
@@ -115,10 +120,6 @@ public class SeminarEnroll {
         
     }
     
-//    public int getNumOfSeminar(){
-//        
-////        return attendee.getNumOfSeminar();
-//    }
     
     public String output(){
      
@@ -153,12 +154,14 @@ public class SeminarEnroll {
     public void menu(){
         
         
-        System.out.println( 
+        System.out.print( 
                   "\n=====================================================" 
                 + "\n                  Choose an option"
                 + "\n1. Enroll"            
                 + "\n2. View Enrolls"
                 + "\n3. Cancel Enroll"
+                + "\n"
+                + "\n0. Quit"
                 + "\n=====================================================" 
                 + "\n>  ");
     }
@@ -209,38 +212,63 @@ public class SeminarEnroll {
                 }else if(num > 0){
                     
                     System.out.println("Which seminar do you wanna enroll?");
-                    System.out.print("Seminar ID: ");
-                    String userInput = scanner.next();
+                    String userInput = "";
+                    int cout = 0;
+                    
+                    do {
+                        System.out.print("Enter Seminar ID (S1 to S5): ");
+                        userInput = scanner.nextLine();
+
+
+                        if (userInput.matches("S[1-5]")) {
+
+                            break; // Exit the loop if input is valid
+                            
+                        } else {
+                            System.out.println("Invalid input. Please enter S1 to S5.");
+                        }
+                        
+                    } while (true);
 
                     for (int i = 0; i < seminar.length; i++) {
 
                         if(seminar[i] != null){
 
                             if(userInput.equals(seminar[i].getID())){
-
+                                cout++;
+                                
                                 if(paymentClass.eventPayment(scanner, payment, seminar[i].getPrice())){
 
-//                                    int numOfPayment = Payment.getNumOfPayment();
+
+                                    int numOfPayment = Payment.getNumOfPayment();
 //                                    int numOfAttendee = Attendee.getNumOfAttendee();
-//                                    int enrollCount = SeminarEnroll.getEnrollCount();
-//                                    System.out.println(enrollCount);
-//                                    attendee[numOfAttendee] = new Attendee("test",null, seminar[i].getID(), payment[numOfPayment]);
-//                                    SE[enrollCount-1] = new SeminarEnroll(attendee[numOfAttendee], seminar[i]);
+                                    int enrollCount = SeminarEnroll.getEnrollCount();
 
-
+//                                    attendee[numOfAttendee] = new Attendee("", "",
+//                                            name,"test", seminar[i].getID(), payment[numOfPayment]);
+//                                    SE[enrollCount-1] = new SeminarEnroll(attendee[numOfAttendee], seminar[i]);            
+                                    System.out.println("Seminar successfully enrolled!");
+                                    System.out.println(SE[enrollCount-1]);
+                                    //format
+                                            
                                 }
-                                
+                                        
                             }
+                                    
 
-                        }else{
-                            
-                            System.out.println("Seminar ID not found.");
+
+
                         }
-                    }                
-                    
-                }
+                                
+                    }
 
-                
+                    if(cout == 0){
+                        
+                        System.out.println("Seminar ID not found.");
+                    }
+                }
+            
+
 
             }else if(choice == 2){
 
@@ -251,6 +279,10 @@ public class SeminarEnroll {
 
                 
                 cancelBookedEvents(scanner, name, SE, seminar, payment);
+            
+            }else if(choice == 0){
+                
+                
             }
                     
             
@@ -261,21 +293,24 @@ public class SeminarEnroll {
     }
  
     public static void viewBookedEvents(Attendee[] attendee, Scanner scanner, String name, SeminarEnroll[] SE, Seminar[] seminar, Payment[] payment) {
+        
+        int num = 0;
 
-        System.out.println("Enrolled Events");
-        System.out.println("---------------");
         for (int i = 0; i < SE.length; i++) {
             
             if(SE[i] != null){
                 
+                
                 for (int j = 0; j < attendee.length; j++) {
-
+                    System.out.println(SE[i].getAttendeeName());
                     if(attendee[j] != null){
-
-//                        if(SE[i].getAttendeeID().equals(attendee[j].getID())){
-//                            
-//                            System.out.println(SE[i].output());
-//                        }
+   
+                        //if(SE[i].getAttendeeName().equals(attendee[j].getName())){
+                            
+                            clScr();
+                            num++;
+                            System.out.println(SE[i].output());
+                       // }
 
 
                     }
@@ -283,21 +318,36 @@ public class SeminarEnroll {
             }
             
         }
+        
+        if(num==0){
+            
+            clScr();
+            System.out.println("You have not enrolled any seminars");
+            System.out.println("\nPress any key to continue...");
+            scanner.nextLine();
+
+        }
+        
+        
       
     }
     
     
     public static void cancelBookedEvents(Scanner scanner, String user, SeminarEnroll[] SE, Seminar[] seminar, Payment[] payment) {
 
+        
+
+        
+        
+        
         while(true){
-            System.out.println("\nBooked Events");
-            System.out.println("---------------");
-            int num = 1;
+
+            int num = 0;
             for (int i = 0; i < SE.length; i++) {
 
                 if (SE[i] != null && SE[i].getAttendeeID().equals(user)) {
                     
-                    System.out.println((num) + ". " + SE[i].getVenue());
+                    System.out.println((num+1) + ". " + SE[i].getVenue());
                     System.out.println("Start Time: " + SE[i].getStartTime());   
                     System.out.println("End Time: " + SE[i].getEndTime());   
                     System.out.println("Start Date: " + SE[i].getStartDate());   
@@ -307,46 +357,61 @@ public class SeminarEnroll {
                     num++;
                     
                 }
+                
+              
             }
-
-            System.out.println("\n0. Quit");
-            int eventNumber = 0;        
-            try {
+            
+            if(num<1){
                 
-                for (int i = 0; i < 5; i++) {
-                    System.out.println(SE[i]);
-                    
-                }
-                
-                System.out.print("Enter the number of the event to refund (0 to exit): ");
-                eventNumber = scanner.nextInt();
-                if (eventNumber == 0) {
-                    break;
-                }
-            } catch (InputMismatchException e) {
+                clScr();
+                System.out.println("You have not enrolled any seminars.");
+                System.out.println("\nPress any key to continue...");
                 scanner.nextLine();
-                continue; // Continue the loop to prompt for input again
-            }
+                break;
 
-            if (eventNumber >= 1 && eventNumber <= SE.length && SE[eventNumber - 1] != null) {
-                System.out.println(SE[eventNumber - 1]);
-                double refund = SE[eventNumber - 1].getPrice();
-                SE[eventNumber - 1] = null;
+            }else{
+                
+                System.out.println("\n0. Quit");
+                int eventNumber = 0;        
+                try {
 
-                // Shift elements after the deleted index to the left
-                for (int i = eventNumber - 1; i < SE.length - 1; i++) {
-                    SE[i] = SE[i + 1];
+                    for (int i = 0; i < 5; i++) {
+                        System.out.println(SE[i]);
+
+                    }
+
+                    System.out.print("Enter the number of the event to refund (0 to exit): ");
+                    eventNumber = scanner.nextInt();
+                    if (eventNumber == 0) {
+                        break;
+                    }
+                } catch (InputMismatchException e) {
+                    scanner.nextLine();
+                    continue; // Continue the loop to prompt for input again
                 }
 
-                // Set the last element to null or whatever value is appropriate
-                SE[SE.length - 1] = null;
-                setEnrollCount(SeminarEnroll.getEnrollCount() - 1);
-                System.out.println("Event canceled successfully.");
-                System.out.println("RM" + refund + " is refund successfully. ");
-                break;
-            } else {
-                System.out.println("Invalid eventNumber or event not found.");
+                if (eventNumber >= 1 && eventNumber <= SE.length && SE[eventNumber - 1] != null) {
+                    System.out.println(SE[eventNumber - 1]);
+                    double refund = SE[eventNumber - 1].getPrice();
+                    SE[eventNumber - 1] = null;
+
+                    // Shift elements after the deleted index to the left
+                    for (int i = eventNumber - 1; i < SE.length - 1; i++) {
+                        SE[i] = SE[i + 1];
+                    }
+
+                    // Set the last element to null or whatever value is appropriate
+                    SE[SE.length - 1] = null;
+                    setEnrollCount(SeminarEnroll.getEnrollCount() - 1);
+                    System.out.println("Event canceled successfully.");
+                    System.out.println("RM" + refund + " is refund successfully. ");
+                    break;
+                } else {
+                    System.out.println("Invalid eventNumber or event not found.");
+                }
+                
             }
+
         }
         
     }   
