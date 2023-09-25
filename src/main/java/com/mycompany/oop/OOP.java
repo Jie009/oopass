@@ -150,6 +150,44 @@ public class OOP {
             //Advertisement
             }else if(choice == 3){
 
+                ArrayList<Advertisement> advertisements = new ArrayList<Advertisement>();
+        
+                Date date;
+                Time time;
+
+                while (true) {
+                    System.out.println("Advertisement Manager");
+                    System.out.println("1. Create Advertisement");
+                    System.out.println("2. View Advertisements");
+                    System.out.println("3. Update Advertisement");
+                    System.out.println("4. Delete Advertisement");
+                    System.out.println("5. Exit");
+                    System.out.print("Enter your choice: ");
+
+                    int advChoice = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+
+                    switch (advChoice) {
+                        case 1:
+                            Advertisement.createAdvertisement(advertisements, scanner);
+                            break;
+                        case 2:
+                            Advertisement.viewAdvertisements(advertisements);
+                            break;
+                        case 3:
+                            Advertisement.updateAdvertisement(advertisements, scanner);
+                            break;
+                        case 4:
+                            Advertisement.deleteAdvertisement(advertisements, scanner);
+                            break;
+                        case 5:
+                            System.out.println("Goodbye!");
+                            System.exit(0);
+                        default:
+                            System.out.println("Invalid choice. Try again.");
+                    }
+                }              
+                
                 
                 
             //End
