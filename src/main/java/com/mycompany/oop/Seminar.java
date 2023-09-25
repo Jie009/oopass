@@ -47,7 +47,19 @@ public class Seminar {
         this.startTime = startTime;
     }
     
+    public String getDesc(){
+     
+        return desc;
+    }
+    public Date getStartDate(){
+        
+        return startDate;
+    }
     
+    public Date getEndDate(){
+     
+        return endDate;
+    }
     
     
     public Time getStartTime(){
@@ -59,6 +71,12 @@ public class Seminar {
         
         return endTime;
     }
+    
+    public String getLocation(){
+        
+        return location;
+    }    
+    
 
     public void setEnrollList(ArrayList<SeminarEnroll> enrollList){
         
@@ -81,22 +99,25 @@ public class Seminar {
         return id;
     }
     
-    /*
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Seminar Details\n");
-        sb.append("--------------------\n");
-        sb.append("Title: ").append(SeminarTitle).append("\n");
-        sb.append("Start Date: ").append(startDate).append("\n");
-        sb.append("End Date: ").append(endDate).append("\n");
-        sb.append("Start Time: ").append(startTime).append("\n");
-        sb.append("End Time: ").append(endTime).append("\n");
-        sb.append("Price: ").append(price).append("\n");
-        sb.append("Location: ").append(location).append("\n");
-        sb.append("--------------------");
-
-        return sb.toString();
-    }
-    */
+    public double getPrice(){
+        
+        return price;
+    }  
+    
+    public String output() {
+        return String.format
+                ( "\n=====================================================" 
+                + "\nID: %s"                             
+                + "\nLocation: %s"                             
+                + "\nStart Time: %s"            
+                + "\nEnd Time: %s"            
+                + "\nStart Date: %s"
+                + "\nEnd Date: %s"
+                + "\nPrice: RM%.2f"
+                + "\nSpeaker: %s"
+                + "\n=====================================================" ,
+                getID(), getLocation(), getStartTime(), getEndTime(), getStartDate(), 
+                getEndDate(), getPrice(), "speaker");
+    }   
+    
 }

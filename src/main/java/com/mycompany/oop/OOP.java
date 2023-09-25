@@ -52,7 +52,7 @@ public class OOP {
         slot[2] = new Slot("S3","Dataran Murni", "Indoor hall", "8:00am", "3:00pm", "10/10/2023", Date.valueOf("2023-10-10"), Date.valueOf("2023-10-11"), 500, 600);
         slot[3] = new Slot("S4","SMK Kawi", "Secondary school hall", "8:00am", "11:00am", "30/10/2023", Date.valueOf("2023-10-30"), Date.valueOf("2023-10-30"), 200, 150);
         slot[4] = new Slot("S5","Dewan Wangsa Maju", "Wangsa Maju hall", "3:00pm", "7:00pm", "26/10/2023", Date.valueOf("2023-10-26"), Date.valueOf("2023-10-27"), 200, 220);
-        
+             
         for(int i=0; i<5; i++){
         
             availableSlots.add(slot[i]);
@@ -201,7 +201,8 @@ public class OOP {
             
             if(choice == 1){
                 
-               
+                SeminarEnroll seminarenroll = new SeminarEnroll(null, null);
+                seminarenroll.enroll(user.getid(), attendee, seminarEnroll, seminar, payment);
                 
                 
             }else if(choice == 2){

@@ -4,19 +4,20 @@ import java.util.ArrayList;
 
 public class Attendee {
     
-    private ArrayList<SeminarEnroll> enrollList;
     private int numOfSeminar;
     private String attendeeID;
     private String seminarID;
     private Payment payment;
     
-    public Attendee(ArrayList<SeminarEnroll> enrollList, int numOfSeminar, String attendeeID, String seminarID, Payment payment){
+    private static int numOfAttendee = -1;
+    
+    public Attendee(String attendeeID, String seminarID, Payment payment){
         
-        this.enrollList = enrollList;
+
         this.attendeeID = attendeeID;
-        this.numOfSeminar = numOfSeminar;
         this.seminarID = seminarID;
         this.payment = payment;
+        numOfAttendee++;
     }
     
     public void setNumOfSeminar(int numOfSeminar){
@@ -29,19 +30,14 @@ public class Attendee {
         return numOfSeminar;
     }
     
-    public void setEnrollList(ArrayList<SeminarEnroll> enrollList){
-        
-        this.enrollList = enrollList;
+    public String getMethod(){
+     
+        return payment.getMethod();
     }
     
-    public ArrayList<SeminarEnroll> getEnrollList(){
-        
-        return enrollList;
-    }    
-    
-    public void associateAttendee(SeminarEnroll attendee){
-        
-        enrollList.add(attendee);
+    public double getTotal(){
+     
+        return payment.getTotal();
     }
     
     public String toString(){
@@ -52,16 +48,16 @@ public class Attendee {
     public String getSeminarID(){
      
         return seminarID;
-    }   
-    
-    public double getTotal(){
-     
-        return payment.getTotal();
     }
     
-    public String getMethod(){
-     
-        return payment.getMethod();
-    } 
+    public String getID(){
+        
+        return attendeeID;
+    }
+    
+    public static int getNumOfAttendee(){
+        return numOfAttendee;
+    }    
+    
     
 }
