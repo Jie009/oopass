@@ -1,14 +1,13 @@
 package com.mycompany.oop;
 
 import static com.mycompany.oop.OOP.clScr;
-import static com.mycompany.oop.welcomePage.welcomePage;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
 public class Login{
-    public static void showLoginOptions(UserStore userStore, Scanner scanner){
-        
-        boolean cont = true;
+    private static String category = "";
+    public static void showLoginOptions(UserStore userStore, Scanner scanner){       
         welcomePage wp = new welcomePage();
         clScr();
         System.out.println("Login Options:");
@@ -35,13 +34,16 @@ public class Login{
                 case 1:
                     // Admin login
                     login(userStore, "Admin", scanner);
+                    category = "Admin";
                     break;
                 case 2:
                     // Speaker login
                     login(userStore, "Speaker", scanner);
+                    category = "Speaker";
                     break;
                 case 3:
                     // Attendee login
+                    category = "Attendee";
                     login(userStore, "Attendee", scanner);
                     break;
                 default:
@@ -52,29 +54,8 @@ public class Login{
         else{
             System.out.println("Invalid choice, please try again");
         }
-//        scanner.nextLine();
-//        clScr();
-//        System.out.print("\nEnter ID: ");
-//        id = scanner.nextLine();
-//        System.out.print("Enter Password: ");
-//        password = scanner.nextLine();
-//
-//        
-//        String loggedInUser = User.validateLogin(id, password, category);
-//        if (loggedInUser != null) {
-//            System.out.println("Login successful. Welcome, " + loggedInUser + "!");
-//            System.out.println("\nPress any key to continue...");
-//            scanner.nextLine();
-//
-//        } else {
-//            System.out.println("Login failed. Please check your credentials.");
-//            category = "";
-//            System.out.println("\nPress any key to continue...");
-//            scanner.nextLine();
-////            welcomePage(admin, speaker, attendee);
-//        }
-
     }
+    
     public static void login(UserStore userStore, String category, Scanner scanner) {
         scanner.nextLine();
         System.out.print("Enter User ID: ");
@@ -86,9 +67,19 @@ public class Login{
 
         if (loginUser != null && loginUser.getcategory().equals(category)) {
             String loginResult = loginUser.validateLogin(password);
-            System.out.println(loginResult);
+            System.out.println(loginResult);                        
+            System.out.println("\nPress any key to continue...");
+            scanner.nextLine();
         } else {
             System.out.println("User not found or incorrect category.");
+            System.out.println("\nPress any key to continue...");
+            scanner.nextLine();
+            showLoginOptions(userStore, scanner);
         }
+    }
+    
+    public static String Category(String scategory){
+        scategory = category;
+        return scategory;
     }
 }

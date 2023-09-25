@@ -19,7 +19,7 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Report {
+public class Report extends ReportAbstract {
     
     private String title;
     private SeminarEnroll seminarEnroll;
@@ -352,10 +352,10 @@ public class Report {
 
                         for(int j=0; j<method.length; j++){
 
-                            if(attendee[i].getMethod().equals(method[j])){
-
-                                    methodCount[j]++;
-                            }
+//                            if(attendee[i].getMethod().equals(method[j])){
+//
+//                                    methodCount[j]++;
+//                            }
                         }
                     }
 
@@ -621,11 +621,11 @@ public class Report {
                         System.out.println(speakerSlotID);
                         for(int j=0; j<attendee.length; j++){
 
-                            if((attendee[j].getSeminarID()).equals(speakerSlotID)){
-
-                                totalAttendee += attendee[j].getTotal();
-
-                            }
+//                            if((attendee[j].getSeminarID()).equals(speakerSlotID)){
+//
+//                                totalAttendee += attendee[j].getTotal();
+//
+//                            }
                         }
 
                     } 

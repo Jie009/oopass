@@ -34,8 +34,10 @@ public class welcomePage {
 
                 switch (choice) {
                     case 1:
-                        Login.showLoginOptions(userStore, scanner);     
+                        Login.showLoginOptions(userStore, scanner);  
+                        cont = false;
                         break;
+                        
 
                     case 2:
                         // Call the Registration class
@@ -56,7 +58,8 @@ public class welcomePage {
             Time time;
             int choice;
 
-
+            category = Login.Category(null);
+            System.out.println(category);
             while(userCont == true){
 
                 if(category.equals("Admin")){
@@ -65,7 +68,7 @@ public class welcomePage {
                     System.out.println("---------------------");
                     System.out.println("1 - Monitor");
                     System.out.println("2 - Report");
-                    System.out.println("3 - Logout"); 
+                    System.out.println("0 - Logout"); 
                     System.out.println("---------------------");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
@@ -79,7 +82,7 @@ public class welcomePage {
                     System.out.println("1 - Slot Booking");
                     System.out.println("2 - Report");              
                     System.out.println("3 - Advertisement");                
-                    System.out.println("4 - Logout");                
+                    System.out.println("0 - Logout");                
                     System.out.println("---------------------");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();

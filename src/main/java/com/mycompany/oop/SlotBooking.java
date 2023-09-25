@@ -122,6 +122,7 @@ public class SlotBooking {
                 + "\n=====================================================" ,
                 slot.getVenue(), slot.getStartTime(), slot.getEndTime(), slot.getSlotDate(), slot.getSeatNo(), slot.getPrice(), payment.getMethod(), speaker);
         }
+    
     public static void eventBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots){
         
         while(true){
@@ -155,6 +156,7 @@ public class SlotBooking {
             }
 
             else if (choice == 0){
+                OOP.menu(1, speaker);
                 break;
             }
 
