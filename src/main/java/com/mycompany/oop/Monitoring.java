@@ -17,7 +17,7 @@ import java.util.Scanner;
  *
  * @author User
  */
-public class Monitoring {
+public class Monitoring extends MonitorAbstract {
     
     private String title;
     private ArrayList<SeminarEnroll> enrollData;
