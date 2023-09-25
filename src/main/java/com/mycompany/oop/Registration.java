@@ -12,7 +12,7 @@ public class Registration {
             Speaker newSpeaker = new Speaker(id, password, name, contactInfo);
             speakers.add(newSpeaker);
         } else if ("Attendee".equals(category)) {
-            Attendee newAttendee = new Attendee(id, password, name, contactInfo);
+            Attendee newAttendee = new Attendee(id, password, name, contactInfo, null, null);
             attendees.add(newAttendee);
         }
     }

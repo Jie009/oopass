@@ -17,7 +17,7 @@ public class OOP {
         
         admins.add(new Admin("ad", "ad", "Admin User", "admin@example.com"));
         speakers.add(new Speaker("sp", "sp", "Speaker User", "speaker@example.com"));
-        attendees.add(new Attendee("at", "at", "Attendee User", "attendee@example.com"));
+        attendees.add(new Attendee("at", "at", "Attendee User", "attendee@example.com", null, null));
         
         wp.welcomePage(admins, speakers, attendees, scanner);
     }    
