@@ -1,7 +1,3 @@
-    /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.oop;
 
 
@@ -27,7 +23,6 @@ public class User {
     public String getid(){
     return id;
     }
-
     public String getpassword(){
     return password;
     }
@@ -40,6 +35,24 @@ public class User {
     public String getcontactInfo(){
     return contactInfo;
     }
+    
+    //setters
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+    
     // Update User List
     public void updateUserList() {
         userList[userCount][0] = id;
@@ -51,13 +64,13 @@ public class User {
     }
 
     // Validate Login
-    public static String validateLogin(String id, String password, String category) {
-        for (int i = 0; i < userCount; i++) {
-            if (userList[i][0].equals(id) && userList[i][1].equals(password) && userList[i][3].equals(category)) {
-                return userList[i][2]; // Return the name of the user
-            }
+    // Validation method (you can customize this based on your needs)
+    public String validateLogin(String enteredPassword) {
+        if (enteredPassword.equals(this.password)) {
+            return "Login Successful!";
+        } else {
+            return "Login Failed. Incorrect Password.";
         }
-        return null; // Login failed
     }
 
     @Override
@@ -70,21 +83,5 @@ public class User {
                 ", contactInfo='" + contactInfo + '\'' +
                 '}';
     }
-    // Admin subclass
-    public class Admin extends User {
-        public Admin(String id, String password, String name, String contactInfo) {
-            super(id, password, name, "Admin", contactInfo);
-        }
 
-    }
-
-
-    // Attendee subclass
-    public class Attendee extends User {
-        public Attendee(String id, String password, String name, String contactInfo) {
-            super(id, password, name, "Attendee", contactInfo);
-        }
-
-    }
 }
-

@@ -5,16 +5,10 @@ import static com.mycompany.oop.welcomePage.welcomePage;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Login {
-    
-    public Login(){
-        
-    }
-    
-    public String loginProcess(User admin, User speaker, User attendee){
+public class Login{
+    public static void showLoginOptions(UserStore userStore, Scanner scanner){
         
         boolean cont = true;
-        Scanner scanner = new Scanner(System.in);
         welcomePage wp = new welcomePage();
         clScr();
         System.out.println("Login Options:");
@@ -25,9 +19,6 @@ public class Login {
         System.out.println("\n0. Quit:");
 
         int choice = 0;
-        String id = "";
-        String password = "";
-        String category = "";
         try{
             System.out.print("Your Choice: ");
             choice = scanner.nextInt();
@@ -37,50 +28,67 @@ public class Login {
             scanner.nextLine();
         }
         if (choice == 0){
-            wp.welcomePage(admin, speaker, attendee);
+            wp.welcomePage(userStore);
         }
         else if(choice >0 && choice <4){
-            
-            switch (choice) {
+            switch (choice) { 
                 case 1:
-                    category = "Admin";
+                    // Admin login
+                    login(userStore, "Admin", scanner);
                     break;
                 case 2:
-                    category = "Speaker";
+                    // Speaker login
+                    login(userStore, "Speaker", scanner);
                     break;
                 case 3:
-                    category = "Attendee";
+                    // Attendee login
+                    login(userStore, "Attendee", scanner);
                     break;
                 default:
-                    System.out.println("Invalid choice");
-
+                    System.out.println("Invalid choice. Please try again.");
+                    break;                
             }
         }
         else{
             System.out.println("Invalid choice, please try again");
         }
+//        scanner.nextLine();
+//        clScr();
+//        System.out.print("\nEnter ID: ");
+//        id = scanner.nextLine();
+//        System.out.print("Enter Password: ");
+//        password = scanner.nextLine();
+//
+//        
+//        String loggedInUser = User.validateLogin(id, password, category);
+//        if (loggedInUser != null) {
+//            System.out.println("Login successful. Welcome, " + loggedInUser + "!");
+//            System.out.println("\nPress any key to continue...");
+//            scanner.nextLine();
+//
+//        } else {
+//            System.out.println("Login failed. Please check your credentials.");
+//            category = "";
+//            System.out.println("\nPress any key to continue...");
+//            scanner.nextLine();
+////            welcomePage(admin, speaker, attendee);
+//        }
+
+    }
+    public static void login(UserStore userStore, String category, Scanner scanner) {
         scanner.nextLine();
-        clScr();
-        System.out.print("\nEnter ID: ");
-        id = scanner.nextLine();
+        System.out.print("Enter User ID: ");
+        String userId = scanner.nextLine();
         System.out.print("Enter Password: ");
-        password = scanner.nextLine();
+        String password = scanner.nextLine();
 
-        
-        String loggedInUser = User.validateLogin(id, password, category);
-        if (loggedInUser != null) {
-            System.out.println("Login successful. Welcome, " + loggedInUser + "!");
-            System.out.println("\nPress any key to continue...");
-            scanner.nextLine();
+        User loginUser = userStore.getUserById(userId);
 
+        if (loginUser != null && loginUser.getcategory().equals(category)) {
+            String loginResult = loginUser.validateLogin(password);
+            System.out.println(loginResult);
         } else {
-            System.out.println("Login failed. Please check your credentials.");
-            category = "";
-            System.out.println("\nPress any key to continue...");
-            scanner.nextLine();
-            welcomePage(admin, speaker, attendee);
+            System.out.println("User not found or incorrect category.");
         }
-   
-        return category;
     }
 }

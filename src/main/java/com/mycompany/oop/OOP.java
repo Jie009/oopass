@@ -8,22 +8,17 @@ import java.util.Comparator;
 import java.util.List;
 import java.text.SimpleDateFormat;
 
-public class OOP {
-    
-
+public class OOP {    
     public static void main(String[] args) {
-
+        UserStore userStore = new UserStore();
         // Create some sample users
-        User admin = new User("test", "test", "Jason", "Admin", "admin@example.com");
-        User speaker = new User("test2", "test2", "Jane", "Speaker", "speaker@example.com");
-        User attendee = new User("test3", "test3", "Ali", "Attendee", "attendee@example.com");
+        userStore.addUser(new Admin("admin123", "adminpass", "Admin User", "admin@example.com"));
+        userStore.addUser(new Speaker("speaker456", "speakerpass", "Speaker User", "speaker@example.com"));
+        userStore.addUser(new Attendee("attendee789", "attendeepass", "Attendee User","attendee@example.com"));
         welcomePage wp = new welcomePage();
         // Add the sample users to the user list
-        admin.updateUserList();
-        speaker.updateUserList();
-        attendee.updateUserList();
         
-        wp.welcomePage(admin, speaker, attendee);
+        wp.welcomePage(userStore);
     }    
     
 
@@ -35,7 +30,7 @@ public class OOP {
     
         
     // Menu screen for speaker
-    public static boolean menu(int choice, String category, User user){
+    public static boolean menu(int choice, String category){
         
 
         Seminar[] seminar = new Seminar[100];

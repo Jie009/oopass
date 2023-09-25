@@ -3,13 +3,15 @@ package com.mycompany.oop;
 
 import static com.mycompany.oop.OOP.clScr;
 import static com.mycompany.oop.OOP.menu;
-import static com.mycompany.oop.Registration.RegistrationProcess;
+import static com.mycompany.oop.RegistrationProcess.RegistrationProcess;
+import com.mycompany.oop.Login;
+import com.mycompany.oop.RegistrationProcess;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Scanner;
 
 public class welcomePage {
-    public static void welcomePage(User admin, User speaker, User attendee){ 
+    public static void welcomePage(UserStore userStore){ 
         Scanner scanner = new Scanner(System.in);
         boolean cont = true;
         boolean bigLoop = true;
@@ -32,18 +34,12 @@ public class welcomePage {
 
                 switch (choice) {
                     case 1:
-                        // Call the Login class
-                        Login login = new Login();
-                        category = login.loginProcess(admin, speaker, attendee);
-                        if(category != null){
-
-                            cont = false;
-                        }
+                        Login.showLoginOptions(userStore, scanner);     
                         break;
 
                     case 2:
                         // Call the Registration class
-                        RegistrationProcess(admin, speaker, attendee);
+                        RegistrationProcess.RegistrationProcess(userStore);
 
                     case 3:
                         System.out.println("Thank you. Goodbye!");
@@ -73,7 +69,7 @@ public class welcomePage {
                     System.out.println("---------------------");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
-                    userCont = menu(choice, category, admin);
+                    userCont = menu(choice, category);
 
 
                 }else if(category.equals("Speaker")){
@@ -87,7 +83,7 @@ public class welcomePage {
                     System.out.println("---------------------");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
-                    userCont = menu(choice, category, speaker);
+                    userCont = menu(choice, category);
 
                 }else if(category.equals("Attendee")){
                     clScr();
@@ -98,7 +94,7 @@ public class welcomePage {
                     System.out.println("---------------------");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
-                    userCont = menu(choice, category, attendee);
+                    userCont = menu(choice, category);
 
                 }
 
