@@ -199,13 +199,14 @@ public class SeminarEnroll {
                             System.out.println(seminar[i].output());
                         }
                         
-                    }else if(num == 0){
-                     
-                        System.out.println("There are currently no seminars.");
                     }
                 }
+                
+                if(num == 0){
+                     
+                    System.out.println("There are currently no seminars.");
 
-                if(num > 0){
+                }else if(num > 0){
                     
                     System.out.println("Which seminar do you wanna enroll?");
                     System.out.print("Seminar ID: ");
