@@ -73,7 +73,7 @@ public class Payment {
                     method = "Cash";
                     break;
                 }
-                System.out.println(numOfPayment);
+
                 payment[numOfPayment] = new Payment(method, price);
                 return true;    
             }
