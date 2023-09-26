@@ -9,7 +9,7 @@ public class Login{
     static String ggcategory = "";
     static String ggid = "";
     public static void showLoginOptions(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner){ 
-        WelcomePage wp = new WelcomePage();
+        welcomePage wp = new welcomePage();
         OOP.clScr();
         System.out.println("===================================================");
         System.out.println("                    Login Page");
@@ -60,7 +60,7 @@ public class Login{
         }
     }    
     public static void loginProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner, String category){
-        WelcomePage wp = new WelcomePage();
+        welcomePage wp = new welcomePage();
         scanner.nextLine();
         OOP.clScr();
         System.out.println("===================================================");

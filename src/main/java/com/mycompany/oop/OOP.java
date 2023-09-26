@@ -12,7 +12,7 @@ public class OOP {
         List<Admin> admins = new ArrayList<>();
         List<Speaker> speakers = new ArrayList<>();
         List<Attendee> attendees = new ArrayList<>();
-        WelcomePage wp = new WelcomePage();
+        welcomePage wp = new welcomePage();
         // Add the sample users to the user list1
         
         admins.add(new Admin("ad", "ad", "Admin User", "admin@example.com"));

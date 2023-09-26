@@ -1,7 +1,7 @@
 package com.mycompany.oop;
 
 import static com.mycompany.oop.OOP.clScr;
-import static com.mycompany.oop.WelcomePage.welcomePage;
+import static com.mycompany.oop.welcomePage.welcomePage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

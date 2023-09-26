@@ -1,6 +1,6 @@
 package com.mycompany.oop;
 
-import static com.mycompany.oop.WelcomePage.welcomePage;
+import static com.mycompany.oop.welcomePage.welcomePage;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
