@@ -376,9 +376,9 @@ public class Report extends ReportAbstract {
 
                 if(attendee[i] != null){
 
-                    System.out.println(attendee[i].getMethod());
                     for(int j=0; j<method.length; j++){
                         
+                        System.out.println(attendee[0].getMethod());
                         if(attendee[i].getMethod() != null){
                             
                             
@@ -821,30 +821,29 @@ public class Report extends ReportAbstract {
                     System.out.printf("\nDate: %-50s ", formattedDate);
 
                     for(int i=0; i<slotbooking.length; i++){
+                        
+                        if(slotbooking[i] != null){
+                         
+                            venue[i] = slotbooking[i].getVenue();
+                            slotStartDate[i] = slotbooking[i].getStartDate();
+                            slotEndDate[i] = slotbooking[i].getEndDate();
+                           // slotStartTime[i] = slotbooking[i].getStartDate();
+                            //slotEndTime[i] = slotbooking[i].getEndTime();
 
-                        venue[i] = slotbooking[i].getVenue();
-                        slotStartTime[i] = Time.valueOf(slotbooking[i].getStartTime());
-                        slotEndTime[i] = Time.valueOf(slotbooking[i].getEndTime());
-                        slotStartDate[i] = slotbooking[i].getStartDate();
-                        slotEndDate[i] = slotbooking[i].getEndDate();
+                            //Less than 0 means its before
+                            int comparisonResult = currentDate.compareTo(slotStartDate[i]);
+                            if(comparisonResult < 0){
 
-                        //Less than 0 means its before
-                        int comparisonResult = currentDate.compareTo(slotStartDate[i]);
-                        if(comparisonResult < 0){
+                                System.out.printf("\nNo: %-25s", i+1);
+                                System.out.printf("\nVenue:  %-25s ", venue[i]);
+                                System.out.printf("\nSlot Start Time:  %-25s ", slotStartTime[i]);
+                                System.out.printf("\nSlot End Time:  %-25s ", slotEndTime[i]);
+                                System.out.printf("\nSlot Start Date:  %-25s ", slotStartDate[i]);
+                                System.out.printf("\nSlot End Date:  %-25s ", slotEndDate[i]);
+                                System.out.println("");
 
-                            System.out.printf("\nNo: %-25s", i+1);
-                            System.out.printf("\nVenue:  %-25s ", venue[i]);
-                            System.out.printf("\nSlot Start Time:  %-25s ", slotStartTime[i]);
-                            System.out.printf("\nSlot End Time:  %-25s ", slotEndTime[i]);
-                            System.out.printf("\nSlot Start Date:  %-25s ", slotStartDate[i]);
-                            System.out.printf("\nSlot End Date:  %-25s ", slotEndDate[i]);
-                            System.out.println("");
-
-                        }
-
-                        if(slotbooking == null){
-
-                            break;
+                            }
+                            
                         }
 
                     } 
@@ -858,7 +857,11 @@ public class Report extends ReportAbstract {
 
                     System.out.print("Enter a date (dd-MM-yyyy): ");
                     boolean status = false;
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
                     String userInput = scan.next();
+                    
+                    java.sql.Time sqlTimes = null;
+                    java.sql.Time sqlTime2 = null;
 
                     do {
 
@@ -877,31 +880,45 @@ public class Report extends ReportAbstract {
 
                             //Loop through slotbooking to get time and venue and date
                             for(int i=0; i<slotbooking.length; i++){
+                                
+                                if(slotbooking[i] != null){
+                                    
+                                    
+                                    venue[i] = slotbooking[i].getVenue();
+                                    slotStartDate[i] = slotbooking[i].getStartDate();
+                                    slotEndDate[i] = slotbooking[i].getEndDate();
+                                   
+                                    try {
 
-                                venue[i] = slotbooking[i].getVenue();
-                                slotStartTime[i] = Time.valueOf(slotbooking[i].getStartTime());
-                                slotEndTime[i] = Time.valueOf(slotbooking[i].getEndTime());
-                                slotStartDate[i] = slotbooking[i].getStartDate();
-                                slotEndDate[i] = slotbooking[i].getEndDate();
+                                        // Parse the string into a Date object
+                                        Date parsedDate = dateFormat.parse(slotbooking[i].getStartTime());
 
-                                //More than 0 means its after
-                                int comparisonResult = sqlDate.compareTo(slotStartDate[i]);
-                                if(comparisonResult < 0){
+                                        // Create a java.sql.Time object from the parsed Date
+                                        sqlTimes = new java.sql.Time(parsedDate.getTime());
+                                        
+                                        // Parse the string into a Date object
+                                        Date parsedDate2 = dateFormat.parse(slotbooking[i].getEndTime());
 
-                                    System.out.printf("\nNo: %-25s", i+1);
-                                    System.out.printf("\nVenue:  %-25s ", venue[i]);
-                                    System.out.printf("\nSlot Start Time:  %-25s ", slotStartTime[i]);
-                                    System.out.printf("\nSlot End Time:  %-25s ", slotEndTime[i]);
-                                    System.out.printf("\nSlot Start Date:  %-25s ", slotStartDate[i]);
-                                    System.out.printf("\nSlot End Date:  %-25s ", slotEndDate[i]);
-                                    System.out.println("");
+                                        // Create a java.sql.Time object from the parsed Date
+                                        sqlTime2 = new java.sql.Time(parsedDate2.getTime());
+                                        
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }                                    
 
-                                }
+                                    //More than 0 means its after
+                                    int comparisonResult = sqlDate.compareTo(slotStartDate[i]);
+                                    if(comparisonResult < 0){
 
-                                if(slotbooking == null){
+                                        System.out.printf("\nNo: %-25s", i+1);
+                                        System.out.printf("\nVenue:  %-25s ", venue[i]);
+                                        System.out.printf("\nSlot Start Time:  %-25s ", sqlTimes);
+                                        System.out.printf("\nSlot End Time:  %-25s ", sqlTime2);
+                                        System.out.printf("\nSlot Start Date:  %-25s ", slotStartDate[i]);
+                                        System.out.printf("\nSlot End Date:  %-25s ", slotEndDate[i]);
+                                        System.out.println("");
 
-                                    break;
-
+                                    }
                                 }
 
                             }
