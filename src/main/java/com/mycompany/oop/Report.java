@@ -1,25 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.oop;
 
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
-/**
- *
- * @author User
- */
 public class Report extends ReportAbstract {
     
     private String title;
@@ -589,25 +577,7 @@ public class Report extends ReportAbstract {
 
                             }
 
-                        }
-
-
-
-    /*                    if(slotbooking[i].getSpeaker().equals(name)){
-
-                    String speakerSlotID = slotbooking[i].getID();
-                    System.out.println(speakerSlotID);
-                    for(int j=0; j<attendee.length; j++){
-
-                        if((attendee[j].getSeminarID()).equals(speakerSlotID)){
-
-                            totalAttendee += attendee[j].getTotal();
-
-                        }
-                    }
-
-                } 
-    */       
+                        }     
                 }               
 
 

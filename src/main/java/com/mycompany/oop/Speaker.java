@@ -10,5 +10,4 @@ public class Speaker extends User {
      
         return super.getid();
     }
-    // Add specific methods or overrides for Speaker users here
 }

@@ -1,7 +1,5 @@
 package com.mycompany.oop;
 
-import java.util.ArrayList;
-
 public class Attendee extends User {
     
         private static int numOfAttendee = -1;

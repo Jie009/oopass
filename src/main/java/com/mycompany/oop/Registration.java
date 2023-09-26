@@ -1,7 +1,6 @@
 package com.mycompany.oop;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Registration {
     public static void registerUser(String id, String password, String name, String category, String contactInfo, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees) {

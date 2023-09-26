@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.oop;
 
 import java.util.Date;
@@ -9,14 +5,9 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- *
- * @author User
- */
 public class Monitoring extends MonitorAbstract {
     
     private String title;
@@ -1032,69 +1023,3 @@ public class Monitoring extends MonitorAbstract {
     
     
 }
-
-/*
-            ArrayList<SlotBooking> booking = bookingData;
-            String start = "";
-            String endTime = "";
-            String venueTime = "";
-            String[] arrVenue = new String[100];
-            int j = 0;
-
-            //Process of checking whether the booking is in a range of a given time
-            for(int i=0; i<booking.size(); i++){
-                
-                String bookingString = booking.toString();
-                String[] lines = bookingString.split("\n");
-                
-                //might change
-                for(String line: lines){
-                    
-                    
-                    if(line.startsWith("Start time:")){
-                        
-                        startTime = line.substring("Start time:".length());
-
-                    }else if(line.startsWith("End time:")){
-                        
-                        endTime = line.substring("End time:".length());
-                        
-                    }
-                    
-
-                }
-                
-                
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                    Date date = sdf.parse(startTime);
-                    Time sqlTime = new Time(date.getTime());
-                    Date date2 = sdf.parse(endTime);
-                    Time sqlTime2 = new Time(date.getTime());
-                    
-                    Time seminarStartTime = getStartTimeByID(seminarID[0]);
-                    Time seminarEndTime = getEndTimeByID(seminarID[0]);
-                    
-                    
-                    
-                    //Validation
-                    if (sqlTime.compareTo(seminarStartTime) >= 0 && sqlTime2.compareTo(seminarEndTime) <= 0) {
-                        System.out.println("Current time is between start time and end time.");
-                    } else {
-                        System.out.println("Current time is not between start time and end time.");
-                    }
-                    
-                    
-                    
-                    
-                }catch(ParseException e){
-                    
-                    e.printStackTrace();
-                    
-                }         
-                
-            }
-
-
-
-*/

@@ -1,5 +1,4 @@
 package com.mycompany.oop;
-import static com.mycompany.oop.OOP.clScr;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;

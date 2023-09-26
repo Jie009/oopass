@@ -1,6 +1,5 @@
 package com.mycompany.oop;
 
-import static com.mycompany.oop.OOP.clScr;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -10,7 +9,7 @@ public class Login{
     static String ggcategory = "";
     static String ggid = "";
     public static void showLoginOptions(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner){ 
-        welcomePage wp = new welcomePage();
+        WelcomePage wp = new WelcomePage();
         OOP.clScr();
         System.out.println("===================================================");
         System.out.println("                    Login Page");
@@ -61,7 +60,7 @@ public class Login{
         }
     }    
     public static void loginProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner, String category){
-        welcomePage wp = new welcomePage();
+        WelcomePage wp = new WelcomePage();
         scanner.nextLine();
         OOP.clScr();
         System.out.println("===================================================");
@@ -73,7 +72,6 @@ public class Login{
         String password = scanner.nextLine();
         System.out.println("");
         System.out.println("===================================================");
-        // 调用新的登录方法 
         boolean loginSuccessful = false;
         if (category.equals("Admin")){
             

@@ -1,7 +1,7 @@
 package com.mycompany.oop;
 
 import static com.mycompany.oop.OOP.clScr;
-import static com.mycompany.oop.welcomePage.welcomePage;
+import static com.mycompany.oop.WelcomePage.welcomePage;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -125,6 +125,7 @@ public class SlotBooking {
                 slot.getVenue(), slot.getStartTime(), slot.getEndTime(), slot.getSlotDate(), slot.getSeatNo(), slot.getPrice(), payment.getMethod(), speaker);
         }
     
+    // Event Booking Menu
     public static boolean eventBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
         
         boolean exitStatus = false;
@@ -174,6 +175,8 @@ public class SlotBooking {
         
         return exitStatus;
     }
+    
+    // Booking details (Filter)
     public static void bookingDetails(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
         clScr();
         boolean continueBooking = true;
@@ -239,7 +242,7 @@ public class SlotBooking {
                     continueBooking = false;
                 }
                 else if(choice3 == 0){
-                    continueBooking = false;
+                    eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees, seminar, slot);
                 }
                 else{
                     System.out.println("Invalid Choice. Please try again");
@@ -248,6 +251,7 @@ public class SlotBooking {
         }
     } 
     
+    // show the available slots
     public static void contBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
         boolean indicate = true;
         while(indicate){
@@ -289,7 +293,6 @@ public class SlotBooking {
                             numOfBooking++;
                         }
                     }
-//                    int numOfBooking = SlotBooking.getNumOfBooking();
                     int numOfPayment = Payment.getNumOfPayment();
                     sb[numOfBooking] = new SlotBooking(speaker, chosenSlot, payment[numOfPayment-1]);
                     clScr();
@@ -358,13 +361,6 @@ public class SlotBooking {
                        // Handle parsing errors, such as invalid time format
                        e.printStackTrace();
                    }
-
-                        
-
-                        
-                                 
-                    
-
                     availableSlots.remove(choice2);
 
                 }
@@ -385,6 +381,8 @@ public class SlotBooking {
                 System.out.println("Invalid choice. Please try again.");
         }
     }
+    
+    // booking menu
     public static void choiceBookingManagement(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
         OOP.clScr();
         System.out.println("===================================================");
@@ -421,6 +419,7 @@ public class SlotBooking {
         }
     }
     
+    // booked event
     public static void viewBookedEvents(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot) {
         OOP.clScr();
         System.out.println("===================================================");
@@ -465,6 +464,7 @@ public class SlotBooking {
             System.out.println("Invalid choice. Please try again");
     }
 
+    //refund slots
     public static void cancelBookedEvents(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot) {
         while(true){
             OOP.clScr();

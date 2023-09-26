@@ -2,7 +2,6 @@ package com.mycompany.oop;
 
 import java.sql.Date;
 
-
 public class Slot{
     private String id;
     private String venue;
