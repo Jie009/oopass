@@ -88,15 +88,16 @@ public class Report extends ReportAbstract {
         if(category == 1){
             
             System.out.println("===================================================");
-            System.out.println("               Choose an option");
+            System.out.println("                 Report Generator");
             System.out.println("");
             System.out.println("1 - Total Attendees Joined for Seminar");
             System.out.println("2 - Financial Report for Seminar");
             System.out.println("3 - Total Slot Bookings by Date");
+            System.out.println("");
             System.out.println("0 - EXIT");
             System.out.println("");
             System.out.println("===================================================");
-            System.out.print("> ");
+            System.out.print("Enter your choice:  ");
         
             choice = scan.nextInt();
             if(choice == 0){
@@ -105,7 +106,7 @@ public class Report extends ReportAbstract {
             }
             
             //Validation
-            while(choice > 4 && exit == false){
+            while(choice > 3 && exit == false){
 
 
                 try {
@@ -130,14 +131,15 @@ public class Report extends ReportAbstract {
             
             OOP.clScr();
             System.out.println("===================================================");
-            System.out.println("               Choose an option");
+            System.out.println("                  Report Generator");
             System.out.println("");
             System.out.println("1 - Total Attendees Joined for Seminar");
             System.out.println("2 - Financial Report");
+            System.out.println("");
             System.out.println("0 - EXIT");
             System.out.println("");
-            System.out.println("===================================================");
-            System.out.print("> ");     
+            System.out.println("===================================================");   
+            System.out.print("Enter your choice:  ");
             choice = scan.nextInt();
             if(choice == 0){
                 
@@ -216,15 +218,16 @@ public class Report extends ReportAbstract {
                     int sb = 0;
                     
                     OOP.clScr();
-                    System.out.println("------------------------------------------");
-                    System.out.println("            Choose an option.");
-                    System.out.println("------------------------------------------");
-                    System.out.println("1 - All Seminars");
-                    System.out.println("2 - Search by a Seminar");
-                    System.out.println("");
-                    System.out.println("0 - Exit");
-                    System.out.println("");
-                    System.out.print("> ");
+                     System.out.println("===================================================");
+                     System.out.println("                 Report Generator");
+                     System.out.println("");
+                     System.out.println("1 - All Seminars");
+                     System.out.println("2 - Search by a Seminar");
+                     System.out.println("");
+                     System.out.println("0 - EXIT");
+                     System.out.println("");
+                     System.out.println("===================================================");
+                    System.out.print("Enter you choice:  ");
                     attendeechoice = scan.nextInt();
 
                     //Validation
@@ -280,16 +283,17 @@ public class Report extends ReportAbstract {
                 do {
 
                     int sb = 0;
-                    OOP.clScr();
-                    System.out.println("------------------------------------------");
-                    System.out.println("            Choose an option.");
-                    System.out.println("------------------------------------------");
-                    System.out.println("1 - All Seminars");
-                    System.out.println("2 - Search by a Seminar");
-                    System.out.println("");
-                    System.out.println("0 - Exit");
-                    System.out.println("");
-                    System.out.print("> ");
+                   OOP.clScr();
+                     System.out.println("===================================================");
+                     System.out.println("                 Report Generator");
+                     System.out.println("");
+                     System.out.println("1 - All Seminars");
+                     System.out.println("2 - Search by a Seminar");
+                     System.out.println("");
+                     System.out.println("0 - EXIT");
+                     System.out.println("");
+                     System.out.println("===================================================");
+                    System.out.print("Enter you choice:  ");
                     attendeechoice = scan.nextInt();
 
                     //Validation
@@ -307,7 +311,33 @@ public class Report extends ReportAbstract {
                     }else{
 
                         OOP.clScr();
-                        countAttendeeSeminar(attendeechoice);
+                        
+                        int sdcount = 0;
+                        for (int i = 0; i < seminars.length; i++) {
+
+                            if(seminars[i] != null){
+
+
+                                for (int j = 0; j < attendee.length; j++) {
+
+                                    if(seminars[j] != null){
+
+                                        sdcount++;
+                                    }
+
+                                }
+
+                            }
+
+                        }
+                        if(sdcount != 0){
+
+                            countAttendeeSeminar(attendeechoice); 
+
+                        }else{
+                            
+                            System.out.println("There are currently no enrolls");
+                        }
 
                     }
 

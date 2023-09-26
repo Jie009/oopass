@@ -105,7 +105,7 @@ public class Monitoring extends MonitorAbstract {
         System.out.println("0 - EXIT");
         System.out.println("");
         System.out.println("===================================================");
-        System.out.print("> ");
+        System.out.print("Enter your choice:  ");
 
         
         int choice = scan.nextInt();
@@ -219,11 +219,10 @@ public class Monitoring extends MonitorAbstract {
                 System.out.println("               Choose an option");
                 System.out.println("");
                 System.out.println("1 - Search by Seminar ID");
-                System.out.println("2 - Search by Username");
                 System.out.println("");
                 System.out.println("0 - EXIT");
                 System.out.println("===================================================");
-                System.out.print("> "); 
+                System.out.print("Enter your choice:  ");
 
                 slotChoice = scan.nextInt();
                 
@@ -233,7 +232,7 @@ public class Monitoring extends MonitorAbstract {
                     status = false;
                 }
 
-                if(slotChoice > 2 && slotChoice != 0){
+                if(slotChoice > 1 && slotChoice != 0){
 
                     System.out.println("Please Choose again.");
                     System.out.print("> ");
@@ -271,7 +270,7 @@ public class Monitoring extends MonitorAbstract {
                 System.out.println("");
                 System.out.println("0 - EXIT");
                 System.out.println("===================================================");
-                System.out.print("> "); 
+                System.out.print("Enter your choice:  ");
  
                 choiceVenue = scan.nextInt();
                 
@@ -315,7 +314,7 @@ public class Monitoring extends MonitorAbstract {
                 System.out.println("");
                 System.out.println("0 - EXIT");
                 System.out.println("===================================================");
-                System.out.print("> "); 
+                System.out.print("Enter your choice:  ");
 
                 ongoingChoice = scan.nextInt();
                 
@@ -955,15 +954,8 @@ public class Monitoring extends MonitorAbstract {
             }
             
             
-        }else if(slotChoice == 2){
-            
-            
-            
-            
         }
-        
-        
-        
+
     }        
     
 

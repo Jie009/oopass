@@ -11,14 +11,17 @@ public class Login{
     static String ggid = "";
     public static void showLoginOptions(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner){ 
         welcomePage wp = new welcomePage();
-        clScr();
-            
-        System.out.println("Login Options:");
-        System.out.println("---------------");
-        System.out.println("1. Admin login");
-        System.out.println("2. Speaker login");
-        System.out.println("3. Attendee login");
-        System.out.println("\n0. Quit:");
+        OOP.clScr();
+        System.out.println("===================================================");
+        System.out.println("                    Login Page");
+        System.out.println("");
+        System.out.println("1 - Admin");
+        System.out.println("2 - Speaker");
+        System.out.println("3 - Attendee");
+        System.out.println("");
+        System.out.println("0 - EXIT");
+        System.out.println("");
+        System.out.println("===================================================");
 
         int choices = 0;
         try{
@@ -60,11 +63,16 @@ public class Login{
     public static void loginProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner, String category){
         welcomePage wp = new welcomePage();
         scanner.nextLine();
+        OOP.clScr();
+        System.out.println("===================================================");
+        System.out.println("                    Login Page");
+        System.out.println("");
         System.out.print("Enter Id: ");
         String id = scanner.nextLine();
         System.out.print("Enter Password: ");
         String password = scanner.nextLine();
-
+        System.out.println("");
+        System.out.println("===================================================");
         // 调用新的登录方法 
         boolean loginSuccessful = false;
         if (category.equals("Admin")){

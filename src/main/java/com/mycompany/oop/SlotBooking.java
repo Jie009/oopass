@@ -116,8 +116,7 @@ public class SlotBooking {
         return String.format
                 ( "\n=====================================================" 
                 + "\nVenue: %s"               
-                + "\nTime: %s - %s"            
-                + "\t\t\tDate: %s"
+                + "\nTime: %s - %s\t\tDate: %s"            
                 + "\nNumber of Seat: %d"
                 + "\t\t\tPrice: RM%.2f"
                 + "\nPayment Method: %s"
@@ -130,13 +129,17 @@ public class SlotBooking {
         
         boolean exitStatus = false;
         while(exitStatus == false){
-            clScr();
-            System.out.println("\nEvent Booking");
-            System.out.println("--------------");
-            System.out.println("1. Slot available");
-            System.out.println("2. Booking slot");
-            System.out.println("3. Slot management");
-            System.out.println("\n0. Quit");
+            OOP.clScr();
+            System.out.println("===================================================");
+            System.out.println("                    Event Booking");
+            System.out.println("");
+            System.out.println("1 - Slot available");
+            System.out.println("2 - Booking slot");
+            System.out.println("3 - Slot management");
+            System.out.println("");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
             int choice = 0;       
             try{
                 System.out.print("Your Choice: ");
@@ -177,12 +180,17 @@ public class SlotBooking {
         Comparator<Slot> currentComparator = new SlotDateComparator();
         while(continueBooking){
             int choice5 = 0;
-            System.out.println("Filter Options in Ascending:");
-            System.out.println("-----------------------------");            
-            System.out.println("1. Sort by Date");
-            System.out.println("2. Sort by Price");
-            System.out.println("3. Continue booking");
-            System.out.println("\n0. Quit");
+            OOP.clScr();
+            System.out.println("===================================================");
+            System.out.println("              Filter Options in Ascending");
+            System.out.println("");
+            System.out.println("1 - Sort by Date");
+            System.out.println("2 - Sort by Price");
+            System.out.println("3 - Continue booking");
+            System.out.println("");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
 
             try {
                 System.out.print("Your Choice: ");
@@ -241,22 +249,24 @@ public class SlotBooking {
     } 
     
     public static void contBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
-        clScr();
         boolean indicate = true;
         while(indicate){
-            System.out.println("Event Booking");
-            System.out.println("--------------");
-            System.out.println("Which slots you prefer:");
+            OOP.clScr();
+            System.out.println("===================================================");
+            System.out.println("                   Event Booking");
+            System.out.println("");
             int numOfSlot = 0;
 
             for (int i = 0; i < availableSlots.size(); i++) {
                 Slot slotToDisplay = availableSlots.get(i);
-                System.out.println((i + 1) + ". " + slotToDisplay.getVenue());
+                System.out.println((i + 1) + " - " + slotToDisplay.getVenue());
                 numOfSlot++;
             }
 
             int quit = numOfSlot + 1;
-            System.out.println("\n0. Quit");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
             int choice2 = 0;
             int idSB = 0;
             try{
@@ -376,12 +386,16 @@ public class SlotBooking {
         }
     }
     public static void choiceBookingManagement(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
-        clScr();
-        System.out.println("\nBooking Management");
-        System.out.println("---------------------");
-        System.out.println("1. Booked event");
-        System.out.println("2. Refund");
-        System.out.println("\n0. Quit");
+        OOP.clScr();
+        System.out.println("===================================================");
+        System.out.println("                   Booking Management");
+        System.out.println("");
+        System.out.println("1 - Booked event");
+        System.out.println("2 - Refund");
+        System.out.println("");
+        System.out.println("0 - EXIT");
+        System.out.println("");
+        System.out.println("===================================================");
         int choice = 0;
         try{
                 System.out.print("Your Choice: ");
@@ -408,19 +422,23 @@ public class SlotBooking {
     }
     
     public static void viewBookedEvents(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot) {
-        clScr();
-        System.out.println("\nBooked Events");
-        System.out.println("---------------");
+        OOP.clScr();
+        System.out.println("===================================================");
+        System.out.println("                     Booked Events");
+        System.out.println("");
         int num = 1;
         int[] venueNum = new int[100];
         for (int i = 0; i < sb.length; i++) {
             if (sb[i] != null && sb[i].getSpeaker().equals(speaker)) {
-                System.out.println(num + ". " + sb[i].getVenue());
+                System.out.println(num + " - " + sb[i].getVenue());
                 venueNum[num-1]= i;
                 num ++;
             }
         }
-        System.out.println("\n0. Quit");
+        System.out.println("");
+        System.out.println("0 - EXIT");
+        System.out.println("");
+        System.out.println("===================================================");
         int choice5 = 0;
         try{
                 System.out.print("Your Choice: ");
@@ -448,10 +466,11 @@ public class SlotBooking {
     }
 
     public static void cancelBookedEvents(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot) {
-        clScr();
         while(true){
-            System.out.println("\nBooked Events");
-            System.out.println("---------------");
+            OOP.clScr();
+            System.out.println("===================================================");
+            System.out.println("                     Booked Events");
+            System.out.println("");
             int num = 1;
             for (int i = 0; i < sb.length; i++) {
                 if (sb[i] != null && sb[i].getSpeaker().equals(speaker)) {
@@ -460,7 +479,10 @@ public class SlotBooking {
                     num++;
                 }
             }
-            System.out.println("\n0. Quit");
+            System.out.println("");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
             int eventNumber = 0;        
             try{
                     System.out.print("Enter the number of the event to refund: ");

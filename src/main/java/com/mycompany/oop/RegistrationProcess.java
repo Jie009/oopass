@@ -8,12 +8,16 @@ import java.util.Scanner;
 
 public class RegistrationProcess {
     public static void RegistrationProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner) {          
-        clScr();
-        System.out.println("Registration Options:");
-        System.out.println("---------------------");
-        System.out.println("1. Speaker register");
-        System.out.println("2. Attendee register");
-        System.out.println("\n0. Quit");
+        OOP.clScr();
+        System.out.println("===================================================");
+        System.out.println("                 Registration Options");
+        System.out.println("");
+        System.out.println("1 - Speaker");
+        System.out.println("2 - Attendee");
+        System.out.println("");
+        System.out.println("0 - EXIT");
+        System.out.println("");
+        System.out.println("===================================================");
         int choice = 0;
         String category = "";
         try{
@@ -30,7 +34,8 @@ public class RegistrationProcess {
         }
         else if (choice >0 && choice < 3){
             scanner.nextLine();
-            clScr();
+            OOP.clScr();
+            System.out.println("===================================================");
             System.out.print("Enter ID: ");
             String id = scanner.nextLine();
 
@@ -42,6 +47,7 @@ public class RegistrationProcess {
 
             System.out.print("Enter Contact Info: ");
             String contactInfo = scanner.nextLine();
+            System.out.println("===================================================");
             switch (choice) {
                 case 1:
                     Registration.registerUser(id, password, name, "Speaker",contactInfo, admins, speakers, attendees);
@@ -54,7 +60,7 @@ public class RegistrationProcess {
                     break;
             }
 
-            System.out.println("Registration successful!");
+            System.out.println("\nRegistration successful!");
 
             System.out.println("\nPress any key to continue...");
             scanner.nextLine();

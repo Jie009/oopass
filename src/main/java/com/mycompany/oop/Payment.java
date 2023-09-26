@@ -36,17 +36,20 @@ public class Payment {
         return numOfPayment;
     }
     public static boolean eventPayment(Scanner scanner, Payment[] payment, double price){
-        clScr();
         int numOfPayment = Payment.getNumOfPayment();
         while (true){
-            System.out.println("Payment Page");
-            System.out.println("---------------");
-            System.out.println("Payment method:");
-            System.out.println("1. Credit Card");
-            System.out.println("2. Online banking");
-            System.out.println("3. Touch & Go");
-            System.out.println("4. Cash");
-            System.out.println("\n0. Quit");  
+            OOP.clScr();
+            System.out.println("===================================================");
+            System.out.println("                    Payment Options");
+            System.out.println("");
+            System.out.println("1 - Credit Card");
+            System.out.println("2 - Online banking");
+            System.out.println("3 - Touch & Go");
+            System.out.println("4 - Cash");
+            System.out.println("");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
             int choice3 = 0;
             try{
                 System.out.print("Your Choice: ");
