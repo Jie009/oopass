@@ -102,11 +102,7 @@ public class welcomePage {
 
                     //change "test" to admin name
                     sb[0] = new SlotBooking("Speaker User", slot[0], payment[0]);
-                    sb[1] = new SlotBooking("Speaker User", slot[0], payment[0]);
-                    System.out.println(Login.userId());
-                
-
-
+                    sb[1] = new SlotBooking("Speaker User", slot[1], payment[1]);
 
                 
                 if(cat.equals("Admin")){

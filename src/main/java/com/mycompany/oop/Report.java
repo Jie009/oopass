@@ -661,27 +661,31 @@ public class Report extends ReportAbstract {
                     if(slotbooking[i] != null){
                         count++;
                         
-                        userStatus = 2;
                         //1 is admin
                         if(userStatus == 2){
                             
                             System.out.println(slotbooking[i].getSpeaker());
                             if(slotbooking[i].getSpeaker().equals(name)){
 
-                                 String speakerSlotID = slotbooking[i].getID();
-                                 System.out.println(speakerSlotID);
-                                 for(int j=0; j<attendee.length; j++){
+                                String speakerSlotID = slotbooking[i].getID();
+                                for(int j=0; j<attendee.length; j++){
+                                        
+                                       if(attendee[j] != null){
+                                           if((attendee[j].getSeminarID()).equals(speakerSlotID)){
+                                               
+                                               System.out.println(seminarenrolls[i].getAttendee().getTotal());
+                                               totalCost += seminarenrolls[i].getAttendee().getTotal();
 
-                                     if((attendee[j].getSeminarID()).equals(speakerSlotID)){
+                                           }
 
-                                         totalAttendee += attendee[j].getTotal();
+                                    
+                                       }
+                                
+                                    }
 
-                                     }
-                                 }
+                                }                    
 
-                             }                    
-
-                        }
+                            }
                         
                     }
 /*                    if(slotbooking[i].getSpeaker().equals(name)){
@@ -702,16 +706,7 @@ public class Report extends ReportAbstract {
                 }               
         
         
-                for(int i=0; i<slotbooking.length; i++){
 
-/*                    if(slotbooking[i].getSpeaker().equals(name)){
-
-                        totalCost += slotbooking[i].getTotal();
-
-                    }      */      
-
-                }    
-                
 
                 System.out.printf("\nFinancial Report by %-30s", formattedDate);
                 System.out.printf("\nTotal: RM%.2f", totalAttendee);
