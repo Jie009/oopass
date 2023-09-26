@@ -260,6 +260,7 @@ public class SlotBooking {
             int choice2 = 0;
             int idSB = 0;
             try{
+                scanner.nextLine();
                 System.out.print("Your Choice: ");
                 choice2 = scanner.nextInt();
             }
@@ -360,7 +361,7 @@ public class SlotBooking {
                 }
                 break;
             }
-            else if (choice2 == quit){
+            else if (choice2 == 0){
                 eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees, seminar, slot);
             }
             else
