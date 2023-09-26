@@ -114,7 +114,7 @@ public class welcomePage {
                 }   
 
 
-                Report report = new Report(seminar, sb, seminarEnroll, attendee);
+                Report report = new Report(seminar, sb, seminarEnroll, attendee, payment);
                 for(int i=0; i<seminarEnroll.length; i++){
 
                     if(seminarEnroll[i] != null){

@@ -33,9 +33,10 @@ public class Report extends ReportAbstract {
     private int[] count;
     private SlotBooking[] slotbooking;
     private SlotBooking slotBooking;
+    private Payment[] payment;
     private SeminarEnroll[] seminarenrolls;
         
-    public Report(Seminar[] seminars, SlotBooking[] slotbooking, SeminarEnroll[] seminarenrolls, Attendee[] attendee){
+    public Report(Seminar[] seminars, SlotBooking[] slotbooking, SeminarEnroll[] seminarenrolls, Attendee[] attendee, Payment[] payment){
         
         enrollData = new ArrayList<>();
         this.seminars = seminars;
@@ -90,9 +91,8 @@ public class Report extends ReportAbstract {
             System.out.println("               Choose an option");
             System.out.println("");
             System.out.println("1 - Total Attendees Joined for Seminar");
-            System.out.println("2 - Top Payment Methods");
-            System.out.println("3 - Financial Report for Seminar");
-            System.out.println("4 - Total Slot Bookings by Date");
+            System.out.println("2 - Financial Report for Seminar");
+            System.out.println("3 - Total Slot Bookings by Date");
             System.out.println("0 - EXIT");
             System.out.println("");
             System.out.println("===================================================");
@@ -250,62 +250,14 @@ public class Report extends ReportAbstract {
                 }while(status == true);             
 
 
-            //TOP PAYMENT    
-            }else if(reportChoice == 2){
-
-                int paymentChoice;
-                boolean status = true;
-
-                do {
-
-                    int sb = 0;
-                    OOP.clScr();
-                    System.out.println("------------------------------------------");
-                    System.out.println("            Choose an option.");
-                    System.out.println("------------------------------------------");
-                    System.out.println("1 - Payment by Attendee");
-                    System.out.println("2 - Payment by Speaker");
-                    System.out.println("");
-                    System.out.println("0 - Exit");
-                    System.out.println("");
-                    System.out.print("> ");
-                    paymentChoice = scan.nextInt();
-
-                    //Validation
-                    if(paymentChoice == 0){
-
-                        status = false;
-                        exitStatus = true;
-                        break;
-                    }
-
-                    if(paymentChoice > 2){
-
-                        System.out.println("Please Choose again.");
-
-                    }else{
-
-
-                        generateTopPayment(paymentChoice);
-
-
-                    }
-
-
-                }while(status == true);   
-
-
-
-
-
             //CHECK ONGOING SEMINAR
-            }else if(reportChoice == 3){
+            }else if(reportChoice == 2){
 
                 checkSeminars(category, name);
                 
                 
             //CHECK ALL BOOKING
-            }else if(reportChoice == 4){
+            }else if(reportChoice == 3){
 
                 checkBooking();
 
@@ -383,150 +335,7 @@ public class Report extends ReportAbstract {
 
     }
     
-    public void generateTopPayment(int paymentChoice){
-        
-        int count = 0;
-        int count2 = 0;
 
-        String[] method = { "Credit card", "Online Banking", "Touch & Go", "Cash" };
-        int[] methodCount = new int[4];
-        Scanner scan = new Scanner(System.in);
-
-        if(paymentChoice == 1){
-            
-
-            count++;
-            for(int i=0; i<attendee.length; i++){
-
-                if(attendee[i] != null){
-
-                    for(int j=0; j<method.length; j++){
-                        
-                        
-                        if(attendee[i].getMethod() != null){
-                            
-                             System.out.println(attendee[i].getMethod());
-                            
-                            if(attendee[i].getMethod().equals(method[j])){
-                                
-                                methodCount[j]++;
-                            }
-                            
-                        }else{
-                            
-                           
-                            
-                        }
-
-                    }
-                }
-
-            }
-
-            List<ReportPaymentComparable> paymentMethods = new ArrayList<>(); 
-            paymentMethods.clear();
-
-            paymentMethods = Arrays.asList(
-
-               new ReportPaymentComparable("Credit card", methodCount[0]),
-               new ReportPaymentComparable("Online Banking", methodCount[1]),
-               new ReportPaymentComparable("Touch & Go", methodCount[2]),
-               new ReportPaymentComparable("Cash", methodCount[3])
-
-           );
-
-
-           // Sort paymentMethods based on counts
-           Collections.sort(paymentMethods);
-
-            System.out.println("");
-            System.out.printf("%-30s", "Top Payment Method for Attendee");
-            System.out.println("");
-           // Print the sorted payment methods
-           for (ReportPaymentComparable methodObj : paymentMethods) {
-               System.out.println(methodObj);
-           }        
-
-
-            System.out.println("\nPress enter to continue..");
-            scan.nextLine();                    
-
-
-
-            if(count<=0){
-
-                System.out.println("There are no bookings at the moment..");
-                System.out.println("\nPress enter to continue..");
-                scan.nextLine();  
-
-            }                              
-                
-            
-
-        }else if(paymentChoice == 2){
-            
-            
-                
-               
-                    
-                    count2++;
-                    for(int i=0; i<slotbooking.length; i++){
-
-
-                        for(int j=0; j<method.length; j++){
-
-                            if(slotbooking[i].getMethod().equals(method[j])){
-
-                                methodCount[j]++;
-                            }
-                        }
-                    }
-
-                    List<ReportPaymentComparable> paymentMethods = new ArrayList<>(); 
-                    paymentMethods.clear();
-
-                    paymentMethods = Arrays.asList(
-
-                       new ReportPaymentComparable("Credit card", methodCount[0]),
-                       new ReportPaymentComparable("Online Banking", methodCount[1]),
-                       new ReportPaymentComparable("Touch & Go", methodCount[2]),
-                       new ReportPaymentComparable("Cash", methodCount[3])
-
-                   );
-
-
-                   // Sort paymentMethods based on counts
-                   Collections.sort(paymentMethods);
-
-                    System.out.println("");
-                    System.out.printf("%-30s", "Top Payment Method for Slot Booking");
-                    System.out.println("");
-                   // Print the sorted payment methods
-                   for (ReportPaymentComparable methodObj : paymentMethods) {
-                       System.out.println(methodObj);
-                   }     
-
-
-                    System.out.println("\nPress enter to continue..");
-                    scan.nextLine();                    
-                    
-                
-                    
-                    if(count<=0){
-
-                        System.out.println("There are no bookings at the moment..");
-                        System.out.println("\nPress enter to continue..");
-                        scan.nextLine();  
-                        
-                    }                                        
-                    
-                
-            
-
-        }                        
-
-     
-    }
 
     
     public void setTitle(String title){
