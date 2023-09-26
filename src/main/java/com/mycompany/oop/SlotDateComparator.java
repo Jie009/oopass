@@ -8,6 +8,7 @@ public class SlotDateComparator implements Comparator<Slot> {
    
     private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+    // arrange the date ascendingly
     @Override
     public int compare(Slot slot1, Slot slot2) {
         try {

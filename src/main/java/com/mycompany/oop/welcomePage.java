@@ -42,11 +42,12 @@ public class welcomePage {
         
         
         while(bigLoop == true){
-            
+            // main page
             do {
                 OOP.clScr();
                 System.out.println("===================================================");
                 System.out.println("      Welcome to the Seminar Management System");
+                System.out.println("                 -- EventHub --");
                 System.out.println("");
                 System.out.println("1 - Login");
                 System.out.println("2 - Register");
@@ -148,7 +149,7 @@ public class welcomePage {
 //                sb[0] = new SlotBooking("Speaker User", slot[0], payment[0]);
 //                sb[1] = new SlotBooking("Speaker User", slot[1], payment[1]);
 
-                
+                // admin menu page
                 if(cat.equals("Admin")){
                     
                     OOP.clScr();
@@ -198,8 +199,10 @@ public class welcomePage {
                 
                     
                     
-
-                }else if(cat.equals("Speaker")){
+                    
+                }
+                // speaker menu page
+                else if(cat.equals("Speaker")){
                     OOP.clScr();
                     System.out.println("===================================================");
                     System.out.println("                   Speaker Menu");
@@ -245,7 +248,8 @@ public class welcomePage {
 
                         Date date;
                         Time time;
-
+                        
+                        // advertisement menu page
                         while (true) {
                         OOP.clScr();
                         System.out.println("===================================================");
@@ -300,7 +304,9 @@ public class welcomePage {
                     }         
                     
 
-                }else if(cat.equals("Attendee")){
+                }
+                // attendee menu page
+                else if(cat.equals("Attendee")){
                     
                     OOP.clScr();
                     System.out.println("===================================================");

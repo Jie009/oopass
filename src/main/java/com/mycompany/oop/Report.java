@@ -34,7 +34,8 @@ public class Report extends ReportAbstract {
         this.attendee = attendee;
     }
 
-    //Get start time using id
+    
+    // get start time according to name
     public Time getStartTimeByID(String id){
         
         for(Seminar seminard: seminars){
@@ -166,8 +167,7 @@ public class Report extends ReportAbstract {
         return choice;
 
     }
-    
-    //Generate report
+    // generate report
     public boolean generateReport(int reportChoice, int category, String name){
         
         int count = 0;

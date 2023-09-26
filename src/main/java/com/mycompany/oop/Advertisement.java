@@ -72,9 +72,7 @@ public class Advertisement extends Seminar{
 
         return sb.toString();
     }
-    
-    
-    //Create an advertisement
+
     public static void createAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
         OOP.clScr();
         System.out.println("===================================================");
@@ -186,8 +184,7 @@ public class Advertisement extends Seminar{
         scanner.nextLine();
     }
 
-    
-    //View adv
+    // view the advertisement
     public static boolean viewAdvertisements(ArrayList<Advertisement> advertisements, Scanner scanner) {
         OOP.clScr();
         if (advertisements.isEmpty()) {
@@ -207,8 +204,9 @@ public class Advertisement extends Seminar{
             return true;
         }
     }
-    
-    //Update adv
+
+    // update the advertisement
+
     public static void updateAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
         if(viewAdvertisements(advertisements, scanner)){
             System.out.print("Enter the number of the advertisement to update: ");
@@ -267,8 +265,8 @@ public class Advertisement extends Seminar{
         }
         
     }
+    // delete created advertisement
 
-    //Del adv
     public static void deleteAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
         
         if(viewAdvertisements(advertisements, scanner)){

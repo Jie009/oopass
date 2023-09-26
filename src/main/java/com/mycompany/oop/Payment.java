@@ -39,7 +39,7 @@ public class Payment {
         return numOfPayment;
     }
     
-    //Payment process 
+    // show the payment option will return True if success
     public static boolean eventPayment(Scanner scanner, Payment[] payment, double price){
         int numOfPayment = Payment.getNumOfPayment();
         while (true){

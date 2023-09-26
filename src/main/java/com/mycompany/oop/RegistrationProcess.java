@@ -34,6 +34,7 @@ public class RegistrationProcess {
 
         }
         else if (choice >0 && choice < 3){
+            // enter details
             scanner.nextLine();
             OOP.clScr();
             System.out.println("===================================================");

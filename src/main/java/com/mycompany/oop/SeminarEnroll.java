@@ -142,6 +142,7 @@ public class SeminarEnroll {
         return seminar.getEndDate();
     }
     
+    // enroll menu
     public void menu(){
         
         
@@ -158,7 +159,8 @@ public class SeminarEnroll {
             System.out.println("===================================================");
             System.out.print("Enter your choice: ");
     }
-
+    
+    // enter details and do monitoring for the menu
     public void enroll(String name, Attendee[] attendee, SeminarEnroll[] SE, Seminar[] seminar, Payment[] payment){
         
         boolean status = true;
@@ -352,13 +354,9 @@ public class SeminarEnroll {
       
     }
     
-    
+    // cancel booked event
     public static void cancelBookedEvents(Scanner scanner, String user, SeminarEnroll[] SE, Seminar[] seminar, Payment[] payment) {
-
-        
-
-        
-        
+ 
         clScr();
         while(true){
 

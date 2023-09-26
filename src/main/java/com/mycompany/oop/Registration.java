@@ -3,8 +3,7 @@ package com.mycompany.oop;
 import java.util.List;
 
 public class Registration {
-    
-    //Register user
+    // create a new user for specific user category
     public static void registerUser(String id, String password, String name, String category, String contactInfo, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees) {
         if ("Admin".equals(category)) {
             Admin newAdmin = new Admin(id, password, name, contactInfo);
