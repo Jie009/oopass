@@ -130,25 +130,20 @@ public class welcomePage {
                 
                 //Sample data for Report & Monitoring
 
-                /*
-                
-                
-                    payment[0] = new Payment("Credit card", 200);
-                    payment[1] = new Payment("Online Banking", 200);
+                payment[0] = new Payment("Credit card", 200);
+                payment[1] = new Payment("Online Banking", 200);
 
-                    attendee[0] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S1", payment[0]);
-                    attendee[1] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S2", payment[1]);
-                    attendee[2] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S2", payment[2]);
+                attendee[0] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S1", payment[0]);
+                attendee[1] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S2", payment[1]);
+                attendee[2] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S2", payment[2]);
 
-                    seminarEnroll[0] = new SeminarEnroll(attendee[0], seminar[0]);
-                    seminarEnroll[1] = new SeminarEnroll(attendee[1], seminar[1]);
-                    seminarEnroll[2] = new SeminarEnroll(attendee[0], seminar[1]);
+                seminarEnroll[0] = new SeminarEnroll(attendee[0], seminar[0]);
+                seminarEnroll[1] = new SeminarEnroll(attendee[1], seminar[1]);
+                seminarEnroll[2] = new SeminarEnroll(attendee[0], seminar[1]);
 
+                sb[0] = new SlotBooking("Speaker User", slot[0], payment[0]);
+                sb[1] = new SlotBooking("Speaker User", slot[1], payment[1]);
 
-                    //change "test" to admin name
-                    sb[0] = new SlotBooking("Speaker User", slot[0], payment[0]);
-                    sb[1] = new SlotBooking("Speaker User", slot[1], payment[1]);
-*/
                 
                 if(cat.equals("Admin")){
                     

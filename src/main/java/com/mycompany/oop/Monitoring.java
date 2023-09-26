@@ -456,7 +456,7 @@ public class Monitoring extends MonitorAbstract {
                 if(choiceVenue == 1){
 
                     String formattedDate = convertDate.format(currentDate);
-                    System.out.println("Current Date: " + formattedDate);
+                    System.out.printf("\n%-50s %-25s", "Slot", "Time");
                     for(int i=0; i<slotbooking.length; i++){
                         
                         if(slotbooking[i] != null){
@@ -467,11 +467,13 @@ public class Monitoring extends MonitorAbstract {
                             slotEndTime = Time.valueOf(slotbooking[i].getEndTime());
 
                             int comparisonResult = currentDate.compareTo(slotStartDate);
+                            
+                            
                             if(comparisonResult < 0){
 
                                 if(slotbooking[i] != null){
 
-                                    System.out.println("The time of " + slotbooking[i].getVenue() + " is " + slotStartTime + " until " + slotEndTime);
+                                    System.out.printf("\n%-50s %-25s %-25s",slotbooking[i].getVenue(), slotStartTime, slotEndTime);
 
                                     if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
 
