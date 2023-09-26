@@ -33,7 +33,10 @@ public class welcomePage {
 
         //seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
         //seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
-        
+        for(int i=0; i<5; i++){
+
+            availableSlots.add(slot[i]);
+        }   
 
         
         clScr();
@@ -122,10 +125,8 @@ public class welcomePage {
 
                     }
                 } 
-                for(int i=0; i<5; i++){
+                
 
-                    availableSlots.add(slot[i]);
-                }   
                 
                 //Sample data for Report & Monitoring
 
@@ -150,6 +151,7 @@ public class welcomePage {
 */
                 
                 if(cat.equals("Admin")){
+                    
                     clScr();
                     System.out.println("Admin Menu");
                     System.out.println("---------------------");
@@ -159,9 +161,9 @@ public class welcomePage {
                     System.out.println("---------------------");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
+                    int userStatus = 1;
                     if(choice == 1){
                 
-                        int userStatus = 1;
                     
                         int monitorChoice = monitor.displayChoices();
 
@@ -170,34 +172,35 @@ public class welcomePage {
 
                             userCont = monitor.displayList(monitorChoice);           
 
-
-
-                        }else if(choice == 2){
-                            String nameCompare = Login.userId();
-
-                            int reportChoice = report.generateList(userStatus);
-                            if(reportChoice != 0){
-
-                                userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
-                            }
-
-
-                        }else if(choice == 0){
-
-                            System.out.println("Thank you. Goodbye!");
-                            System.out.println("\nPress any key to continue...");
-
-                            userCont = false; 
-
                         }
+
+                    }else if(choice == 2){
+                        String nameCompare = Login.userId();
+
+                        int reportChoice = report.generateList(userStatus);
+                        if(reportChoice != 0){
+
+                            userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
+                        }
+
+
+                    }else if(choice == 0){
+                        
+                        
+                        System.out.println("Thank you. Goodbye!");
+                        System.out.println("\nPress any key to continue...");
+
+                        userCont = false; 
+
                     }
+                
                     
                     
 
                 }else if(cat.equals("Speaker")){
                     if(seminar[0] != null){
                         
-                     System.out.println(seminar[0].toString());
+                        System.out.println(seminar[0].toString());
                         
                     }
                     clScr();
