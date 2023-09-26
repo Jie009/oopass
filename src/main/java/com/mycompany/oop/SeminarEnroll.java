@@ -218,7 +218,8 @@ public class SeminarEnroll {
 
 
                         if (userInput.matches("S[1-5]")) {
-
+                            System.out.println("Enroll Successfully");
+                            System.out.println("\nPress any key to continue...");
                             break; // Exit the loop if input is valid
                             
                         } else {
