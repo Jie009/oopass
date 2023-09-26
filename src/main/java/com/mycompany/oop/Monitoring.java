@@ -464,26 +464,29 @@ public class Monitoring extends MonitorAbstract {
         
         for (int i = 0; i < slotbooking.length; i++) {
             
-            count++;
-            if(count == 0){
-                
-                System.out.printf("\n%-50s %-50s", "Slot", "Time");
-                
-            }
             
             if(slotbooking[i] != null){
-                count++;
                 if(choiceVenue == 1){
 
+                    
                     String formattedDate = convertDate.format(currentDate);
                     slotStartDate = slotbooking[i].getStartDate();
                     slotEndDate = slotbooking[i].getEndDate();
                     slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
                     slotEndTime = Time.valueOf(slotbooking[i].getEndTime());
 
+                    if(count == 0){
+
+                        System.out.println("Earlier than Date: " + formattedDate);
+                        System.out.printf("\n%-50s %-50s", "Slot", "Time");
+                        count++;
+
+                    }
+
+                    
                     int comparisonResult = currentDate.compareTo(slotStartDate);
 
-
+                    //Earlier than currentDate
                     if(comparisonResult < 0){
 
                         if(slotbooking[i] != null){
@@ -536,8 +539,8 @@ public class Monitoring extends MonitorAbstract {
                                 // Format the date as "yyyy-MM-dd"
                                 formattedDate = convertDate.format(sqlDate3);
 
-                                System.out.printf("\nDate: %-100s ", formattedDate);
-                                System.out.printf("\nCurrent Date: %-100s", formattedDate);
+                                System.out.printf("\nEarlier than Date: %-100s ", formattedDate);
+                                System.out.printf("\nToday's Date: %-100s", formattedDate);
 
                                 status = false;
 
@@ -553,10 +556,10 @@ public class Monitoring extends MonitorAbstract {
 
 
                     if(slotbooking[i] != null){
-                        count++;
                         if(count == 0){
 
                             System.out.printf("\n%-50s %-100s", "Slot", "Time");
+                            count++;
 
                         }
                         slotStartDate = slotbooking[i].getStartDate();
@@ -635,7 +638,7 @@ public class Monitoring extends MonitorAbstract {
         int count = 0;
         if(slotChoice == 1){
 
-            System.out.println("Input a Slot/Seminar ID: ");
+            System.out.println("Input a Slot/Seminar ID (S1-S5): ");
             String userInput = scan.nextLine();
             
             for (int i = 0; i < slot.length; i++) {
@@ -735,6 +738,9 @@ public class Monitoring extends MonitorAbstract {
                                 System.out.println("Original: " + original);
                                 System.out.println("Modified: " + slot[i].getStartTime());
                                 
+                                System.out.println("\nPress enter to continue..");
+                                scan.nextLine();
+                                
                             }else if(choiceTime == 2){
                                 
                                 boolean status = false;
@@ -779,8 +785,6 @@ public class Monitoring extends MonitorAbstract {
                                 System.out.println("Modified: " + slot[i].getEndTime());        
                             }
 
-                            System.out.println("\nPress enter to continue..");
-                            scan.nextLine();
                             
                         //Date
                         }else if(updateChoice == 3){
@@ -838,6 +842,9 @@ public class Monitoring extends MonitorAbstract {
 
                                 }while(status == true);       
 
+                                System.out.println("\nPress enter to continue..");
+                                scan.nextLine();
+                                
                             }else if(choiceDate == 2){
                                 
                                 System.out.print("Enter a date (dd-MM-yyyy): ");
@@ -912,6 +919,7 @@ public class Monitoring extends MonitorAbstract {
 
                             System.out.println("\nPress enter to continue..");
                             scan.nextLine();
+                            scan.nextLine();
                                                                  
                                                             
                         //Price   
@@ -923,10 +931,11 @@ public class Monitoring extends MonitorAbstract {
                             double original = slot[i].getPrice();
                      
                             slot[i].setPrice(updateInput);
-                            System.out.printf("Original: RM%.2f", original);
-                            System.out.printf("Modified: RM%.2f", slot[i].getPrice());         
+                            System.out.printf("\nOriginal: RM%.2f", original);
+                            System.out.printf("\nModified: RM%.2f", slot[i].getPrice());         
 
                             System.out.println("\nPress enter to continue..");
+                            scan.nextLine();                        
                             scan.nextLine();                        
                         
                         }

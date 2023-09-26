@@ -80,7 +80,7 @@ public class Report extends ReportAbstract {
             System.out.println("");
             System.out.println("1 - Total Attendees Joined for Seminar");
             System.out.println("2 - Financial Report for Seminar");
-            System.out.println("3 - Total Slot Bookings by Date");
+            System.out.println("3 - Total Slot by Date");
             System.out.println("");
             System.out.println("0 - EXIT");
             System.out.println("");
@@ -190,11 +190,14 @@ public class Report extends ReportAbstract {
         
         Scanner scan = new Scanner(System.in);
         boolean exitStatus = false;
+            
         
         //ADMIN ONLY
         if(category == 1){
             
             //SEMINAR ATTENDEE PER COUNT
+            //require data, welcomePage contains the data seminar[0-1]
+            
             if(reportChoice == 1){
 
                 int attendeechoice;
@@ -204,6 +207,7 @@ public class Report extends ReportAbstract {
                 do {
 
                     int sb = 0;
+                    int sdcount = 0;
                     
                     OOP.clScr();
                      System.out.println("===================================================");
@@ -231,11 +235,43 @@ public class Report extends ReportAbstract {
                         System.out.println("Please Choose again.");
 
                     }else{
+                        
+                        
+                        
+                        for (int i = 0; i < seminars.length; i++) {
+
+                            if(seminars[i] != null){
 
 
-                        countAttendeeSeminar(attendeechoice);
+                                for (int j = 0; j < attendee.length; j++) {
 
+                                    if(seminars[j] != null){
+
+                                        sdcount++;
+                                    }
+
+                                }
+
+                            }
+
+                        }
                     }
+                    
+                    if(sdcount != 0){
+
+                        countAttendeeSeminar(attendeechoice); 
+
+                    }else{
+
+                        System.out.println("There are currently no enrolls");
+                        System.out.println("");
+                        System.out.println("\nPress enter to continue..");
+
+                        scan.nextLine();          
+                        scan.nextLine();          
+                    }
+
+  
 
 
                 }while(status == true);             
@@ -245,12 +281,15 @@ public class Report extends ReportAbstract {
             }else if(reportChoice == 2){
 
                 checkSeminars(category, name);
+                exitStatus = true;
                 
                 
-            //CHECK ALL BOOKING
+            //CHECK ALL SLOT
             }else if(reportChoice == 3){
 
                 checkBooking();
+                exitStatus = true;
+                
 
             //EXIT TO ADMIN HOMEPAGE
             }else if(reportChoice == 0){
@@ -334,7 +373,8 @@ public class Report extends ReportAbstract {
 
 
             }else if(reportChoice == 2){
-
+                
+                //Financial report
                 checkSeminars(category, name);
                 
                 
@@ -644,34 +684,112 @@ public class Report extends ReportAbstract {
 
         SimpleDateFormat convertDate = new SimpleDateFormat("dd-MM-yyyy");
         
-        System.out.println("How do you wanna check boooking?");
+        System.out.println("How do you wanna check slot?");
         System.out.println("1 - Today Date");
         System.out.println("2 - Custom Date");
         int choice = scan.nextInt();
-        
-        for(int k=0; k<slotbooking.length; k++){
-            
-            if(slotbooking[k] != null){
-                
-                count++;
-                //Today date
-                if(choice == 1){
 
-                    String formattedDate = convertDate.format(currentDate);
-                    System.out.printf("\nDate: %-50s ", formattedDate);
+        //Today date
+        if(choice == 1){
 
+            String formattedDate = convertDate.format(currentDate);
+            System.out.printf("\nAfter Date: %-50s ", formattedDate);
+
+            for(int i=0; i<slotbooking.length; i++){
+
+                if(slotbooking[i] != null){
+                    count++;
+
+                    venue[i] = slotbooking[i].getVenue();
+                    slotStartDate[i] = slotbooking[i].getStartDate();
+                    slotEndDate[i] = slotbooking[i].getEndDate();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+
+                    java.sql.Time sqlTimes = null;
+                    java.sql.Time sqlTime2 = null;
+
+
+                    try {
+
+                        // Parse the string into a Date object
+                        Date parsedDate = dateFormat.parse(slotbooking[i].getStartTime());
+
+                        // Create a java.sql.Time object from the parsed Date
+                        sqlTimes = new java.sql.Time(parsedDate.getTime());
+
+                        // Parse the string into a Date object
+                        Date parsedDate2 = dateFormat.parse(slotbooking[i].getEndTime());
+
+                        // Create a java.sql.Time object from the parsed Date
+                        sqlTime2 = new java.sql.Time(parsedDate2.getTime());
+
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }                             
+
+
+
+
+                    //Less than 0 means its before
+                    int comparisonResult = currentDate.compareTo(slotStartDate[i]);
+                    if(comparisonResult < 0){
+
+                        System.out.printf("\nNo: %-25s", i+1);
+                        System.out.printf("\nVenue:  %-25s ", venue[i]);
+                        System.out.printf("\nSlot Start Time:  %-25s ", sqlTimes);
+                        System.out.printf("\nSlot End Time:  %-25s ", sqlTime2);
+                        System.out.printf("\nSlot Start Date:  %-25s ", slotStartDate[i]);
+                        System.out.printf("\nSlot End Date:  %-25s ", slotEndDate[i]);
+                        System.out.println("");
+
+                    }
+
+                }
+
+            } 
+
+            System.out.println("\nPress enter to continue..");
+            scan.nextLine();
+            scan.nextLine();
+
+
+        //Custom Date
+        }else if(choice == 2){
+
+            System.out.print("Enter a date (dd-MM-yyyy): ");
+            boolean status = false;
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+            String userInput = scan.next();
+
+            java.sql.Time sqlTimes = null;
+            java.sql.Time sqlTime2 = null;
+
+            do {
+
+                try {
+
+                    // Parse the user input into a java.util.Date
+                    java.util.Date utilDate = convertDate.parse(userInput);
+
+                    // Convert the java.util.Date to a java.sql.Date in the desired format
+                    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+                    // Format the date as "yyyy-MM-dd"
+                    String formattedDate = convertDate.format(sqlDate);
+                    
+
+
+                    System.out.printf("\nAfter Date: %-50s ", formattedDate);
+
+                    //Loop through slotbooking to get time and venue and date
                     for(int i=0; i<slotbooking.length; i++){
-                        
+
                         if(slotbooking[i] != null){
-                         
+
+
                             venue[i] = slotbooking[i].getVenue();
                             slotStartDate[i] = slotbooking[i].getStartDate();
                             slotEndDate[i] = slotbooking[i].getEndDate();
-                            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
-                            java.sql.Time sqlTimes = null;
-                            java.sql.Time sqlTime2 = null;
-
 
                             try {
 
@@ -689,13 +807,10 @@ public class Report extends ReportAbstract {
 
                             } catch (ParseException e) {
                                 e.printStackTrace();
-                            }                             
-                            
-                            
-                            
-                            
-                            //Less than 0 means its before
-                            int comparisonResult = currentDate.compareTo(slotStartDate[i]);
+                            }                                    
+
+                            //SQLDATE EARLIER THAN CUSTOM DATE
+                            int comparisonResult = sqlDate.compareTo(slotStartDate[i]);
                             if(comparisonResult < 0){
 
                                 System.out.printf("\nNo: %-25s", i+1);
@@ -707,114 +822,33 @@ public class Report extends ReportAbstract {
                                 System.out.println("");
 
                             }
-                            
                         }
 
-                    } 
+                    }
 
-                    System.out.println("\nPress enter to continue..");
-                    scan.nextLine();
+                } catch (ParseException e) {
 
+                    status = true;
+                    System.out.println("Invalid date format. Please use dd-MM-yyyy.");
 
-                //Custom Date
-                }else if(choice == 2){
-
-                    System.out.print("Enter a date (dd-MM-yyyy): ");
-                    boolean status = false;
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                    String userInput = scan.next();
-                    
-                    java.sql.Time sqlTimes = null;
-                    java.sql.Time sqlTime2 = null;
-
-                    do {
-
-                        try {
-
-                            // Parse the user input into a java.util.Date
-                            java.util.Date utilDate = convertDate.parse(userInput);
-
-                            // Convert the java.util.Date to a java.sql.Date in the desired format
-                            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-
-                            // Format the date as "yyyy-MM-dd"
-                            String formattedDate = convertDate.format(sqlDate);
-
-                            System.out.printf("\nDate: %-50s ", formattedDate);
-
-                            //Loop through slotbooking to get time and venue and date
-                            for(int i=0; i<slotbooking.length; i++){
-                                
-                                if(slotbooking[i] != null){
-                                    
-                                    
-                                    venue[i] = slotbooking[i].getVenue();
-                                    slotStartDate[i] = slotbooking[i].getStartDate();
-                                    slotEndDate[i] = slotbooking[i].getEndDate();
-                                   
-                                    try {
-
-                                        // Parse the string into a Date object
-                                        Date parsedDate = dateFormat.parse(slotbooking[i].getStartTime());
-
-                                        // Create a java.sql.Time object from the parsed Date
-                                        sqlTimes = new java.sql.Time(parsedDate.getTime());
-                                        
-                                        // Parse the string into a Date object
-                                        Date parsedDate2 = dateFormat.parse(slotbooking[i].getEndTime());
-
-                                        // Create a java.sql.Time object from the parsed Date
-                                        sqlTime2 = new java.sql.Time(parsedDate2.getTime());
-                                        
-                                    } catch (ParseException e) {
-                                        e.printStackTrace();
-                                    }                                    
-
-                                    //More than 0 means its after
-                                    int comparisonResult = sqlDate.compareTo(slotStartDate[i]);
-                                    if(comparisonResult < 0){
-
-                                        System.out.printf("\nNo: %-25s", i+1);
-                                        System.out.printf("\nVenue:  %-25s ", venue[i]);
-                                        System.out.printf("\nSlot Start Time:  %-25s ", sqlTimes);
-                                        System.out.printf("\nSlot End Time:  %-25s ", sqlTime2);
-                                        System.out.printf("\nSlot Start Date:  %-25s ", slotStartDate[i]);
-                                        System.out.printf("\nSlot End Date:  %-25s ", slotEndDate[i]);
-                                        System.out.println("");
-
-                                    }
-                                }
-
-                            }
-
-                        } catch (ParseException e) {
-
-                            status = true;
-                            System.out.println("Invalid date format. Please use dd-MM-yyyy.");
-
-                        }
-
-                    }while(status == true);
-
-                    System.out.println("\nPress enter to continue..");
-                    scan.nextLine();
-
-                }                
-                
-            }else{
-                
-                if(count<=0){
-                    
-                    System.out.println("There are no bookings at the moment..");
-                    System.out.println("\nPress enter to continue..");
-                    scan.nextLine();  
-                    break;
                 }
-                
+
+            }while(status == true);
+
+            if(count<=0){
+
+                System.out.println("There are no bookings at the moment..");
+
             }
-                        
             
-        }
+            System.out.println("");
+            System.out.println("\nPress enter to continue..");
+            scan.nextLine();
+            scan.nextLine();
+
+        }                
+
+
  
     }
 

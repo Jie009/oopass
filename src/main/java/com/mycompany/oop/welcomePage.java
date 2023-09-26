@@ -173,7 +173,7 @@ public class welcomePage {
                         if(monitorChoice != 0){
 
                             userCont = monitor.displayList(monitorChoice);           
-
+                            
                         }
 
                     }else if(choice == 2){
@@ -184,6 +184,7 @@ public class welcomePage {
 
                             userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
                         }
+                       
 
 
                     }else if(choice == 0){
