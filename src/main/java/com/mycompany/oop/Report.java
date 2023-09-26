@@ -80,6 +80,7 @@ public class Report extends ReportAbstract {
         OOP.clScr();
         Scanner scan = new Scanner(System.in);
         int choice = 0;
+        boolean exit = false;
         System.out.println("What report do you wanna generate?");
         
         if(category == 1){
@@ -97,33 +98,36 @@ public class Report extends ReportAbstract {
             System.out.print("> ");
         
             choice = scan.nextInt();
-        
+            if(choice == 0){
+                
+                exit = true;
+            }
+            
             //Validation
-            while(choice > 4 || choice == 0){
+            while(choice > 4 && exit == false){
 
-                choice = scan.nextInt();
 
                 try {
 
                     System.out.println("Please choose a number.");
                     System.out.print("> "); 
+                    choice = scan.nextInt();    
 
 
                 }catch(InputMismatchException e){
 
                     System.out.println("Input must be a number");
                 }
+                
+                
 
 
             }
-
-            return choice;              
-            
-            
-            
+      
             
         }else if(category == 2){
             
+            OOP.clScr();
             System.out.println("===================================================");
             System.out.println("               Choose an option");
             System.out.println("");
@@ -134,26 +138,31 @@ public class Report extends ReportAbstract {
             System.out.println("===================================================");
             System.out.print("> ");     
             choice = scan.nextInt();
-
+            if(choice == 0){
+                
+                exit = true;
+            }
             //Validation
-            while(choice > 2 || choice == 0){
+            while(choice > 2 && exit == false){
 
-                choice = scan.nextInt();
 
                 try {
 
                     System.out.println("Please choose a number.");
+                    System.out.print("> "); 
+                    choice = scan.nextInt();    
 
 
                 }catch(InputMismatchException e){
 
                     System.out.println("Input must be a number");
                 }
+                
+                
 
 
             }
-
-            return choice;          
+         
         
         
         }
@@ -198,6 +207,7 @@ public class Report extends ReportAbstract {
                     if(attendeechoice == 0){
 
                         status = false;
+                        exitStatus = true;
                         break;
                     }
 

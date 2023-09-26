@@ -89,23 +89,37 @@ public class Monitoring extends MonitorAbstract {
 
     
     public int displayChoices(){
+
+        OOP.clScr();
+        boolean exit = false;
         
         Scanner scan = new Scanner(System.in);
-        System.out.println("What do you wanna monitor?");
+        System.out.println("===================================================");
+        System.out.println("               Choose an option");
+        System.out.println("");
         System.out.println("1 - Update Slot");
         System.out.println("2 - Monitor Venue Start and End Time by Date");
         System.out.println("3 - Monitor Seminars by Time");
+        System.out.println("0 - EXIT");
+        System.out.println("");
+        System.out.println("===================================================");
+        System.out.print("> ");
+
         
         int choice = scan.nextInt();
+        if(choice == 0){
+
+            exit = true;
+        }
         
         //Validation
-        while(choice > 4){
+        while(choice > 3){
             
             choice = scan.nextInt();
             
             try {
                 
-                System.out.println("Please choose a number.");
+                System.out.println("Please choose (0-3).");
                 
                 
             }catch(InputMismatchException e){
@@ -149,10 +163,11 @@ public class Monitoring extends MonitorAbstract {
 
     
     
-    public void displayList(int choice){
+    public boolean displayList(int choice){
         
         Scanner scan = new Scanner(System.in);
         countAttendeeSeminar();
+        boolean exit = true;
         
         //Search current enrolls by time
         if(choice == 1){
@@ -164,29 +179,30 @@ public class Monitoring extends MonitorAbstract {
             do {
 
                 int sb = 0;
+                
+                OOP.clScr();
+                System.out.println("===================================================");
+                System.out.println("               Choose an option");
                 System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("------------------------------------------");
-                System.out.println("            Choose an option.");
-                System.out.println("------------------------------------------");
-                System.out.println("-1 - Exit");
                 System.out.println("1 - Search by Seminar ID");
                 System.out.println("2 - Search by Username");
                 System.out.println("");
+                System.out.println("0 - EXIT");
+                System.out.println("===================================================");
+                System.out.print("> "); 
+
                 slotChoice = scan.nextInt();
                 
                 //Validation
-                if(slotChoice == -1){
-
+                if(choice == 0){
+                    exit = true;
                     status = false;
-                    break;
                 }
 
                 if(slotChoice > 2){
 
                     System.out.println("Please Choose again.");
+                    System.out.print("> ");
 
                 }else{
                     
@@ -291,6 +307,8 @@ public class Monitoring extends MonitorAbstract {
             }while(status == true);            
                  
         }
+        
+        return exit;
          
     }
   

@@ -120,7 +120,7 @@ public class welcomePage {
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
                     userCont = false;
-                    bigLoop = false;
+                    
                     userCont = contPage(choice, cat, admins, speakers, attendees, scanner, slot, seminar, sb, payment, attendee, seminarEnroll, availableSlots);
                     
 
@@ -169,12 +169,13 @@ public class welcomePage {
     }
     public static boolean contPage(int choice, String category, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner,
         Slot[] slot, Seminar[] seminar, SlotBooking[] sb, Payment[] payment, Attendee[] attendee, SeminarEnroll[] seminarEnroll, List<Slot> availableSlots){
-       
-        
+        boolean userCont = true;
+
+
         Monitoring monitor = new Monitoring(seminar, sb, seminarEnroll, slot);
         for(int i=0; i<seminarEnroll.length; i++){
             if(seminarEnroll[i] != null){
-                
+
             //Adding seminarenrolls array to arraylist
             seminarEnroll[i].deleteSeminarEnroll();
 
@@ -183,68 +184,79 @@ public class welcomePage {
 
             //Getting seminarenroll arraylist and put it in monitor class
             monitor.addEnrollToMonitor(seminarEnroll[i].getEnrollList());
-                
+
             }
         }   
-        
+
         for(int i=0; i<sb.length; i++){
-            
+
             if(sb[i] != null){
-                
+
                 sb[i].deleteSlotBooking();
                 //Adding each main class slotbooking array to slotbooking arraylist
                 sb[i].addSlotBooking(sb[i]);
                 //Getting slotbooking arraylist to monitor
                 monitor.addBookingToMonitor(sb[i].getBookingList());
-                
+
             }
         }   
-        
-        
+
+
         Report report = new Report(seminar, sb, seminarEnroll, attendee);
         for(int i=0; i<seminarEnroll.length; i++){
-                
+
             if(seminarEnroll[i] != null){
-                
+
                 seminarEnroll[i].deleteSeminarEnroll();
                 seminarEnroll[i].addSeminarEnroll(seminarEnroll[i]);
 
                 report.addToReport(seminarEnroll[i].getEnrollList());
-                
+
             }
         }    
-        
-       
+
+
         if(category.equals("Admin")){
-            
+
+
             int userStatus = 1;
-            
+
             if(choice == 1){
                 
-                int monitorChoice = monitor.displayChoices();
-                monitor.displayList(monitorChoice);           
-                
-            }else if(choice == 2){
-                
-                boolean exitStatus = false;
-                while(exitStatus == false){
+                while(userCont == true){
                     
-                    int reportChoice = report.generateList(userStatus);
-                    exitStatus = report.generateReport(reportChoice, userStatus);             
-                    
+                    int monitorChoice = monitor.displayChoices();
+
+                    //If usercont false then exit
+                    if(monitorChoice != 0){
+
+                        userCont = monitor.displayList(monitorChoice);           
+                    }
                 }
-                
+
+            }else if(choice == 2){
+
+                int reportChoice = report.generateList(userStatus);
+                if(reportChoice != 0){
+
+                    userCont = report.generateReport(reportChoice, userStatus);             
+                }
+
+
             }else if(choice == 0){
-                
+
                 System.out.println("Thank you. Goodbye!");
                 System.out.println("\nPress any key to continue...");
+
                 welcomePage(admins, speakers, attendees, scanner);
-      
-                
+
+
             }
-            
+
+
+
         }
-        
+
         else if(category.equals("Speaker")){
 
             int userStatus = 2;
@@ -258,18 +270,18 @@ public class welcomePage {
                 slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
         //        eb.eventBooking(scanner, speaker, sb, payment, availableSlots);      
                 System.out.println(slotBooking);
-        
+
             //Report
             }else if(choice == 2){
 
                 int reportChoice = report.generateList(userStatus);
                 report.generateReport(reportChoice, userStatus);                
-                
+
             //Advertisement
             }else if(choice == 3){
 
                 ArrayList<Advertisement> advertisements = new ArrayList<Advertisement>();
-        
+
                 Date date;
                 Time time;
 
@@ -305,41 +317,45 @@ public class welcomePage {
                             System.out.println("Invalid choice. Try again.");
                     }
                 }              
-                
-                
-                
+
+
+
             //End
             }else if(choice == 0){
-                 
+
                 System.out.println("Thank you. Goodbye!");
                 System.out.println("\nPress any key to continue...");
                 scanner.nextLine();
                 welcomePage(admins, speakers, attendees, scanner);   
 
-                
+
             }           
             return false;
         }else if(category.equals("Attendee")){
-            
+
             if(choice == 1){
-                
+
                 String attendeeid = Login.userId();
                 SeminarEnroll seminarenroll = new SeminarEnroll(null, null);
                 seminarenroll.enroll(attendeeid, attendee, seminarEnroll, seminar, payment);
-                
-                
+
+
             }else if(choice == 2){
-                 
+
                 welcomePage(admins, speakers, attendees, scanner);    
-             
-                
+
+
             }
-                
-            
-                     
+
+
+
         }
-        
-        return false;
-        
+
+
+
+
+
+        return userCont;
+
     }
 }
