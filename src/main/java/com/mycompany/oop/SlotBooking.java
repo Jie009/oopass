@@ -126,9 +126,10 @@ public class SlotBooking {
                 slot.getVenue(), slot.getStartTime(), slot.getEndTime(), slot.getSlotDate(), slot.getSeatNo(), slot.getPrice(), payment.getMethod(), speaker);
         }
     
-    public static void eventBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
+    public static boolean eventBooking(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
         
-        while(true){
+        boolean exitStatus = false;
+        while(exitStatus == false){
             clScr();
             System.out.println("\nEvent Booking");
             System.out.println("--------------");
@@ -160,13 +161,15 @@ public class SlotBooking {
 
             else if (choice == 0){
                 
-                welcomePage(admins, speakers, attendees, scanner);   
-                break;
+                 exitStatus = true;
+                 
             }
 
             else
                 System.out.println("Invalid choice. Please try again");               
         }
+        
+        return exitStatus;
     }
     public static void bookingDetails(Scanner scanner, String speaker, SlotBooking[] sb, Payment[] payment, List<Slot> availableSlots, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Seminar[] seminar, Slot[] slot){
         clScr();
@@ -326,7 +329,7 @@ public class SlotBooking {
 
                         seminar[semCount] = new Seminar(slot[idSB].getID(), "", slot[idSB].getStartDate(), slot[idSB].getEndDate(), sqlTime, sqlTime2, slot[idSB].getPrice(), slot[idSB].getVenue(), new ArrayList<>());
                         
-                        if(seminar != null){
+                        if(seminar[semCount] != null){
                             
                             System.out.println(seminar[semCount].output());
                             

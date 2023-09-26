@@ -187,12 +187,19 @@ public class welcomePage {
                             System.out.println("Thank you. Goodbye!");
                             System.out.println("\nPress any key to continue...");
 
-                            break;
+                            userCont = false; 
 
                         }
                     }
+                    
+                    
 
                 }else if(cat.equals("Speaker")){
+                    if(seminar[0] != null){
+                        
+                     System.out.println(seminar[0].toString());
+                        
+                    }
                     clScr();
                     System.out.println("Speaker Menu");
                     System.out.println("---------------------");
@@ -205,8 +212,8 @@ public class welcomePage {
                     choice = scanner.nextInt();
                     
                     userCont = false;
-                    bigLoop = false;
-                                int userStatus = 2;
+                    
+                    int userStatus = 2;
                     String speaker = Login.userId();
                     //Booking
                     if(choice == 1){
@@ -214,7 +221,7 @@ public class welcomePage {
 
                 //        EventBooking eb = new EventBooking();
 
-                        slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees, seminar, slot);
+                        userCont = slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees, seminar, slot);
                 //        eb.eventBooking(scanner, speaker, sb, payment, availableSlots);      
 
 
@@ -277,7 +284,7 @@ public class welcomePage {
                         System.out.println("Thank you. Goodbye!");
                         System.out.println("\nPress any key to continue...");
                         scanner.nextLine();
-                        break;  
+                        userCont = false; 
 
 
                     }         
@@ -333,7 +340,10 @@ public class welcomePage {
 
                     }else if(choice == 2){
 
-                        break;
+                        System.out.println("Thank you. Goodbye!");
+                        System.out.println("\nPress any key to continue...");
+                        scanner.nextLine();                       
+                        userCont = false; 
 
 
                     }
