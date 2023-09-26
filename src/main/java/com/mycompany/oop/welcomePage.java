@@ -83,7 +83,7 @@ public class welcomePage {
             
             while(userCont == true){
                 
-                Monitoring monitor = new Monitoring(seminar, sb, seminarEnroll, slot);
+                Monitoring monitor = new Monitoring(attendee, seminar, sb, seminarEnroll, slot);
                 for(int i=0; i<seminarEnroll.length; i++){
                     if(seminarEnroll[i] != null){
 
@@ -193,11 +193,7 @@ public class welcomePage {
                     
 
                 }else if(cat.equals("Speaker")){
-                    if(seminar[0] != null){
-                        
-                        System.out.println(seminar[0].toString());
-                        
-                    }
+
                     clScr();
                     System.out.println("Speaker Menu");
                     System.out.println("---------------------");
