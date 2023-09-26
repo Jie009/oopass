@@ -650,80 +650,88 @@ public class Report extends ReportAbstract {
         double totalAttendee = 0;
         double totalCost = 0;
         int count = 0;
-
+        String speakerSlotID = "";
         
-        
-            
-            
-                
-                for(int i=0; i<slotbooking.length; i++){
-                    
-                    if(slotbooking[i] != null){
-                        count++;
-                        
-                        //1 is admin
-                        if(userStatus == 2){
-                            
-                            System.out.println(slotbooking[i].getSpeaker());
-                            if(slotbooking[i].getSpeaker().equals(name)){
+        for(int i=0; i<slotbooking.length; i++){
 
-                                String speakerSlotID = slotbooking[i].getID();
-                                for(int j=0; j<attendee.length; j++){
-                                        
-                                       if(attendee[j] != null){
-                                           if((attendee[j].getSeminarID()).equals(speakerSlotID)){
-                                               
-                                               System.out.println(seminarenrolls[i].getAttendee().getTotal());
-                                               totalCost += seminarenrolls[i].getAttendee().getTotal();
+            if(slotbooking[i] != null){
+                count++;
 
-                                           }
+                //1 is admin
+                if(userStatus == 2){
 
-                                    
-                                       }
-                                
-                                    }
+                    System.out.println(slotbooking[i].getSpeaker());
+                    if(slotbooking[i].getSpeaker().equals(name)){
 
-                                }                    
-
-                            }
-                        
-                    }
-/*                    if(slotbooking[i].getSpeaker().equals(name)){
-
-                        String speakerSlotID = slotbooking[i].getID();
-                        System.out.println(speakerSlotID);
+                        speakerSlotID = slotbooking[i].getID();
                         for(int j=0; j<attendee.length; j++){
 
-                            if((attendee[j].getSeminarID()).equals(speakerSlotID)){
+                               if(attendee[j] != null){
+                                   if((attendee[j].getSeminarID()).equals(speakerSlotID)){
 
-                                totalAttendee += attendee[j].getTotal();
+                                       System.out.println(seminarenrolls[i].getAttendee().getTotal());
+                                       totalAttendee += seminarenrolls[i].getAttendee().getTotal();
 
+                                   }
+
+
+                               }
+
+                            }
+
+                        }
+
+                        for(int j=0; j<seminars.length; j++){
+
+                            if(seminars[j] != null){
+
+                                if(seminars[j].getID().equals(speakerSlotID)){
+
+                                    totalCost += seminars[j].getPrice();
+
+                                }
                             }
                         }
 
-                    } 
-     */       
-                }               
-        
-        
+
+    /*                    if(slotbooking[i].getSpeaker().equals(name)){
+
+                    String speakerSlotID = slotbooking[i].getID();
+                    System.out.println(speakerSlotID);
+                    for(int j=0; j<attendee.length; j++){
+
+                        if((attendee[j].getSeminarID()).equals(speakerSlotID)){
+
+                            totalAttendee += attendee[j].getTotal();
+
+                        }
+                    }
+
+                } 
+    */       
+            }               
 
 
-                System.out.printf("\nFinancial Report by %-30s", formattedDate);
-                System.out.printf("\nTotal: RM%.2f", totalAttendee);
-                System.out.printf("\nTotal Cost: RM%.2f", totalCost);
-                System.out.printf("\nTotal Profit: RM%.2f", (totalAttendee-totalCost));
-        
 
-                if(count<=0){
 
-                    System.out.println("There are no bookings at the moment..");
-                    System.out.println("\nPress enter to continue..");
-                    scan.nextLine();  
+            System.out.printf("\nFinancial Report by %-30s", formattedDate);
+            System.out.printf("\nTotal: RM%.2f", totalAttendee);
+            System.out.printf("\nTotal Cost: RM%.2f", totalCost);
+            System.out.printf("\nTotal Profit: RM%.2f", (totalAttendee-totalCost));
 
-                }
+
+            if(count<=0){
+
+                System.out.println("There are no bookings at the moment..");
+                System.out.println("\nPress enter to continue..");
+                scan.nextLine();  
+
+            }
             
               
     
+            }
+        }
     }
     
     public void checkBooking(){
