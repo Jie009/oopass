@@ -187,8 +187,7 @@ public class welcomePage {
                             System.out.println("Thank you. Goodbye!");
                             System.out.println("\nPress any key to continue...");
 
-                            welcomePage(admins, speakers, attendees, scanner);
-
+                            break;
 
                         }
                     }
@@ -278,7 +277,7 @@ public class welcomePage {
                         System.out.println("Thank you. Goodbye!");
                         System.out.println("\nPress any key to continue...");
                         scanner.nextLine();
-                        welcomePage(admins, speakers, attendees, scanner);   
+                        break;  
 
 
                     }         
@@ -334,7 +333,7 @@ public class welcomePage {
 
                     }else if(choice == 2){
 
-                        welcomePage(admins, speakers, attendees, scanner);    
+                        break;
 
 
                     }
