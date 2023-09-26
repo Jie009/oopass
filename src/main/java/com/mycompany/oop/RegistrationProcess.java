@@ -36,6 +36,8 @@ public class RegistrationProcess {
             scanner.nextLine();
             OOP.clScr();
             System.out.println("===================================================");
+            System.out.println("                  Register Process");
+            System.out.println("");
             System.out.print("Enter ID: ");
             String id = scanner.nextLine();
 

@@ -31,8 +31,8 @@ public class welcomePage {
         slot[3] = new Slot("S4","SMK Kawi", "Secondary school hall", "8:00:00", "11:00:00", "30/10/2023", Date.valueOf("2023-10-30"), Date.valueOf("2023-10-30"), 200, 150);
         slot[4] = new Slot("S5","Dewan Wangsa Maju", "Wangsa Maju hall", "15:00:00", "19:00:00", "26/10/2023", Date.valueOf("2023-10-26"), Date.valueOf("2023-10-27"), 200, 220);
 
-        //seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
-        //seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
+        seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
+        seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
         for(int i=0; i<5; i++){
 
             availableSlots.add(slot[i]);
@@ -69,7 +69,7 @@ public class welcomePage {
                         RegistrationProcess.RegistrationProcess(admins, speakers, attendees, scanner);
                         break;
 
-                    case 3:
+                    case 0:
                         System.out.println("Thank you. Goodbye!");
                         System.exit(0);
                     default:
@@ -295,36 +295,7 @@ public class welcomePage {
 
 
                     }         
-                    /*
                     
-                    PC0 IS NETWORK OF 192.168.10.0/24, THE DEFAULT GATEWAU PC0 IS .1
-                   WAN USING 10.0 30.0
-                    PC3-PC5 PC4 USING .4 AND USING GATEWAY OF .1
-                    
-                    REACHING DEFAULT GATEWAY OF 0.0.0.0
-                    REMOTE CONNECTION SENDING PACKET REQUIRE 0.0.0.0 BROADCASTED HERE
-                    IF CNANOT REACH DESTINATION THEN SEND TO 0.0.0.0, BUT MUST HAVE GATEWAY OF LAST RESORT WHICH IS 192.168.30.1
-                    DISCARD PACKET IF GATEWAY OF LAST RESORT IS NOT MENTIONED
-                    
-                    S* IS STATIC DEFAULT GATEWAY
-                    
-                    PC0 FROM THE NETWORK OF 10.0 WANTS TO SEND A PACKET TO PC5 (INSERT ADDRESS)
-                    PC0 FORWARD S2 AND S2 FORWARD TO R0
-                    REACHING R0 IT WILL CALC WHAT IS THE NA TO GO TO S3
-                    IF GOT GO TO THE IP BUT IF DUN HAVE DISCARD
-                    BEFORE DECIDING TO DISCARD, IT WILL FORWARD TOT HE PACKET OF LAST RESORT TO REACH THE STATIC DEFUALT WHICH IS 0.000
-                    
-                    AFTER SENDING, IT WILL HOP TO R1. R1 WILL OPEN WILL OPEN ROUTING INFO TO CHECK IF GOT MATCHING INFO
-                    
-                    IF MATCH = R1 WILL SEND THE PACKET TO PC5 BY FORWARDING THE PACKET TO S2 THEN TO PC5 THAT IS CONNECTED VIA FASTETHERNET
-                    
-                    ROUTING TABLE ARE USED TO CHECK DIRECTLY CONNECTED AND LAST RESORT
-                    
-                    
-                    
-                    
-                    
-                    */
 
                 }else if(cat.equals("Attendee")){
                     
