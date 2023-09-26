@@ -194,17 +194,17 @@ public class Monitoring extends MonitorAbstract {
                 slotChoice = scan.nextInt();
                 
                 //Validation
-                if(choice == 0){
+                if(slotChoice == 0){
                     exit = true;
                     status = false;
                 }
 
-                if(slotChoice > 2){
+                if(slotChoice > 2 && slotChoice != 0){
 
                     System.out.println("Please Choose again.");
                     System.out.print("> ");
 
-                }else{
+                }else if(slotChoice != 0){
                     
                     //Check seminars
                     updateSlot(slotChoice);
@@ -228,31 +228,31 @@ public class Monitoring extends MonitorAbstract {
             do {
 
                 int sb = 0;
+                OOP.clScr();
+                System.out.println("===================================================");
+                System.out.println("               Choose an option");
                 System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("------------------------------------------");
-                System.out.println("            Choose an option.");
-                System.out.println("------------------------------------------");
-                System.out.println("-1 - Exit");
                 System.out.println("1 - Today Date");
                 System.out.println("2 - Custom Date");
                 System.out.println("");
+                System.out.println("0 - EXIT");
+                System.out.println("===================================================");
+                System.out.print("> "); 
+ 
                 choiceVenue = scan.nextInt();
                 
                 //Validation
-                if(choiceVenue == -1){
+                if(choiceVenue == 0){
 
                     status = false;
-                    break;
+                    exit = true;
                 }
 
-                if(choiceVenue > 2){
+                if(choiceVenue > 2 && choiceVenue != 0){
 
                     System.out.println("Please Choose again.");
 
-                }else{
+                }else if(choiceVenue != 0){
                     
                     //Check venue
                     checkVenue(choiceVenue);
@@ -272,31 +272,31 @@ public class Monitoring extends MonitorAbstract {
             do {
 
                 int sb = 0;
+                OOP.clScr();
+                System.out.println("===================================================");
+                System.out.println("               Choose an option");
                 System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("");
-                System.out.println("------------------------------------------");
-                System.out.println("            Choose an option.");
-                System.out.println("------------------------------------------");
-                System.out.println("-1 - Exit");
                 System.out.println("1 - Current Time");
                 System.out.println("2 - Custom Time");
                 System.out.println("");
+                System.out.println("0 - EXIT");
+                System.out.println("===================================================");
+                System.out.print("> "); 
+
                 ongoingChoice = scan.nextInt();
                 
                 //Validation
-                if(ongoingChoice == -1){
+                if(ongoingChoice == 0){
 
                     status = false;
-                    break;
+                    exit = true;
                 }
 
-                if(ongoingChoice > 2){
+                if(ongoingChoice > 2 && ongoingChoice != 0){
 
                     System.out.println("Please Choose again.");
 
-                }else{
+                }else if(ongoingChoice != 0){
                     
                     //Check seminars
                     checkSeminars(ongoingChoice);
@@ -595,10 +595,9 @@ public class Monitoring extends MonitorAbstract {
 
                     count++;
                     String slotID = slot[i].getID();
-                    System.out.println(slotID);
                     if(userInput.equals(slotID)){
                         
-                        System.out.println(slot[i].toString());
+                        OOP.clScr();
                         System.out.println("");
 
                         System.out.println("What do you wanna change?");
@@ -609,6 +608,8 @@ public class Monitoring extends MonitorAbstract {
                         System.out.println("4 - Description");
                         System.out.println("5 - Seat Number");
                         System.out.println("6 - Price");
+                        System.out.println("");
+                        System.out.print("> ");
                         int updateChoice = scan.nextInt();
                         scan.nextLine();
                         

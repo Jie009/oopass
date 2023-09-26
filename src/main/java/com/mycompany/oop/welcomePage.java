@@ -223,16 +223,16 @@ public class welcomePage {
 
             if(choice == 1){
                 
-                while(userCont == true){
+
                     
-                    int monitorChoice = monitor.displayChoices();
+                int monitorChoice = monitor.displayChoices();
 
-                    //If usercont false then exit
-                    if(monitorChoice != 0){
+                //If usercont false then exit
+                if(monitorChoice != 0){
 
-                        userCont = monitor.displayList(monitorChoice);           
-                    }
+                    userCont = monitor.displayList(monitorChoice);           
                 }
+                
 
             }else if(choice == 2){
 
