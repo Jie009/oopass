@@ -305,21 +305,23 @@ public class Report extends ReportAbstract {
 
                 int attendeechoice;
                 boolean status = true;
+                int sdcount = 0;
 
 
                 do {
 
                     int sb = 0;
-                   OOP.clScr();
-                     System.out.println("===================================================");
-                     System.out.println("                 Report Generator");
-                     System.out.println("");
-                     System.out.println("1 - All Seminars");
-                     System.out.println("2 - Search by a Seminar");
-                     System.out.println("");
-                     System.out.println("0 - EXIT");
-                     System.out.println("");
-                     System.out.println("===================================================");
+                    
+                    OOP.clScr();
+                    System.out.println("===================================================");
+                    System.out.println("                 Report Generator");
+                    System.out.println("");
+                    System.out.println("1 - All Seminars");
+                    System.out.println("2 - Search by a Seminar");
+                    System.out.println("");
+                    System.out.println("0 - EXIT");
+                    System.out.println("");
+                    System.out.println("===================================================");
                     System.out.print("Enter you choice:  ");
                     attendeechoice = scan.nextInt();
 
@@ -337,9 +339,9 @@ public class Report extends ReportAbstract {
 
                     }else{
 
-                        OOP.clScr();
+    
                         
-                        int sdcount = 0;
+                        sdcount = 0;
                         for (int i = 0; i < seminars.length; i++) {
 
                             if(seminars[i] != null){
@@ -357,16 +359,18 @@ public class Report extends ReportAbstract {
                             }
 
                         }
-                        if(sdcount != 0){
-
-                            countAttendeeSeminar(attendeechoice); 
-
-                        }else{
-                            
-                            System.out.println("There are currently no enrolls");
-                        }
-
                     }
+                    
+                    if(sdcount != 0){
+
+                        countAttendeeSeminar(attendeechoice); 
+
+                    }else{
+
+                        System.out.println("There are currently no enrolls");
+                    }
+
+                    
 
 
                 }while(status == true);             
@@ -491,12 +495,16 @@ public class Report extends ReportAbstract {
         int num = 0;
 
         if(attendeechoice == 1){
-            num++;
-            System.out.printf("\n%-30s %-30s", "Seminar", "Number of Attendees");
             for(int i=0; i<seminarID.length; i++){
 
                 if(seminarID[i] != null){
-
+                    
+                    if(num == 0){
+                        
+                        System.out.printf("\n%-30s %-30s", "Seminar", "Number of Attendees");
+                        num++; 
+                        
+                    }
 
                     System.out.printf("\n%-30s %-30s", seminarID[i], count[i]);
                 }
@@ -524,10 +532,15 @@ public class Report extends ReportAbstract {
             System.out.printf("\n%-30s %-30s", "Seminar", "Number of Attendees");
             for(int i=0; i<seminarID.length; i++){
                 
-                num++;
                 if(seminarID[i] != null && seminarID[i].equals(userInput)){
 
-
+                    if(num == 0){
+                        
+                        System.out.printf("\n%-30s %-30s", "Seminar", "Number of Attendees");
+                        num++; 
+                        
+                    }
+                    
                     System.out.printf("\n%-30s %-30s", seminarID[i], count[i]);
                 }
             }            
@@ -537,8 +550,9 @@ public class Report extends ReportAbstract {
 
         if(num == 0){
             
-            System.out.println("Therea re currently no seminars.");
+            System.out.println("There are currently no attendees or seminars.");
         }
+        
         System.out.println("");
         System.out.println("\nPress enter to continue..");
         scan.nextLine();               

@@ -418,10 +418,11 @@ public class SeminarEnroll {
                     // Set the last element to null or whatever value is appropriate
                     SE[SE.length - 1] = null;
                     setEnrollCount(SeminarEnroll.getEnrollCount() - 1);
-                    System.out.println("Event cancelled successfully.");
+                    System.out.println("Enroll cancelled successfully.");
                     System.out.println("RM" + refund + " is refunded successfully. ");
                     System.out.println("");
                     System.out.println("\nPress any key to continue...");
+                    scanner.nextLine();
                     scanner.nextLine();
                     break;
                 } else {
