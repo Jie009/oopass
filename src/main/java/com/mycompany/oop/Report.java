@@ -174,7 +174,30 @@ public class Report extends ReportAbstract {
     
     public boolean generateReport(int reportChoice, int category, String name){
         
-        splitID();
+        int count = 0;
+        for (int i = 0; i < seminars.length; i++) {
+            
+            if(seminars[i] != null){
+                
+
+                for (int j = 0; j < attendee.length; j++) {
+
+                    if(seminars[j] != null){
+                        
+                        count++;
+                    }
+
+                }
+                
+            }
+            
+        }
+        if(count != 0){
+            
+            splitID();
+            
+        }
+        
         Scanner scan = new Scanner(System.in);
         boolean exitStatus = false;
         
@@ -379,13 +402,20 @@ public class Report extends ReportAbstract {
 
                     for(int j=0; j<method.length; j++){
                         
-                        System.out.println(attendee[0].getMethod());
+                        
                         if(attendee[i].getMethod() != null){
                             
+                             System.out.println(attendee[i].getMethod());
                             
                             if(attendee[i].getMethod().equals(method[j])){
-                                    methodCount[j]++;
+                                
+                                methodCount[j]++;
                             }
+                            
+                        }else{
+                            
+                           
+                            
                         }
 
                     }
