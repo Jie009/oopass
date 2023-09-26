@@ -34,7 +34,7 @@ public class welcomePage {
         seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
         seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
         
-        
+
         
         clScr();
         while(bigLoop == true){
@@ -80,7 +80,11 @@ public class welcomePage {
             
             while(userCont == true){
 
+                for(int i=0; i<5; i++){
 
+                    availableSlots.add(slot[i]);
+                }   
+                
                 //Sample data for Report & Monitoring
 
                 /*
@@ -103,11 +107,7 @@ public class welcomePage {
                 */
 
 
-                for(int i=0; i<5; i++){
 
-                    availableSlots.add(slot[i]);
-                }                
-                
                 
                 if(cat.equals("Admin")){
                     clScr();
@@ -226,8 +226,13 @@ public class welcomePage {
                 
             }else if(choice == 2){
                 
-                int reportChoice = report.generateList(userStatus);
-                report.generateReport(reportChoice, userStatus);             
+                boolean exitStatus = false;
+                while(exitStatus == false){
+                    
+                    int reportChoice = report.generateList(userStatus);
+                    exitStatus = report.generateReport(reportChoice, userStatus);             
+                    
+                }
                 
             }else if(choice == 0){
                 
@@ -237,7 +242,7 @@ public class welcomePage {
       
                 
             }
-            return false;
+            
         }
         
         else if(category.equals("Speaker")){
@@ -252,7 +257,7 @@ public class welcomePage {
 
                 slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
         //        eb.eventBooking(scanner, speaker, sb, payment, availableSlots);      
-                
+                System.out.println(slotBooking);
         
             //Report
             }else if(choice == 2){

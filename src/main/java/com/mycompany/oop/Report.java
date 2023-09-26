@@ -77,28 +77,36 @@ public class Report extends ReportAbstract {
     
     public int generateList(int category){
         
+        OOP.clScr();
         Scanner scan = new Scanner(System.in);
         int choice = 0;
         System.out.println("What report do you wanna generate?");
         
         if(category == 1){
             
-            System.out.println("0 - EXIT");
+            System.out.println("===================================================");
+            System.out.println("               Choose an option");
+            System.out.println("");
             System.out.println("1 - Total Attendees Joined for Seminar");
             System.out.println("2 - Top Payment Methods");
             System.out.println("3 - Financial Report for Seminar");
             System.out.println("4 - Total Slot Bookings by Date");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
+            System.out.print("> ");
         
             choice = scan.nextInt();
         
             //Validation
-            while(choice >= 4 || choice == 0){
+            while(choice > 4 || choice == 0){
 
                 choice = scan.nextInt();
 
                 try {
 
                     System.out.println("Please choose a number.");
+                    System.out.print("> "); 
 
 
                 }catch(InputMismatchException e){
@@ -116,13 +124,19 @@ public class Report extends ReportAbstract {
             
         }else if(category == 2){
             
-            System.out.println("0 - EXIT");
+            System.out.println("===================================================");
+            System.out.println("               Choose an option");
+            System.out.println("");
             System.out.println("1 - Total Attendees Joined for Seminar");
-            System.out.println("2 - Financial Report for Seminar");       
+            System.out.println("2 - Top Payment Methods");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
+            System.out.print("> ");     
             choice = scan.nextInt();
 
             //Validation
-            while(choice > 4 || choice == 0){
+            while(choice > 2 || choice == 0){
 
                 choice = scan.nextInt();
 
@@ -148,13 +162,16 @@ public class Report extends ReportAbstract {
 
     }
     
-    public void generateReport(int reportChoice, int category){
+    public boolean generateReport(int reportChoice, int category){
         
         splitID();
         Scanner scan = new Scanner(System.in);
+        boolean exitStatus = false;
         
+        //ADMIN ONLY
         if(category == 1){
             
+            //SEMINAR ATTENDEE PER COUNT
             if(reportChoice == 1){
 
                 int attendeechoice;
@@ -164,21 +181,21 @@ public class Report extends ReportAbstract {
                 do {
 
                     int sb = 0;
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
+                    
+                    OOP.clScr();
                     System.out.println("------------------------------------------");
                     System.out.println("            Choose an option.");
                     System.out.println("------------------------------------------");
-                    System.out.println("-1 - Exit");
                     System.out.println("1 - All Seminars");
                     System.out.println("2 - Search by a Seminar");
                     System.out.println("");
+                    System.out.println("0 - Exit");
+                    System.out.println("");
+                    System.out.print("> ");
                     attendeechoice = scan.nextInt();
 
                     //Validation
-                    if(attendeechoice == -1){
+                    if(attendeechoice == 0){
 
                         status = false;
                         break;
@@ -199,6 +216,7 @@ public class Report extends ReportAbstract {
                 }while(status == true);             
 
 
+            //TOP PAYMENT    
             }else if(reportChoice == 2){
 
                 int paymentChoice;
@@ -207,17 +225,16 @@ public class Report extends ReportAbstract {
                 do {
 
                     int sb = 0;
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
+                    OOP.clScr();
                     System.out.println("------------------------------------------");
                     System.out.println("            Choose an option.");
                     System.out.println("------------------------------------------");
-                    System.out.println("-1 - Exit");
                     System.out.println("1 - Payment by Attendee");
                     System.out.println("2 - Payment by Speaker");
                     System.out.println("");
+                    System.out.println("0 - Exit");
+                    System.out.println("");
+                    System.out.print("> ");
                     paymentChoice = scan.nextInt();
 
                     //Validation
@@ -246,20 +263,21 @@ public class Report extends ReportAbstract {
 
 
 
-
+            //CHECK ONGOING SEMINAR
             }else if(reportChoice == 3){
 
                 checkSeminars();
                 
                 
-            //exit
+            //CHECK ALL BOOKING
             }else if(reportChoice == 4){
 
                 checkBooking();
 
+            //EXIT TO ADMIN HOMEPAGE
             }else if(reportChoice == 0){
 
-
+                exitStatus = true;
             }
 
             
@@ -275,17 +293,16 @@ public class Report extends ReportAbstract {
                 do {
 
                     int sb = 0;
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
-                    System.out.println("");
+                    OOP.clScr();
                     System.out.println("------------------------------------------");
                     System.out.println("            Choose an option.");
                     System.out.println("------------------------------------------");
-                    System.out.println("-1 - Exit");
                     System.out.println("1 - All Seminars");
                     System.out.println("2 - Search by a Seminar");
                     System.out.println("");
+                    System.out.println("0 - Exit");
+                    System.out.println("");
+                    System.out.print("> ");
                     attendeechoice = scan.nextInt();
 
                     //Validation
@@ -301,7 +318,7 @@ public class Report extends ReportAbstract {
 
                     }else{
 
-
+                        OOP.clScr();
                         countAttendeeSeminar(attendeechoice);
 
                     }
@@ -315,17 +332,14 @@ public class Report extends ReportAbstract {
                 checkSeminars();
 
             }else if(reportChoice == 0){
+                
+                exitStatus = true;
 
-
-            }else{
-
-
-            }
-            
+            }  
             
         }
         
-        
+        return exitStatus;
         
         
 
@@ -557,9 +571,10 @@ public class Report extends ReportAbstract {
     public void countAttendeeSeminar(int attendeechoice){
         
         Scanner scan = new Scanner(System.in);
+        int num = 0;
 
         if(attendeechoice == 1){
-            
+            num++;
             System.out.printf("\n%-30s %-30s", "Seminar", "Number of Attendees");
             for(int i=0; i<seminarID.length; i++){
 
@@ -568,16 +583,31 @@ public class Report extends ReportAbstract {
 
                     System.out.printf("\n%-30s %-30s", seminarID[i], count[i]);
                 }
-            }            
+            }     
             
         }else if(attendeechoice == 2){
-            
-            System.out.println("Please input a Seminar ID: ");
-            String userInput = scan.nextLine();
+
+            String userInput;
+            do {
+                
+                System.out.print("Enter Seminar ID (S1 to S5): ");
+                userInput = scan.nextLine();
+
+
+                if (userInput.matches("S[1-5]")) {
+
+                    break; // Exit the loop if input is valid
+
+                } else {
+                    System.out.println("Invalid input. Please enter S1 to S5.");
+                }
+                        
+            } while (true);
             
             System.out.printf("\n%-30s %-30s", "Seminar", "Number of Attendees");
             for(int i=0; i<seminarID.length; i++){
-
+                
+                num++;
                 if(seminarID[i] != null && seminarID[i].equals(userInput)){
 
 
@@ -587,7 +617,11 @@ public class Report extends ReportAbstract {
            
             
         }
-        
+
+        if(num == 0){
+            
+            System.out.println("Therea re currently no seminars.");
+        }
         System.out.println("");
         System.out.println("\nPress enter to continue..");
         scan.nextLine();               

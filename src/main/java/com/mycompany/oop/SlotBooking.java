@@ -158,6 +158,7 @@ public class SlotBooking {
             }
 
             else if (choice == 0){
+                
                 welcomePage(admins, speakers, attendees, scanner);   
                 break;
             }
