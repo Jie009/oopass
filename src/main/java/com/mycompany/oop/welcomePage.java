@@ -79,7 +79,49 @@ public class welcomePage {
             String cat = Login.cat();
             
             while(userCont == true){
+                
+                Monitoring monitor = new Monitoring(seminar, sb, seminarEnroll, slot);
+                for(int i=0; i<seminarEnroll.length; i++){
+                    if(seminarEnroll[i] != null){
 
+                    //Adding seminarenrolls array to arraylist
+                    seminarEnroll[i].deleteSeminarEnroll();
+
+                    //Adding each main classseminarenroll array to seminarenroll arraylist
+                    seminarEnroll[i].addSeminarEnroll(seminarEnroll[i]); 
+
+                    //Getting seminarenroll arraylist and put it in monitor class
+                    monitor.addEnrollToMonitor(seminarEnroll[i].getEnrollList());
+
+                    }
+                }   
+
+                for(int i=0; i<sb.length; i++){
+
+                    if(sb[i] != null){
+
+                        sb[i].deleteSlotBooking();
+                        //Adding each main class slotbooking array to slotbooking arraylist
+                        sb[i].addSlotBooking(sb[i]);
+                        //Getting slotbooking arraylist to monitor
+                        monitor.addBookingToMonitor(sb[i].getBookingList());
+
+                    }
+                }   
+
+
+                Report report = new Report(seminar, sb, seminarEnroll, attendee);
+                for(int i=0; i<seminarEnroll.length; i++){
+
+                    if(seminarEnroll[i] != null){
+
+                        seminarEnroll[i].deleteSeminarEnroll();
+                        seminarEnroll[i].addSeminarEnroll(seminarEnroll[i]);
+
+                        report.addToReport(seminarEnroll[i].getEnrollList());
+
+                    }
+                } 
                 for(int i=0; i<5; i++){
 
                     availableSlots.add(slot[i]);
@@ -117,10 +159,39 @@ public class welcomePage {
                     System.out.println("---------------------");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
-                    userCont = false;
+                    if(choice == 1){
+                
+                        int userStatus = 1;
                     
-                    userCont = contPage(choice, cat, admins, speakers, attendees, scanner, slot, seminar, sb, payment, attendee, seminarEnroll, availableSlots);
-                    
+                        int monitorChoice = monitor.displayChoices();
+
+                        //If usercont false then exit
+                        if(monitorChoice != 0){
+
+                            userCont = monitor.displayList(monitorChoice);           
+
+
+
+                        }else if(choice == 2){
+                            String nameCompare = Login.userId();
+
+                            int reportChoice = report.generateList(userStatus);
+                            if(reportChoice != 0){
+
+                                userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
+                            }
+
+
+                        }else if(choice == 0){
+
+                            System.out.println("Thank you. Goodbye!");
+                            System.out.println("\nPress any key to continue...");
+
+                            welcomePage(admins, speakers, attendees, scanner);
+
+
+                        }
+                    }
 
                 }else if(cat.equals("Speaker")){
                     clScr();
@@ -136,8 +207,111 @@ public class welcomePage {
                     
                     userCont = false;
                     bigLoop = false;
-                    userCont = contPage(choice, cat, admins, speakers, attendees, scanner, slot, seminar, sb, payment, attendee, seminarEnroll, availableSlots);
+                                int userStatus = 2;
+                    String speaker = Login.userId();
+                    //Booking
+                    if(choice == 1){
+                        SlotBooking slotBooking = new SlotBooking(speaker, null, null);
+
+                //        EventBooking eb = new EventBooking();
+
+                        slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees, seminar, slot);
+                //        eb.eventBooking(scanner, speaker, sb, payment, availableSlots);      
+
+
+                    //Report
+                    }else if(choice == 2){
+
+                        String nameCompare = Login.userId();
+                        int reportChoice = report.generateList(userStatus);
+                        if(reportChoice != 0){
+
+                            userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
+                        }               
+
+                    //Advertisement
+                    }else if(choice == 3){
+
+                        ArrayList<Advertisement> advertisements = new ArrayList<Advertisement>();
+
+                        Date date;
+                        Time time;
+
+                        while (true) {
+                            System.out.println("Advertisement Manager");
+                            System.out.println("1. Create Advertisement");
+                            System.out.println("2. View Advertisements");
+                            System.out.println("3. Update Advertisement");
+                            System.out.println("4. Delete Advertisement");
+                            System.out.println("5. Exit");
+                            System.out.print("Enter your choice: ");
+
+                            int advChoice = scanner.nextInt();
+                            scanner.nextLine(); // Consume newline
+
+                            switch (advChoice) {
+                                case 1:
+                                    Advertisement.createAdvertisement(advertisements, scanner);
+                                    break;
+                                case 2:
+                                    Advertisement.viewAdvertisements(advertisements);
+                                    break;
+                                case 3:
+                                    Advertisement.updateAdvertisement(advertisements, scanner);
+                                    break;
+                                case 4:
+                                    Advertisement.deleteAdvertisement(advertisements, scanner);
+                                    break;
+                                case 5:
+                                    System.out.println("Goodbye!");
+                                    System.exit(0);
+                                default:
+                                    System.out.println("Invalid choice. Try again.");
+                            }
+                        }              
+
+
+
+                    //End
+                    }else if(choice == 0){
+
+                        System.out.println("Thank you. Goodbye!");
+                        System.out.println("\nPress any key to continue...");
+                        scanner.nextLine();
+                        welcomePage(admins, speakers, attendees, scanner);   
+
+
+                    }         
+                    /*
                     
+                    PC0 IS NETWORK OF 192.168.10.0/24, THE DEFAULT GATEWAU PC0 IS .1
+                   WAN USING 10.0 30.0
+                    PC3-PC5 PC4 USING .4 AND USING GATEWAY OF .1
+                    
+                    REACHING DEFAULT GATEWAY OF 0.0.0.0
+                    REMOTE CONNECTION SENDING PACKET REQUIRE 0.0.0.0 BROADCASTED HERE
+                    IF CNANOT REACH DESTINATION THEN SEND TO 0.0.0.0, BUT MUST HAVE GATEWAY OF LAST RESORT WHICH IS 192.168.30.1
+                    DISCARD PACKET IF GATEWAY OF LAST RESORT IS NOT MENTIONED
+                    
+                    S* IS STATIC DEFAULT GATEWAY
+                    
+                    PC0 FROM THE NETWORK OF 10.0 WANTS TO SEND A PACKET TO PC5 (INSERT ADDRESS)
+                    PC0 FORWARD S2 AND S2 FORWARD TO R0
+                    REACHING R0 IT WILL CALC WHAT IS THE NA TO GO TO S3
+                    IF GOT GO TO THE IP BUT IF DUN HAVE DISCARD
+                    BEFORE DECIDING TO DISCARD, IT WILL FORWARD TOT HE PACKET OF LAST RESORT TO REACH THE STATIC DEFUALT WHICH IS 0.000
+                    
+                    AFTER SENDING, IT WILL HOP TO R1. R1 WILL OPEN WILL OPEN ROUTING INFO TO CHECK IF GOT MATCHING INFO
+                    
+                    IF MATCH = R1 WILL SEND THE PACKET TO PC5 BY FORWARDING THE PACKET TO S2 THEN TO PC5 THAT IS CONNECTED VIA FASTETHERNET
+                    
+                    ROUTING TABLE ARE USED TO CHECK DIRECTLY CONNECTED AND LAST RESORT
+                    
+                    
+                    
+                    
+                    
+                    */
 
                 }else if(cat.equals("Attendee")){
                     
@@ -151,7 +325,19 @@ public class welcomePage {
                     choice = scanner.nextInt();
                     userCont = false;
                     
-                    userCont = contPage(choice, cat, admins, speakers, attendees, scanner, slot, seminar, sb, payment, attendee, seminarEnroll, availableSlots);
+                    if(choice == 1){
+
+                        String attendeeid = Login.userId();
+                        SeminarEnroll seminarenroll = new SeminarEnroll(null, null);
+                        seminarenroll.enroll(attendeeid, attendee, seminarEnroll, seminar, payment);
+
+
+                    }else if(choice == 2){
+
+                        welcomePage(admins, speakers, attendees, scanner);    
+
+
+                    }
                    
 
                 }
@@ -170,87 +356,15 @@ public class welcomePage {
         boolean userCont = true;
 
 
-        Monitoring monitor = new Monitoring(seminar, sb, seminarEnroll, slot);
-        for(int i=0; i<seminarEnroll.length; i++){
-            if(seminarEnroll[i] != null){
-
-            //Adding seminarenrolls array to arraylist
-            seminarEnroll[i].deleteSeminarEnroll();
-
-            //Adding each main classseminarenroll array to seminarenroll arraylist
-            seminarEnroll[i].addSeminarEnroll(seminarEnroll[i]); 
-
-            //Getting seminarenroll arraylist and put it in monitor class
-            monitor.addEnrollToMonitor(seminarEnroll[i].getEnrollList());
-
-            }
-        }   
-
-        for(int i=0; i<sb.length; i++){
-
-            if(sb[i] != null){
-
-                sb[i].deleteSlotBooking();
-                //Adding each main class slotbooking array to slotbooking arraylist
-                sb[i].addSlotBooking(sb[i]);
-                //Getting slotbooking arraylist to monitor
-                monitor.addBookingToMonitor(sb[i].getBookingList());
-
-            }
-        }   
-
-
-        Report report = new Report(seminar, sb, seminarEnroll, attendee);
-        for(int i=0; i<seminarEnroll.length; i++){
-
-            if(seminarEnroll[i] != null){
-
-                seminarEnroll[i].deleteSeminarEnroll();
-                seminarEnroll[i].addSeminarEnroll(seminarEnroll[i]);
-
-                report.addToReport(seminarEnroll[i].getEnrollList());
-
-            }
-        }    
+           
 
 
         if(category.equals("Admin")){
 
 
-            int userStatus = 1;
+            
 
-            if(choice == 1){
-                
-
-                    
-                int monitorChoice = monitor.displayChoices();
-
-                //If usercont false then exit
-                if(monitorChoice != 0){
-
-                    userCont = monitor.displayList(monitorChoice);           
-                }
-                
-
-            }else if(choice == 2){
-                String nameCompare = Login.userId();
-
-                int reportChoice = report.generateList(userStatus);
-                if(reportChoice != 0){
-
-                    userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
-                }
-
-
-            }else if(choice == 0){
-
-                System.out.println("Thank you. Goodbye!");
-                System.out.println("\nPress any key to continue...");
-
-                welcomePage(admins, speakers, attendees, scanner);
-
-
-            }
+            
 
 
 
@@ -258,97 +372,11 @@ public class welcomePage {
 
         else if(category.equals("Speaker")){
 
-            int userStatus = 2;
-            String speaker = Login.userId();
-            //Booking
-            if(choice == 1){
-                SlotBooking slotBooking = new SlotBooking(speaker, null, null);
-
-        //        EventBooking eb = new EventBooking();
-
-                slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees, seminar, slot);
-        //        eb.eventBooking(scanner, speaker, sb, payment, availableSlots);      
-                
-
-            //Report
-            }else if(choice == 2){
-                
-                String nameCompare = Login.userId();
-                int reportChoice = report.generateList(userStatus);
-                if(reportChoice != 0){
-
-                    userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
-                }               
-
-            //Advertisement
-            }else if(choice == 3){
-
-                ArrayList<Advertisement> advertisements = new ArrayList<Advertisement>();
-
-                Date date;
-                Time time;
-
-                while (true) {
-                    System.out.println("Advertisement Manager");
-                    System.out.println("1. Create Advertisement");
-                    System.out.println("2. View Advertisements");
-                    System.out.println("3. Update Advertisement");
-                    System.out.println("4. Delete Advertisement");
-                    System.out.println("5. Exit");
-                    System.out.print("Enter your choice: ");
-
-                    int advChoice = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-
-                    switch (advChoice) {
-                        case 1:
-                            Advertisement.createAdvertisement(advertisements, scanner);
-                            break;
-                        case 2:
-                            Advertisement.viewAdvertisements(advertisements);
-                            break;
-                        case 3:
-                            Advertisement.updateAdvertisement(advertisements, scanner);
-                            break;
-                        case 4:
-                            Advertisement.deleteAdvertisement(advertisements, scanner);
-                            break;
-                        case 5:
-                            System.out.println("Goodbye!");
-                            System.exit(0);
-                        default:
-                            System.out.println("Invalid choice. Try again.");
-                    }
-                }              
-
-
-
-            //End
-            }else if(choice == 0){
-
-                System.out.println("Thank you. Goodbye!");
-                System.out.println("\nPress any key to continue...");
-                scanner.nextLine();
-                welcomePage(admins, speakers, attendees, scanner);   
-
-
-            }           
-            return false;
+  
+            
         }else if(category.equals("Attendee")){
 
-            if(choice == 1){
-
-                String attendeeid = Login.userId();
-                SeminarEnroll seminarenroll = new SeminarEnroll(null, null);
-                seminarenroll.enroll(attendeeid, attendee, seminarEnroll, seminar, payment);
-
-
-            }else if(choice == 2){
-
-                welcomePage(admins, speakers, attendees, scanner);    
-
-
-            }
+            
 
 
 

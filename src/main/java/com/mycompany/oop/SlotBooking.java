@@ -325,7 +325,12 @@ public class SlotBooking {
                         java.sql.Time sqlTime2 = new java.sql.Time(date2.getTime());
 
                         seminar[semCount] = new Seminar(slot[idSB].getID(), "", slot[idSB].getStartDate(), slot[idSB].getEndDate(), sqlTime, sqlTime2, slot[idSB].getPrice(), slot[idSB].getVenue(), new ArrayList<>());
-                        System.out.println(seminar[semCount].output());
+                        
+                        if(seminar != null){
+                            
+                            System.out.println(seminar[semCount].output());
+                            
+                        }
 
                    } catch (ParseException e) {
 
