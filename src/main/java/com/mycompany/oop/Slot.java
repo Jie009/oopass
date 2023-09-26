@@ -124,7 +124,7 @@ public class Slot{
                 + "\nVenue: %s"
                 + "\nDescription: %s"
                 + "\nTime: %s - %s"            
-                + "\t\t\tDate: %s"
+                + "\t\tDate: %s"
                 + "\nNumber of Seat: %d"
                 + "\t\t\tPrice: RM%.2f"
                 + "\n=====================================================\n", 

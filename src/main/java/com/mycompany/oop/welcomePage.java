@@ -43,15 +43,17 @@ public class welcomePage {
         while(bigLoop == true){
             
             do {
-                clScr();
-     
-                System.out.println("Welcome to the Seminar Management System!");
-                System.out.println("------------------------------------------");
-                System.out.println("Menu:");
-                System.out.println("1. Login");
-                System.out.println("2. Register");
-                System.out.println("3. Exit");
-                System.out.print("Please enter the number: ");
+                OOP.clScr();
+                System.out.println("===================================================");
+                System.out.println("      Welcome to the Seminar Management System");
+                System.out.println("");
+                System.out.println("1 - Login");
+                System.out.println("2 - Register");
+                System.out.println("");
+                System.out.println("0 - EXIT");
+                System.out.println("");
+                System.out.println("===================================================");
+                System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
 
@@ -153,13 +155,16 @@ public class welcomePage {
                 
                 if(cat.equals("Admin")){
                     
-                    clScr();
-                    System.out.println("Admin Menu");
-                    System.out.println("---------------------");
+                    OOP.clScr();
+                    System.out.println("===================================================");
+                    System.out.println("                    Admin Menu");
+                    System.out.println("");
                     System.out.println("1 - Monitor");
                     System.out.println("2 - Report");
-                    System.out.println("0 - Logout"); 
-                    System.out.println("---------------------");
+                    System.out.println("");
+                    System.out.println("0 - EXIT");
+                    System.out.println("");
+                    System.out.println("===================================================");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
                     int userStatus = 1;
@@ -204,14 +209,17 @@ public class welcomePage {
                         System.out.println(seminar[0].toString());
                         
                     }
-                    clScr();
-                    System.out.println("Speaker Menu");
-                    System.out.println("---------------------");
+                    OOP.clScr();
+                    System.out.println("===================================================");
+                    System.out.println("                   Speaker Menu");
+                    System.out.println("");
                     System.out.println("1 - Slot Booking");
-                    System.out.println("2 - Report");              
-                    System.out.println("3 - Advertisement");                
-                    System.out.println("0 - Logout");                
-                    System.out.println("---------------------");
+                    System.out.println("2 - Report");
+                    System.out.println("3 - Advertisement");
+                    System.out.println("");
+                    System.out.println("0 - EXIT");
+                    System.out.println("");
+                    System.out.println("===================================================");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
                     
@@ -248,13 +256,18 @@ public class welcomePage {
                         Time time;
 
                         while (true) {
-                            System.out.println("Advertisement Manager");
-                            System.out.println("1. Create Advertisement");
-                            System.out.println("2. View Advertisements");
-                            System.out.println("3. Update Advertisement");
-                            System.out.println("4. Delete Advertisement");
-                            System.out.println("5. Exit");
-                            System.out.print("Enter your choice: ");
+                        OOP.clScr();
+                        System.out.println("===================================================");
+                        System.out.println("              Advertisement Management");
+                        System.out.println("");
+                        System.out.println("1 - Create Advertisement");
+                        System.out.println("2 - View Advertisements");
+                        System.out.println("3 - Update Advertisement");
+                        System.out.println("4 - Delete Advertisement");
+                        System.out.println("");
+                        System.out.println("0 - EXIT");
+                        System.out.println("");
+                        System.out.println("===================================================");
 
                             int advChoice = scanner.nextInt();
                             scanner.nextLine(); // Consume newline
@@ -272,7 +285,7 @@ public class welcomePage {
                                 case 4:
                                     Advertisement.deleteAdvertisement(advertisements, scanner);
                                     break;
-                                case 5:
+                                case 0:
                                     System.out.println("Goodbye!");
                                     System.exit(0);
                                 default:
@@ -325,12 +338,15 @@ public class welcomePage {
 
                 }else if(cat.equals("Attendee")){
                     
-                    clScr();
-                    System.out.println("Attendee Menu");
-                    System.out.println("---------------------");
+                    OOP.clScr();
+                    System.out.println("===================================================");
+                    System.out.println("                    Attendee Menu");
+                    System.out.println("");
                     System.out.println("1 - Enroll Seminar");
-                    System.out.println("2 - Logout");                
-                    System.out.println("---------------------");
+                    System.out.println("");
+                    System.out.println("0 - EXIT");
+                    System.out.println("");
+                    System.out.println("===================================================");
                     System.out.print("Choose an option: ");
                     choice = scanner.nextInt();
                     userCont = false;
@@ -342,7 +358,7 @@ public class welcomePage {
                         seminarenroll.enroll(attendeeid, attendee, seminarEnroll, seminar, payment);
 
 
-                    }else if(choice == 2){
+                    }else if(choice == 0){
 
                         System.out.println("Thank you. Goodbye!");
                         System.out.println("\nPress any key to continue...");
@@ -362,44 +378,6 @@ public class welcomePage {
         
         }
         
-
-    }
-    public static boolean contPage(int choice, String category, List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner,
-        Slot[] slot, Seminar[] seminar, SlotBooking[] sb, Payment[] payment, Attendee[] attendee, SeminarEnroll[] seminarEnroll, List<Slot> availableSlots){
-        boolean userCont = true;
-
-
-           
-
-
-        if(category.equals("Admin")){
-
-
-            
-
-            
-
-
-
-        }
-
-        else if(category.equals("Speaker")){
-
-  
-            
-        }else if(category.equals("Attendee")){
-
-            
-
-
-
-        }
-
-
-
-
-
-        return userCont;
 
     }
 }

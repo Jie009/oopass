@@ -155,16 +155,18 @@ public class SeminarEnroll {
     public void menu(){
         
         
-        System.out.print( 
-                  "\n=====================================================" 
-                + "\n                  Choose an option"
-                + "\n1. Enroll"            
-                + "\n2. View Enrolls"
-                + "\n3. Cancel Enroll"
-                + "\n"
-                + "\n0. Quit"
-                + "\n=====================================================" 
-                + "\n>  ");
+            OOP.clScr();
+            System.out.println("===================================================");
+            System.out.println("                    Choose an option");
+            System.out.println("");
+            System.out.println("1 - Enroll");
+            System.out.println("2 - View Enrolls");
+            System.out.println("3 - Cancel Enroll");
+            System.out.println("");
+            System.out.println("0 - EXIT");
+            System.out.println("");
+            System.out.println("===================================================");
+            System.out.print("Enter your choice: ");
     }
 
     public void enroll(String name, Attendee[] attendee, SeminarEnroll[] SE, Seminar[] seminar, Payment[] payment){
