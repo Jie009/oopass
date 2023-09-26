@@ -127,10 +127,9 @@ public class Seminar {
                 + "\nStart Date: %s"
                 + "\nEnd Date: %s"
                 + "\nPrice: RM%.2f"
-                + "\nSpeaker: %s"
                 + "\n=====================================================" ,
                 getID(), getLocation(), getStartTime(), getEndTime(), getStartDate(), 
-                getEndDate(), getPrice(), "speaker");
+                getEndDate(), getPrice());
     }   
     
 }

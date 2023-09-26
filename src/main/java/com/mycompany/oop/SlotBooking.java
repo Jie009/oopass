@@ -313,7 +313,6 @@ public class SlotBooking {
                     
                     try {
 
-                        System.out.println(chosenSlot);
                         // Create a SimpleDateFormat with the desired time format
                         SimpleDateFormat dateform = new SimpleDateFormat("HH:mm:ss");
 
@@ -325,7 +324,7 @@ public class SlotBooking {
                         java.sql.Time sqlTime = new java.sql.Time(date.getTime());
                         java.sql.Time sqlTime2 = new java.sql.Time(date2.getTime());
 
-                        seminar[semCount] = new Seminar(slot[idSB].getID(), "" ,slot[idSB].getStartDate(), slot[idSB].getEndDate(), sqlTime, sqlTime2, slot[idSB].getPrice(), speaker, new ArrayList<>());
+                        seminar[semCount] = new Seminar(slot[idSB].getID(), "", slot[idSB].getStartDate(), slot[idSB].getEndDate(), sqlTime, sqlTime2, slot[idSB].getPrice(), slot[idSB].getVenue(), new ArrayList<>());
                         System.out.println(seminar[semCount].output());
 
                    } catch (ParseException e) {
