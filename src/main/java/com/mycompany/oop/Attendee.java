@@ -2,11 +2,13 @@ package com.mycompany.oop;
 
 public class Attendee extends User {
     
-        private static int numOfAttendee = -1;
-        private String attendeeID;
-        private String seminarID;
-        private Payment payment;
-        
+    private static int numOfAttendee = -1;
+    private String attendeeID;
+    private String seminarID;
+    private Payment payment;
+    
+    
+    //Polymorphism of attendee
     public Attendee(String id, String password, String name, String contactInfo, String seminarID, Payment payment) {
         super(id, password, name, "Attendee", contactInfo);
             
@@ -16,49 +18,53 @@ public class Attendee extends User {
             numOfAttendee++;
 
         }
-        public static int getNumOfAttendee(){
-            return numOfAttendee;
-        }   
+    
+    //Get num of attendee
+    public static int getNumOfAttendee(){
+        return numOfAttendee;
+    }   
 
-        public String getMethod(){
+    public String getMethod(){
 
-            return payment.getMethod();
-        }
+        return payment.getMethod();
+    }
 
-        public double getTotal(){
+    public double getTotal(){
 
-            return payment.getTotal();
-        }
+        return payment.getTotal();
+    }
 
-        public String toString(){
+    public String toString(){
 
-            return attendeeID;
-        }
+        return attendeeID;
+    }
 
-        public String getSeminarID(){
+    public String getSeminarID(){
 
-            return seminarID;
-        }
+        return seminarID;
+    }
 
-        public String getID(){
+    public String getID(){
 
-            return attendeeID;
-        }
-        
-        public String getUserID(){
-            
-            return super.getid();
-        }
-        
-        public String getUserName(){
-            
-            return super.getname();
-        }
-        
-        public String getPswd(){
-            
-            return super.getpassword();
-        }
+        return attendeeID;
+    }
+
+    public String getUserID(){
+
+        return super.getid();
+    }
+    
+    //Get username from super class
+    public String getUserName(){
+
+        return super.getname();
+    }
+    
+    //Get pswd from super class
+    public String getPswd(){
+
+        return super.getpassword();
+    }
         
         
 }

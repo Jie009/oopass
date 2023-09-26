@@ -10,9 +10,10 @@ public class Advertisement extends Seminar{
     private String advertisementDescription;
     private double advertisementPrice;
     
-
+    
     public Advertisement(String id, String desc, Date startDate, Date endDate, Time startTime, Time endTime, double price, String location, ArrayList<SeminarEnroll> enrollList,
             String advertisementTitle, String advertisementDescription, double advertisementPrice) {
+        //Super class getting from seminar
         super(id, desc, startDate, endDate, startTime, endTime, price, location,enrollList);
 
         this.advertisementTitle = advertisementTitle;
@@ -44,7 +45,7 @@ public class Advertisement extends Seminar{
         return super.getDesc();
     }
 
-    
+    //Setter method
     public void setTitle(String title) {
         this.advertisementTitle = title;
     }
@@ -56,7 +57,8 @@ public class Advertisement extends Seminar{
     public void setPrice(double price) {
         this.advertisementPrice= price;
     }
-
+    
+    //Output
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -70,7 +72,9 @@ public class Advertisement extends Seminar{
 
         return sb.toString();
     }
-
+    
+    
+    //Create an advertisement
     public static void createAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
         OOP.clScr();
         System.out.println("===================================================");
@@ -78,7 +82,7 @@ public class Advertisement extends Seminar{
         System.out.print("\nEnter seminar ID: ");
         String ID = scanner.nextLine();
 
-
+        //Validation date
         Date startDate = null;
         boolean startDateValid = false;
         while (!startDateValid) {
@@ -92,7 +96,7 @@ public class Advertisement extends Seminar{
             }
         }
 
-
+        //Validation date
         Date endDate = null;
         boolean endDateValid = false;
         while (!endDateValid) {
@@ -106,7 +110,7 @@ public class Advertisement extends Seminar{
             }
         }
 
-
+        //Validation time
         Time startTime = null;
         boolean startTimeValid = false;
         while (!startTimeValid) {
@@ -120,7 +124,7 @@ public class Advertisement extends Seminar{
             }
         }
 
-
+        //Validation time
         Time endTime = null;
         boolean endTimeValid = false;
         while (!endTimeValid) {
@@ -134,7 +138,7 @@ public class Advertisement extends Seminar{
             }
         }
 
-
+        //Validation price
         double price = 0.0;
         boolean priceValid = false;
         while (!priceValid) {
@@ -146,7 +150,8 @@ public class Advertisement extends Seminar{
                 System.out.println("Invalid price format. Please enter a valid number.");
             }
         }
-
+        
+        //Input
         System.out.print("Enter seminar location: ");
         String location = scanner.nextLine();
 
@@ -156,7 +161,7 @@ public class Advertisement extends Seminar{
         System.out.print("Enter advertisement description: ");
         String advertisementDescription = scanner.nextLine();
 
-
+        //Validation price
         double advertisementPrice = 0.0;
         boolean advertisementPriceValid = false;
         while (!advertisementPriceValid) {
@@ -170,7 +175,7 @@ public class Advertisement extends Seminar{
         }
         
         
-
+        //Add into array
         ArrayList<SeminarEnroll> enrollList = new ArrayList<>();
         Advertisement ad = new Advertisement(ID, "", startDate, endDate, startTime, endTime, price, location, enrollList, advertisementTitle, advertisementDescription, advertisementPrice);
         advertisements.add(ad);
@@ -181,7 +186,8 @@ public class Advertisement extends Seminar{
         scanner.nextLine();
     }
 
-
+    
+    //View adv
     public static boolean viewAdvertisements(ArrayList<Advertisement> advertisements, Scanner scanner) {
         OOP.clScr();
         if (advertisements.isEmpty()) {
@@ -201,7 +207,8 @@ public class Advertisement extends Seminar{
             return true;
         }
     }
-
+    
+    //Update adv
     public static void updateAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
         if(viewAdvertisements(advertisements, scanner)){
             System.out.print("Enter the number of the advertisement to update: ");
@@ -218,7 +225,8 @@ public class Advertisement extends Seminar{
                 System.out.print("Enter your choice: ");
                 int attributeChoice = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
-
+                
+                //If else check
                 switch (attributeChoice) {
                     case 1:
                         System.out.print("Enter new title: ");
@@ -260,7 +268,7 @@ public class Advertisement extends Seminar{
         
     }
 
-
+    //Del adv
     public static void deleteAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
         
         if(viewAdvertisements(advertisements, scanner)){
