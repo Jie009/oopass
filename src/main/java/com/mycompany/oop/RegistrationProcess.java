@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RegistrationProcess {
+    // Register menu
     public static void RegistrationProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner) {          
         OOP.clScr();
         System.out.println("===================================================");
@@ -32,6 +33,7 @@ public class RegistrationProcess {
 
         }
         else if (choice >0 && choice < 3){
+            // enter details
             scanner.nextLine();
             OOP.clScr();
             System.out.println("===================================================");

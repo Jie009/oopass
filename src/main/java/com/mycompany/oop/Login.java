@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Login{
     static String ggcategory = "";
     static String ggid = "";
+    // show the login menu
     public static void showLoginOptions(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner){ 
         welcomePage wp = new welcomePage();
         OOP.clScr();
@@ -59,6 +60,7 @@ public class Login{
             System.out.println("Invalid choice, please try again");
         }
     }    
+    // let user input the login details
     public static void loginProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner, String category){
         welcomePage wp = new welcomePage();
         scanner.nextLine();
@@ -114,9 +116,13 @@ public class Login{
             wp.welcomePage(admins, speakers, attendees, scanner);
         }
     }
+    
+    //get login user category
     public static String cat(){
         return ggcategory;
     }
+    
+    //get login user name
     public static String userId(){
         return ggid;
     }

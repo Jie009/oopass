@@ -34,6 +34,7 @@ public class Report extends ReportAbstract {
     }
 
     
+    // get start time according to name
     public Time getStartTimeByID(String id){
         
         for(Seminar seminard: seminars){
@@ -46,7 +47,7 @@ public class Report extends ReportAbstract {
         
         return null;
     }
-    
+    // get end time according to name
     public Time getEndTimeByID(String id){
         
         for(Seminar seminard: seminars){
@@ -60,11 +61,13 @@ public class Report extends ReportAbstract {
         return null;
     }
     
+    // add enrolled data to report
     public void addToReport(ArrayList<SeminarEnroll> data){
         
         enrollData.addAll(data);
     }
     
+    // report generator menu
     public int generateList(int category){
         
         OOP.clScr();
@@ -161,7 +164,7 @@ public class Report extends ReportAbstract {
         return choice;
 
     }
-    
+    // generate report
     public boolean generateReport(int reportChoice, int category, String name){
         
         int count = 0;
