@@ -4,6 +4,8 @@ import java.sql.Time;
 
 public abstract class ReportAbstract {
     
+    
+    //Declaring abstract methods
     public abstract Time getStartTimeByID(String id);
     public abstract Time getEndTimeByID(String id);
     public abstract int generateList(int category);

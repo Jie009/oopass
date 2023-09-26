@@ -9,11 +9,14 @@ public class Payment {
     private Date date;
     private static int numOfPayment=0;
     
+    //NON ARG Constructor
     public Payment(){
         method = "Hello world";
         total = 0.00;
         date = new Date();
     }
+    
+    //Constructor with arg
     public Payment(String method, double total){
         this.method = method;
         this.total = total;
@@ -21,6 +24,7 @@ public class Payment {
         numOfPayment ++;
     }
     
+    //Getter
     public String getMethod(){
         return method;
     }
@@ -34,6 +38,8 @@ public class Payment {
     public static int getNumOfPayment(){
         return numOfPayment;
     }
+    
+    //Payment process 
     public static boolean eventPayment(Scanner scanner, Payment[] payment, double price){
         int numOfPayment = Payment.getNumOfPayment();
         while (true){

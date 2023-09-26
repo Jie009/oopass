@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RegistrationProcess {
+    
+    //Registration process of choosing specific user
     public static void RegistrationProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner) {          
         OOP.clScr();
         System.out.println("===================================================");

@@ -27,7 +27,7 @@ public class Monitoring extends MonitorAbstract {
     private Slot[] slot;
     private Attendee[] attendee;
     
-    
+    //Constructor
     public Monitoring(Attendee[] attendee, Seminar[] seminars, SlotBooking[] slotbooking, SeminarEnroll[] seminarenrolls, Slot[] slot){
         
         enrollData = new ArrayList<>();
@@ -39,43 +39,49 @@ public class Monitoring extends MonitorAbstract {
         this.slot = slot;
     }
 
-    
+    //Setter title
     public void setTitle(String title){
         
         this.title = title;
     }
     
+    //Getter title
     public String getTitle(){
         
         return title;
     }
     
+    //Setter enrollmonitor
     public void setEnrollMonitor(ArrayList<SeminarEnroll> enrollMontior){
         
         this.enrollMonitor = enrollMonitor;
     }
     
-    
+    //Getter enrollmonitor
     public ArrayList<SeminarEnroll> getEnrollMontior(){
         
         return enrollMonitor;
     }
     
+    //Setter for slotbooking
     public void setSlotBooking(SlotBooking slotBooking){
         
         this.slotBooking = slotBooking;
     }
     
+    //Getter for slotbooking
     public SlotBooking slotBooking(){
         
         return slotBooking;
     }
     
+    //Add enrolldata to montior arraylist
     public void addEnrollToMonitor(ArrayList<SeminarEnroll> enrolldata){
         
         enrollData.addAll(enrolldata);
     }
     
+    //Add bookingdata to monitor arraylist
     public void addBookingToMonitor(ArrayList<SlotBooking> bookingdata){
         
         bookingData.addAll(bookingdata);
@@ -348,7 +354,7 @@ public class Monitoring extends MonitorAbstract {
         Time seminarEndTime;
         Scanner scan = new Scanner(System.in);
         
-
+        //Current
         if(ongoingChoice == 1){
             
             int count = 0;
@@ -378,7 +384,7 @@ public class Monitoring extends MonitorAbstract {
 
             }
      
-            
+        //Custom
         }else if(ongoingChoice == 2){
             
             System.out.print("Enter time in 24HR Format (HH:mm:ss): ");

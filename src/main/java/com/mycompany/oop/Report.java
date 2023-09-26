@@ -24,6 +24,7 @@ public class Report extends ReportAbstract {
     private Payment[] payment;
     private SeminarEnroll[] seminarenrolls;
         
+    //Constructor
     public Report(Seminar[] seminars, SlotBooking[] slotbooking, SeminarEnroll[] seminarenrolls, Attendee[] attendee, Payment[] payment){
         
         enrollData = new ArrayList<>();
@@ -33,7 +34,7 @@ public class Report extends ReportAbstract {
         this.attendee = attendee;
     }
 
-    
+    //Get start time using id
     public Time getStartTimeByID(String id){
         
         for(Seminar seminard: seminars){
@@ -47,6 +48,7 @@ public class Report extends ReportAbstract {
         return null;
     }
     
+     //Get end time using id
     public Time getEndTimeByID(String id){
         
         for(Seminar seminard: seminars){
@@ -60,11 +62,14 @@ public class Report extends ReportAbstract {
         return null;
     }
     
+    //Add to arraylist
     public void addToReport(ArrayList<SeminarEnroll> data){
         
         enrollData.addAll(data);
     }
     
+    
+    //Generate selection list
     public int generateList(int category){
         
         OOP.clScr();
@@ -162,6 +167,7 @@ public class Report extends ReportAbstract {
 
     }
     
+    //Generate report
     public boolean generateReport(int reportChoice, int category, String name){
         
         int count = 0;
@@ -399,27 +405,31 @@ public class Report extends ReportAbstract {
     
 
 
-    
+    //Setter title
     public void setTitle(String title){
         
         this.title = title;
     }
     
+    //Get title
     public String getTitle(){
         
         return title;
     }
 
+    //Set seminarenroll
     public void setSeminarEnroll(SeminarEnroll seminarEnroll){
         
         this.seminarEnroll = seminarEnroll;
     }
     
+    //Get seminarenroll
     public SeminarEnroll getSeminarEnroll(){
         
         return seminarEnroll;
     }
     
+    //Process of splitting id
     public void splitID(){
         
         // Directly access the private field
@@ -489,6 +499,7 @@ public class Report extends ReportAbstract {
         
     }
     
+    //Count how many attendees per seminar same as in monitor
     public void countAttendeeSeminar(int attendeechoice){
         
         Scanner scan = new Scanner(System.in);
@@ -561,6 +572,7 @@ public class Report extends ReportAbstract {
         
     }  
     
+    //Finance
     public void checkSeminars(int userStatus, String name){
         
         Scanner scan = new Scanner(System.in);
@@ -683,6 +695,7 @@ public class Report extends ReportAbstract {
         
     }
     
+    //Check slot using date
     public void checkBooking(){
         
         Scanner scan = new Scanner(System.in);

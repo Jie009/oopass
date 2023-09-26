@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Login{
     static String ggcategory = "";
     static String ggid = "";
+    
+    //Show Login options for user (ADMIN OR SPEAKER OR ATTENDEE)
     public static void showLoginOptions(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner){ 
         welcomePage wp = new welcomePage();
         OOP.clScr();
@@ -59,6 +61,8 @@ public class Login{
             System.out.println("Invalid choice, please try again");
         }
     }    
+            
+    //LOGIN PROCESS (verification/validation) use of polymorphism (attendee, speaker, admin)
     public static void loginProcess(List<Admin> admins, List<Speaker> speakers, List<Attendee> attendees, Scanner scanner, String category){
         welcomePage wp = new welcomePage();
         scanner.nextLine();
@@ -114,9 +118,12 @@ public class Login{
             wp.welcomePage(admins, speakers, attendees, scanner);
         }
     }
+    
+    //Getter
     public static String cat(){
         return ggcategory;
     }
+    
     public static String userId(){
         return ggid;
     }

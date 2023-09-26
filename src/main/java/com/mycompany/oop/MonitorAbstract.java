@@ -4,6 +4,9 @@ import java.sql.Time;
 
 public abstract class MonitorAbstract {
      
+    //Declare abstract classes for monitor
+    //
+    
     public abstract int displayChoices();
     public abstract Time getStartTimeByID(String id);
     public abstract Time getEndTimeByID(String id);
