@@ -89,7 +89,7 @@ public class Monitoring extends MonitorAbstract {
         bookingData.addAll(bookingdata);
     }
 
-    
+    //Display list for user
     public int displayChoices(){
 
         OOP.clScr();
@@ -136,6 +136,7 @@ public class Monitoring extends MonitorAbstract {
     
     }
     
+    //Get start time using id
     public Time getStartTimeByID(String id){
         
         for(Seminar seminard: seminars){
@@ -154,6 +155,7 @@ public class Monitoring extends MonitorAbstract {
         return null;
     }
     
+    //Get end time using id
     public Time getEndTimeByID(String id){
         
         for(Seminar seminard: seminars){
@@ -173,7 +175,8 @@ public class Monitoring extends MonitorAbstract {
 
 
     
-    
+    //attendee seminar splitter validation
+    //check how many attendee enroll in each seminar
     public boolean displayList(int choice){
         
         Scanner scan = new Scanner(System.in);
@@ -345,7 +348,7 @@ public class Monitoring extends MonitorAbstract {
          
     }
   
-    
+    //Check time of seminar
     public void checkSeminars(int ongoingChoice){
         
         Time currentTime = new Time(System.currentTimeMillis());
@@ -450,7 +453,7 @@ public class Monitoring extends MonitorAbstract {
                 
     }
     
-    
+    //Check venue of slot
     public void checkVenue(int choiceVenue){
         
         Date currentDate = new Date();
@@ -619,7 +622,7 @@ public class Monitoring extends MonitorAbstract {
         
     }
     
-    
+    //update slot info
     public void updateSlot(int slotChoice){
         
         Scanner scan = new Scanner(System.in);
@@ -959,7 +962,7 @@ public class Monitoring extends MonitorAbstract {
     }        
     
 
-  
+    //split attendee id with seminar id
     public void countAttendeeSeminar(){
         
         // Directly access the private field

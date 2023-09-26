@@ -30,9 +30,10 @@ public class welcomePage {
         slot[2] = new Slot("S3","Dataran Murni", "Indoor hall", "8:00:00", "15:00:00", "10/10/2023", Date.valueOf("2023-10-10"), Date.valueOf("2023-10-11"), 500, 600);
         slot[3] = new Slot("S4","SMK Kawi", "Secondary school hall", "8:00:00", "11:00:00", "30/10/2023", Date.valueOf("2023-10-30"), Date.valueOf("2023-10-30"), 200, 150);
         slot[4] = new Slot("S5","Dewan Wangsa Maju", "Wangsa Maju hall", "15:00:00", "19:00:00", "26/10/2023", Date.valueOf("2023-10-26"), Date.valueOf("2023-10-27"), 200, 220);
-
-        seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
-        seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
+        
+        //Sample data for monitoring and report
+        //seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
+        //seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
         for(int i=0; i<5; i++){
 
             availableSlots.add(slot[i]);
