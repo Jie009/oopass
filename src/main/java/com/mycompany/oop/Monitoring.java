@@ -33,12 +33,14 @@ public class Monitoring extends MonitorAbstract {
     private int[] count;
     private SlotBooking[] slotbooking;
     private Slot[] slot;
+    private Attendee[] attendee;
     
     
-    public Monitoring(Seminar[] seminars, SlotBooking[] slotbooking, SeminarEnroll[] seminarenrolls, Slot[] slot){
+    public Monitoring(Attendee[] attendee, Seminar[] seminars, SlotBooking[] slotbooking, SeminarEnroll[] seminarenrolls, Slot[] slot){
         
         enrollData = new ArrayList<>();
         bookingData = new ArrayList<>();
+        this.attendee = attendee;
         this.seminars = seminars;
         this.slotbooking = slotbooking;
         this.seminarenrolls = seminarenrolls;
@@ -98,8 +100,8 @@ public class Monitoring extends MonitorAbstract {
         System.out.println("               Choose an option");
         System.out.println("");
         System.out.println("1 - Update Slot");
-        System.out.println("2 - Monitor Venue Start and End Time by Date");
-        System.out.println("3 - Monitor Seminars by Time");
+        System.out.println("2 - Monitor Slot Start and End Time by Date");
+        System.out.println("3 - Monitor Seminar by Time");
         System.out.println("0 - EXIT");
         System.out.println("");
         System.out.println("===================================================");
@@ -175,7 +177,30 @@ public class Monitoring extends MonitorAbstract {
     public boolean displayList(int choice){
         
         Scanner scan = new Scanner(System.in);
-        countAttendeeSeminar();
+        int count = 0;
+        for (int i = 0; i < seminars.length; i++) {
+            
+            if(seminars[i] != null){
+                
+
+                for (int j = 0; j < attendee.length; j++) {
+
+                    if(seminars[j] != null){
+                        
+                        count++;
+                    }
+
+                }
+                
+            }
+            
+        }
+        if(count != 0){
+            
+            countAttendeeSeminar(); 
+            
+        }
+        
         boolean exit = true;
         
         //Search current enrolls by time
@@ -336,12 +361,9 @@ public class Monitoring extends MonitorAbstract {
             System.out.println("Current Time: " + currentTime);
             for(int i=0; i<seminarID.length; i++){
                 
-                seminarStartTime = getStartTimeByID(seminarID[i]);
-                seminarEndTime = getEndTimeByID(seminarID[i]); 
-                
-                
-                
                 if(seminarID[i] != null){
+                    seminarStartTime = getStartTimeByID(seminarID[i]);
+                    seminarEndTime = getEndTimeByID(seminarID[i]); 
 
                     if (currentTime.compareTo(seminarStartTime) >= 0 && currentTime.compareTo(seminarEndTime) <= 0) {
 
@@ -448,121 +470,138 @@ public class Monitoring extends MonitorAbstract {
         
         SimpleDateFormat convertDate = new SimpleDateFormat("dd-MM-yyyy");
         int count = 0;
+        int secondCount = 0;
+        java.sql.Date sqlDate3 = null;
         
-        for (int k = 0; k < slotbooking.length; k++) {
+        for (int i = 0; i < slotbooking.length; i++) {
             
-            if(slotbooking[k] != null){
+            count++;
+            if(count == 0){
+                
+                System.out.printf("\n%-50s %-50s", "Slot", "Time");
+                
+            }
+            
+            if(slotbooking[i] != null){
                 count++;
                 if(choiceVenue == 1){
 
                     String formattedDate = convertDate.format(currentDate);
-                    System.out.println("Current Date: " + formattedDate);
-                    for(int i=0; i<slotbooking.length; i++){
-                        
+                    slotStartDate = slotbooking[i].getStartDate();
+                    slotEndDate = slotbooking[i].getEndDate();
+                    slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
+                    slotEndTime = Time.valueOf(slotbooking[i].getEndTime());
+
+                    int comparisonResult = currentDate.compareTo(slotStartDate);
+
+
+                    if(comparisonResult < 0){
+
                         if(slotbooking[i] != null){
-                            
-                            slotStartDate = slotbooking[i].getStartDate();
-                            slotEndDate = slotbooking[i].getEndDate();
-                            slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
-                            slotEndTime = Time.valueOf(slotbooking[i].getEndTime());
 
-                            int comparisonResult = currentDate.compareTo(slotStartDate);
-                            if(comparisonResult < 0){
+                            System.out.printf("\n%-50s %-25s %-25s",slotbooking[i].getVenue(), slotStartTime, slotEndTime);
 
-                                if(slotbooking[i] != null){
+                            if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
 
-                                    System.out.println("The time of " + slotbooking[i].getVenue() + " is " + slotStartTime + " until " + slotEndTime);
+                                System.out.println(slotbooking[i].getVenue() + " is conducting.");
 
-                                    if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
-
-                                        System.out.println(slotbooking[i].getVenue() + " is conducting.");
-
-                                    }
-
-                                }
-
-                            }else{
-
-                                System.out.println("No seminar is conducting on " + formattedDate + ".");
                             }
-                            
+
                         }
 
+                    }else{
+
+                        System.out.println("No seminar is conducting on " + formattedDate + ".");
                     }
+
+                    
+
+                    
 
                     //Less than 0 means its before
 
                 }else if(choiceVenue == 2){
+                    
+                    boolean status = true;
+                    
+                    String userInput;
+                    String formattedDate = "";
+                    if(secondCount == 0){
+                        
+                        status = false;
+                        secondCount++;
+                        
+                        do {
 
-                    System.out.print("Enter a date (dd-MM-yyyy): ");
-                    boolean status = false;
-                    String userInput = scan.next();
+                            try {
 
-                    do {
+                                System.out.print("Enter a date (dd-MM-yyyy): ");
+                                userInput = scan.next();
 
-                        try {
+                                // Parse the user input into a java.util.Date
+                                java.util.Date utilDate = convertDate.parse(userInput);
 
-                            // Parse the user input into a java.util.Date
-                            java.util.Date utilDate = convertDate.parse(userInput);
+                                // Convert the java.util.Date to a java.sql.Date in the desired format
+                                sqlDate3 = new java.sql.Date(utilDate.getTime());
 
-                            // Convert the java.util.Date to a java.sql.Date in the desired format
-                            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+                                // Format the date as "yyyy-MM-dd"
+                                formattedDate = convertDate.format(sqlDate3);
 
-                            // Format the date as "yyyy-MM-dd"
-                            String formattedDate = convertDate.format(sqlDate);
+                                System.out.printf("\nDate: %-100s ", formattedDate);
+                                System.out.printf("\nCurrent Date: %-100s", formattedDate);
 
-                            System.out.printf("\nDate: %-50s ", formattedDate);
-                            System.out.println("Current Date: " + formattedDate);
+                                status = false;
 
-                            for(int i=0; i<slotbooking.length; i++){
-                                
-                                if(slotbooking[i] != null){
-                                    
-                                    slotStartDate = slotbooking[i].getStartDate();
-                                    slotEndDate = slotbooking[i].getEndDate();
-                                    slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
-                                    slotEndTime = Time.valueOf(slotbooking[i].getEndTime());                        
+                            } catch (ParseException e) {
 
-                                    int comparisonResult = sqlDate.compareTo(slotStartDate);
-                                    if(comparisonResult < 0){
+                                status = true;
+                                System.out.println("Invalid date format. Please use dd-MM-yyyy.");
 
-                                        if(slotbooking[i] != null){
-
-                                            System.out.println("The time of " + slotbooking[i].getVenue() + " is " + slotStartTime + " until " + slotEndTime);
-
-                                            if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
-
-                                                System.out.println(slotbooking[i].getVenue() + " is conducting.");
-
-                                            }
-
-                                        }
-
-                                    }else{
-
-                                        System.out.println("No seminar is conducting on " + formattedDate + ".");
-                                    }
-                                    
-                                }
                             }
 
-                            //Less than 0 means its before
+                        }while(status == true);
+                    }
 
 
+                    if(slotbooking[i] != null){
+                        count++;
+                        if(count == 0){
 
-                        } catch (ParseException e) {
-
-                            status = true;
-                            System.out.println("Invalid date format. Please use dd-MM-yyyy.");
+                            System.out.printf("\n%-50s %-100s", "Slot", "Time");
 
                         }
+                        slotStartDate = slotbooking[i].getStartDate();
+                        slotEndDate = slotbooking[i].getEndDate();
+                        slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
+                        slotEndTime = Time.valueOf(slotbooking[i].getEndTime());                        
 
-                    }while(status == true);
+                        int comparisonResult = sqlDate3.compareTo(slotStartDate);
+                        if(comparisonResult < 0){
 
+
+                            if(slotbooking[i] != null){
+
+                                System.out.printf("\n%-50s %-25s %-25s",slotbooking[i].getVenue(), slotStartTime, slotEndTime);
+
+                                if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
+
+                                    System.out.println(slotbooking[i].getVenue() + " is conducting.");
+
+                                }
+
+                            }
+
+                        }else{
+
+                            System.out.println("No seminar is conducting on " + formattedDate + ".");
+                        }
+
+                    }
+                    
                 }
-
-                System.out.println("\nPress enter to continue..");
-                scan.nextLine();            
+                
+                            
+                           
 
             }else{
                 
@@ -577,6 +616,10 @@ public class Monitoring extends MonitorAbstract {
             
         }
         
+        System.out.println("");
+        System.out.println("\nPress enter to continue..");
+        scan.nextLine();          
+        scan.nextLine();          
         
         
     }
