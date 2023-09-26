@@ -39,11 +39,12 @@ public class welcomePage {
         }   
 
         
-        clScr();
+        
         while(bigLoop == true){
             
             do {
-                
+                clScr();
+     
                 System.out.println("Welcome to the Seminar Management System!");
                 System.out.println("------------------------------------------");
                 System.out.println("Menu:");

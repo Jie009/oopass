@@ -161,7 +161,7 @@ public class SlotBooking {
 
             else if (choice == 0){
                 
-                 exitStatus = true;
+                 welcomePage(admins, speakers, attendees, scanner);
                  
             }
 
@@ -272,7 +272,14 @@ public class SlotBooking {
                 Slot chosenSlot = availableSlots.get(choice2);
                 double slotPrice = chosenSlot.getPrice();
                 if(paymentClass.eventPayment(scanner, payment, slotPrice)){
-                    int numOfBooking = SlotBooking.getNumOfBooking();
+                    int numOfBooking = 0;
+
+                    for (SlotBooking booking : sb) {
+                        if (booking != null) {
+                            numOfBooking++;
+                        }
+                    }
+//                    int numOfBooking = SlotBooking.getNumOfBooking();
                     int numOfPayment = Payment.getNumOfPayment();
                     sb[numOfBooking] = new SlotBooking(speaker, chosenSlot, payment[numOfPayment-1]);
                     clScr();
