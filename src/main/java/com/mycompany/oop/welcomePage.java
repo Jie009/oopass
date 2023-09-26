@@ -87,13 +87,13 @@ public class welcomePage {
                 
                 //Sample data for Report & Monitoring
 
-                /*
+                
                     payment[0] = new Payment("Credit card", 200);
                     payment[1] = new Payment("Online Banking", 200);
 
-                    attendee[0] = new Attendee("A1", "S1", payment[0]);
-                    attendee[1] = new Attendee("A2", "S2", payment[1]);
-                    attendee[2] = new Attendee("A3", "S2", payment[2]);
+                    attendee[0] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S1", payment[0]);
+                    attendee[1] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S2", payment[1]);
+                    attendee[2] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S2", payment[2]);
 
                     seminarEnroll[0] = new SeminarEnroll(attendee[0], seminar[0]);
                     seminarEnroll[1] = new SeminarEnroll(attendee[1], seminar[1]);
@@ -101,10 +101,10 @@ public class welcomePage {
 
 
                     //change "test" to admin name
-                    sb[0] = new SlotBooking("test", slot[0], payment[0]);
-                    sb[1] = new SlotBooking("test", slot[0], payment[0]);
-
-                */
+                    sb[0] = new SlotBooking("Speaker User", slot[0], payment[0]);
+                    sb[1] = new SlotBooking("Speaker User", slot[0], payment[0]);
+                    System.out.println(Login.userId());
+                
 
 
 
@@ -235,11 +235,12 @@ public class welcomePage {
                 
 
             }else if(choice == 2){
+                String nameCompare = Login.userId();
 
                 int reportChoice = report.generateList(userStatus);
                 if(reportChoice != 0){
 
-                    userCont = report.generateReport(reportChoice, userStatus);             
+                    userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
                 }
 
 
@@ -273,9 +274,10 @@ public class welcomePage {
 
             //Report
             }else if(choice == 2){
-
+                
+                String nameCompare = Login.userId();
                 int reportChoice = report.generateList(userStatus);
-                report.generateReport(reportChoice, userStatus);                
+                report.generateReport(reportChoice, userStatus, nameCompare);                
 
             //Advertisement
             }else if(choice == 3){

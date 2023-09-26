@@ -5,5 +5,10 @@ public class Speaker extends User {
         super(id, password, name, "Speaker", contactInfo);
     }
     
+    
+    public String getSpeaker(){
+     
+        return super.getid();
+    }
     // Add specific methods or overrides for Speaker users here
 }

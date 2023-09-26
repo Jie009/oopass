@@ -171,7 +171,7 @@ public class Report extends ReportAbstract {
 
     }
     
-    public boolean generateReport(int reportChoice, int category){
+    public boolean generateReport(int reportChoice, int category, String name){
         
         splitID();
         Scanner scan = new Scanner(System.in);
@@ -248,9 +248,10 @@ public class Report extends ReportAbstract {
                     paymentChoice = scan.nextInt();
 
                     //Validation
-                    if(paymentChoice == -1){
+                    if(paymentChoice == 0){
 
                         status = false;
+                        exitStatus = true;
                         break;
                     }
 
@@ -276,7 +277,7 @@ public class Report extends ReportAbstract {
             //CHECK ONGOING SEMINAR
             }else if(reportChoice == 3){
 
-                checkSeminars();
+                checkSeminars(category, name);
                 
                 
             //CHECK ALL BOOKING
@@ -316,9 +317,10 @@ public class Report extends ReportAbstract {
                     attendeechoice = scan.nextInt();
 
                     //Validation
-                    if(attendeechoice == -1){
+                    if(attendeechoice == 0){
 
                         status = false;
+                        exitStatus = true;
                         break;
                     }
 
@@ -339,7 +341,7 @@ public class Report extends ReportAbstract {
 
             }else if(reportChoice == 2){
 
-                checkSeminars();
+                checkSeminars(category, name);
 
             }else if(reportChoice == 0){
                 
@@ -638,7 +640,7 @@ public class Report extends ReportAbstract {
         
     }  
     
-    public void checkSeminars(){
+    public void checkSeminars(int userStatus, String name){
         
         Scanner scan = new Scanner(System.in);
         Date currentDate = new Date();
@@ -648,42 +650,65 @@ public class Report extends ReportAbstract {
         double totalAttendee = 0;
         double totalCost = 0;
         int count = 0;
-        
-        //change
-        String name = "Liew";
-        
-        for(int k=0; k<slotbooking.length; k++){
-            
-            if(slotbooking[k] != null){
-                
-                count++;
-                for(int i=0; i<slotbooking.length; i++){
 
-                    if(slotbooking[i].getSpeaker().equals(name)){
+        
+        
+            
+            
+                
+                for(int i=0; i<slotbooking.length; i++){
+                    
+                    if(slotbooking[i] != null){
+                        count++;
+                        
+                        userStatus = 2;
+                        //1 is admin
+                        if(userStatus == 2){
+                            
+                            System.out.println(slotbooking[i].getSpeaker());
+                            if(slotbooking[i].getSpeaker().equals(name)){
+
+                                 String speakerSlotID = slotbooking[i].getID();
+                                 System.out.println(speakerSlotID);
+                                 for(int j=0; j<attendee.length; j++){
+
+                                     if((attendee[j].getSeminarID()).equals(speakerSlotID)){
+
+                                         totalAttendee += attendee[j].getTotal();
+
+                                     }
+                                 }
+
+                             }                    
+
+                        }
+                        
+                    }
+/*                    if(slotbooking[i].getSpeaker().equals(name)){
 
                         String speakerSlotID = slotbooking[i].getID();
                         System.out.println(speakerSlotID);
                         for(int j=0; j<attendee.length; j++){
 
-//                            if((attendee[j].getSeminarID()).equals(speakerSlotID)){
-//
-//                                totalAttendee += attendee[j].getTotal();
-//
-//                            }
+                            if((attendee[j].getSeminarID()).equals(speakerSlotID)){
+
+                                totalAttendee += attendee[j].getTotal();
+
+                            }
                         }
 
                     } 
-            
+     */       
                 }               
         
         
                 for(int i=0; i<slotbooking.length; i++){
 
-                    if(slotbooking[i].getSpeaker().equals(name)){
+/*                    if(slotbooking[i].getSpeaker().equals(name)){
 
                         totalCost += slotbooking[i].getTotal();
 
-                    }            
+                    }      */      
 
                 }    
                 
@@ -693,20 +718,17 @@ public class Report extends ReportAbstract {
                 System.out.printf("\nTotal Cost: RM%.2f", totalCost);
                 System.out.printf("\nTotal Profit: RM%.2f", (totalAttendee-totalCost));
         
-        
-                                    
-            }else{
-                
+
                 if(count<=0){
-                    
+
                     System.out.println("There are no bookings at the moment..");
                     System.out.println("\nPress enter to continue..");
                     scan.nextLine();  
-                    break;
+
                 }
-            }
-        }      
-                
+            
+              
+    
     }
     
     public void checkBooking(){
