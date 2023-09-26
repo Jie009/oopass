@@ -361,12 +361,9 @@ public class Monitoring extends MonitorAbstract {
             System.out.println("Current Time: " + currentTime);
             for(int i=0; i<seminarID.length; i++){
                 
-                seminarStartTime = getStartTimeByID(seminarID[i]);
-                seminarEndTime = getEndTimeByID(seminarID[i]); 
-                
-                
-                
                 if(seminarID[i] != null){
+                    seminarStartTime = getStartTimeByID(seminarID[i]);
+                    seminarEndTime = getEndTimeByID(seminarID[i]); 
 
                     if (currentTime.compareTo(seminarStartTime) >= 0 && currentTime.compareTo(seminarEndTime) <= 0) {
 
@@ -473,6 +470,8 @@ public class Monitoring extends MonitorAbstract {
         
         SimpleDateFormat convertDate = new SimpleDateFormat("dd-MM-yyyy");
         int count = 0;
+        int secondCount = 0;
+        java.sql.Date sqlDate3 = null;
         
         for (int i = 0; i < slotbooking.length; i++) {
             
@@ -524,44 +523,45 @@ public class Monitoring extends MonitorAbstract {
                 }else if(choiceVenue == 2){
                     
                     boolean status = true;
-                    java.sql.Date sqlDate = null;
+                    
                     String userInput;
-                    String formattedDate;
-                    if(count == 0){
+                    String formattedDate = "";
+                    if(secondCount == 0){
                         
                         status = false;
-                        count++;
+                        secondCount++;
+                        
+                        do {
+
+                            try {
+
+                                System.out.print("Enter a date (dd-MM-yyyy): ");
+                                userInput = scan.next();
+
+                                // Parse the user input into a java.util.Date
+                                java.util.Date utilDate = convertDate.parse(userInput);
+
+                                // Convert the java.util.Date to a java.sql.Date in the desired format
+                                sqlDate3 = new java.sql.Date(utilDate.getTime());
+
+                                // Format the date as "yyyy-MM-dd"
+                                formattedDate = convertDate.format(sqlDate3);
+
+                                System.out.printf("\nDate: %-100s ", formattedDate);
+                                System.out.printf("\nCurrent Date: %-100s", formattedDate);
+
+                                status = false;
+
+                            } catch (ParseException e) {
+
+                                status = true;
+                                System.out.println("Invalid date format. Please use dd-MM-yyyy.");
+
+                            }
+
+                        }while(status == true);
                     }
 
-                    do {
-
-                        try {
-                            
-                            System.out.print("Enter a date (dd-MM-yyyy): ");
-                            userInput = scan.next();
-
-                            // Parse the user input into a java.util.Date
-                            java.util.Date utilDate = convertDate.parse(userInput);
-
-                            // Convert the java.util.Date to a java.sql.Date in the desired format
-                            sqlDate = new java.sql.Date(utilDate.getTime());
-
-                            // Format the date as "yyyy-MM-dd"
-                            formattedDate = convertDate.format(sqlDate);
-
-                            System.out.printf("\nDate: %-100s ", formattedDate);
-                            System.out.printf("\nCurrent Date: %-100s", formattedDate);
-
-                            status = false;
-
-                        } catch (ParseException e) {
-
-                            status = true;
-                            System.out.println("Invalid date format. Please use dd-MM-yyyy.");
-
-                        }
-
-                    }while(status == true);
 
                     if(slotbooking[i] != null){
                         count++;
@@ -575,7 +575,7 @@ public class Monitoring extends MonitorAbstract {
                         slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
                         slotEndTime = Time.valueOf(slotbooking[i].getEndTime());                        
 
-                        int comparisonResult = sqlDate.compareTo(slotStartDate);
+                        int comparisonResult = sqlDate3.compareTo(slotStartDate);
                         if(comparisonResult < 0){
 
 
@@ -618,6 +618,7 @@ public class Monitoring extends MonitorAbstract {
         
         System.out.println("");
         System.out.println("\nPress enter to continue..");
+        scan.nextLine();          
         scan.nextLine();          
         
         
