@@ -359,12 +359,12 @@ public class Monitoring extends MonitorAbstract {
             
             int count = 0;
             System.out.println("Current Time: " + currentTime);
-            for(int i=0; i<seminarID.length; i++){
+            for(int i=0; i<seminars.length; i++){
                 
-                if(seminarID[i] != null){
-                    seminarStartTime = getStartTimeByID(seminarID[i]);
-                    seminarEndTime = getEndTimeByID(seminarID[i]); 
-
+                if(seminars[i] != null){
+                    seminarStartTime = seminars[i].getStartTime();
+                    seminarEndTime = seminars[i].getEndTime(); 
+                    
                     if (currentTime.compareTo(seminarStartTime) >= 0 && currentTime.compareTo(seminarEndTime) <= 0) {
 
                         System.out.println(seminarID[i] + " is conducting.");
@@ -404,23 +404,19 @@ public class Monitoring extends MonitorAbstract {
                 System.out.println("");
                 System.out.println("");
                 System.out.println("Chosen Time: " + sqlTime);
-                for(int i=0; i<seminarID.length; i++){
-
-                    seminarStartTime = getStartTimeByID(seminarID[i]);
-                    seminarEndTime = getEndTimeByID(seminarID[i]); 
-
-
-
-                    if(seminarID[i] != null){
-
+                for(int i=0; i<seminars.length; i++){
+                    
+                    if(seminars[i] != null){
+                        
+                        seminarStartTime = seminars[i].getStartTime();
+                        seminarEndTime = seminars[i].getEndTime(); 
+                        
                         if (sqlTime.compareTo(seminarStartTime) >= 0 && sqlTime.compareTo(seminarEndTime) <= 0) {
 
                             System.out.println(seminarID[i] + " is conducting.");
                             count++;
 
                         }
-
-
                     }
 
 
