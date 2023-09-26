@@ -449,7 +449,8 @@ public class Report extends ReportAbstract {
         
         Scanner scan = new Scanner(System.in);
         int num = 0;
-
+        OOP.clScr();
+        System.out.println("===================================================");
         if(attendeechoice == 1){
             num++;
             System.out.printf("\n%-30s %-30s", "Seminar", "Number of Attendees");
@@ -461,7 +462,7 @@ public class Report extends ReportAbstract {
                     System.out.printf("\n%-30s %-30s", seminarID[i], count[i]);
                 }
             }     
-            
+        System.out.println("\n===================================================");    
         }else if(attendeechoice == 2){
 
             String userInput;
@@ -492,12 +493,13 @@ public class Report extends ReportAbstract {
                 }
             }            
            
-            
+        System.out.println("\n===================================================");      
         }
+
 
         if(num == 0){
             
-            System.out.println("Therea re currently no seminars.");
+        System.out.println("Therea re currently no seminars.");
         }
         System.out.println("");
         System.out.println("\nPress enter to continue..");
@@ -622,7 +624,8 @@ public class Report extends ReportAbstract {
         
         System.out.println("");
         System.out.println("\nPress enter to continue..");
-        scan.nextLine();  
+        scan.nextLine(); 
+//        generateReport(1, 1, name);
         
     }
     
