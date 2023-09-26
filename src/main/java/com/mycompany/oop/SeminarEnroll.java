@@ -167,14 +167,15 @@ public class SeminarEnroll {
             Scanner scanner = new Scanner(System.in);
             menu();
             int choice = scanner.nextInt();
-
+            
+            //enroll
             if(choice == 1){
                 
                 int num=0;
                 Time currentTime = new Time(System.currentTimeMillis());
                 Date currentDate = new Date(System.currentTimeMillis());
                 Timestamp currentTimestamp = new Timestamp(currentDate.getTime() + currentTime.getTime());
-
+              
 
                 for (int i = 0; i < seminar.length; i++) {
                     
@@ -205,12 +206,14 @@ public class SeminarEnroll {
 
                 }else if(num > 0){
                     
-                    System.out.println("Which seminar do you wanna enroll?");
                     String userInput = "";
                     int cout = 0;
+                    int errorCount = 0;
                     
-                    do {
+                        System.out.println("Which seminar do you wanna enroll?");
                         System.out.print("Enter Seminar ID (S1 to S5): ");
+                    do {
+                        
                         userInput = scanner.nextLine();
 
 
@@ -219,7 +222,13 @@ public class SeminarEnroll {
                             break; // Exit the loop if input is valid
                             
                         } else {
-                            System.out.println("Invalid input. Please enter S1 to S5.");
+                            
+                            if(errorCount != 0){
+                                
+                                errorCount++;
+                                System.out.println("Invalid input. Please enter S1 to S5.");
+                                System.out.print("> ");
+                            }
                         }
                         
                     } while (true);
@@ -245,12 +254,12 @@ public class SeminarEnroll {
                                     attendee[numOfAttendee] = new Attendee(name, "","","", seminar[i].getID(), payment[numOfPayment]);
                                     SE[enrollCount-1] = new SeminarEnroll(attendee[numOfAttendee], seminar[i]);            
                                     System.out.println("Seminar successfully enrolled!");
-
+                                    System.out.println("");
+                                    System.out.println("\nPress any key to continue...");
                                         
-                                    
-                                    
-                                    //format
-                                            
+                                    scanner.nextLine();
+                                    scanner.nextLine();
+                      
                                 }
                                         
                             }
@@ -272,12 +281,14 @@ public class SeminarEnroll {
 
             }else if(choice == 2){
 
-                
+                //View enrolled seminars
+                //Must enroll to get data
                 viewBookedEvents(attendee, scanner, name, SE, seminar, payment);
 
             }else if(choice == 3){
 
-                
+                //Must enroll to get data
+                //Cancel enrolled seminar
                 cancelBookedEvents(scanner, name, SE, seminar, payment);
             
             }else if(choice == 0){
@@ -291,7 +302,8 @@ public class SeminarEnroll {
         
         
     }
- 
+    
+    //Must enroll only to get view
     public static void viewBookedEvents(Attendee[] attendee, Scanner scanner, String name, SeminarEnroll[] SE, Seminar[] seminar, Payment[] payment) {
         
         int num = 0;
@@ -301,12 +313,10 @@ public class SeminarEnroll {
             
             if(SE[i] != null){
                 
-                
-                
-                    
                 if(attendee[i] != null){
-
-                     if(SE[i].getAttendeeID().equals(attendee[i].getUserID())){
+                    
+                    
+                     if(SE[i].getAttendeeID().equals(name)){
 
                         num++;
                         System.out.println(SE[i].output());
@@ -322,11 +332,19 @@ public class SeminarEnroll {
         
         if(num==0){
             
-            clScr();
+
             System.out.println("You have not enrolled any seminars");
             System.out.println("\nPress any key to continue...");
             scanner.nextLine();
+            scanner.nextLine();
 
+        }else{
+            
+
+            System.out.println("\nPress any key to continue...");
+            scanner.nextLine();
+            scanner.nextLine();
+            
         }
         
         
@@ -368,6 +386,7 @@ public class SeminarEnroll {
                 System.out.println("You have not enrolled any seminars.");
                 System.out.println("\nPress any key to continue...");
                 scanner.nextLine();
+                scanner.nextLine();
                 break;
 
             }else{
@@ -401,6 +420,9 @@ public class SeminarEnroll {
                     setEnrollCount(SeminarEnroll.getEnrollCount() - 1);
                     System.out.println("Event cancelled successfully.");
                     System.out.println("RM" + refund + " is refunded successfully. ");
+                    System.out.println("");
+                    System.out.println("\nPress any key to continue...");
+                    scanner.nextLine();
                     break;
                 } else {
                     System.out.println("Event not found.");
