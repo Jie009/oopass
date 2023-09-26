@@ -61,8 +61,9 @@ public class Advertisement extends Seminar{
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(super.toString()); 
-        sb.append("Advertisement Details\n");
-        sb.append("--------------------\n");
+        sb.append("===================================================\n");
+        sb.append(" Advertisement Details\n");
+        sb.append("===================================================\n");
         sb.append("Title: ").append(advertisementTitle).append("\n");
         sb.append("Description: ").append(advertisementDescription).append("\n");
         sb.append("Price: $").append(String.format("%.2f", advertisementPrice)).append("\n");
@@ -71,8 +72,10 @@ public class Advertisement extends Seminar{
     }
 
     public static void createAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
-        
-        System.out.print("Enter seminar ID: ");
+        OOP.clScr();
+        System.out.println("===================================================");
+        System.out.println("              Creating Advertiesment");
+        System.out.print("\nEnter seminar ID: ");
         String ID = scanner.nextLine();
 
 
@@ -171,100 +174,117 @@ public class Advertisement extends Seminar{
         ArrayList<SeminarEnroll> enrollList = new ArrayList<>();
         Advertisement ad = new Advertisement(ID, "", startDate, endDate, startTime, endTime, price, location, enrollList, advertisementTitle, advertisementDescription, advertisementPrice);
         advertisements.add(ad);
-
+        System.out.println("===================================================");
+        System.out.println(" ");
         System.out.println("Advertisement created successfully.");
+        System.out.println("\nPress any key to continue...");
+        scanner.nextLine();
     }
 
 
-    public static void viewAdvertisements(ArrayList<Advertisement> advertisements) {
+    public static boolean viewAdvertisements(ArrayList<Advertisement> advertisements, Scanner scanner) {
+        OOP.clScr();
         if (advertisements.isEmpty()) {
-            System.out.println("No advertisements to display.");
+            System.out.println("===================================================");  
+            System.out.println("           No advertisements to display.");
+            System.out.println("===================================================");  
+            System.out.println("\nPress any key to continue...");
+            scanner.nextLine();
+            return false;
         } else {
             System.out.println("Advertisements:");
             for (int i = 0; i < advertisements.size(); i++) {
                 System.out.println((i + 1) + ". " + advertisements.get(i));
+                System.out.println("\nPress any key to continue...");
+                scanner.nextLine();
             }
+            return true;
         }
     }
 
     public static void updateAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
-        viewAdvertisements(advertisements);
-        System.out.print("Enter the number of the advertisement to update: ");
-        int adNumber = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
-        if (adNumber >= 1 && adNumber <= advertisements.size()) {
-            Advertisement ad = advertisements.get(adNumber - 1);
-
-            System.out.println("Select the attribute to update:");
-            System.out.println("1. Title");
-            System.out.println("2. Description");
-            System.out.println("3. Price");
-            System.out.print("Enter your choice: ");
-            int attributeChoice = scanner.nextInt();
+        if(viewAdvertisements(advertisements, scanner)){
+            System.out.print("Enter the number of the advertisement to update: ");
+            int adNumber = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
-            switch (attributeChoice) {
-                case 1:
-                    System.out.print("Enter new title: ");
-                    String newTitle = scanner.nextLine();
-                    if (newTitle != null && !newTitle.trim().isEmpty()) {
-                        ad.setTitle(newTitle);
-                        System.out.println("Title updated successfully.");
-                    } else {
-                        System.out.println("Title cannot be empty. Update failed.");
-                    }
-                    break;
-                case 2:
-                    System.out.print("Enter new description: ");
-                    String newDescription = scanner.nextLine();
-                    if (newDescription != null && !newDescription.trim().isEmpty()) {
-                        ad.setDescription(newDescription);
-                        System.out.println("Description updated successfully.");
-                    } else {
-                        System.out.println("Description cannot be empty. Update failed.");
-                    }
-                    break;
-                case 3:
-                    System.out.print("Enter new price: ");
-                    double newPrice = scanner.nextDouble();
-                    if (newPrice > 0) {
-                        ad.setPrice(newPrice);
-                        System.out.println("Price updated successfully.");
-                    } else {
-                        System.out.println("Invalid price. Price must be greater than 0. Update failed.");
-                    }
-                    break;
-                default:
-                    System.out.println("Invalid attribute choice.");
+            if (adNumber >= 1 && adNumber <= advertisements.size()) {
+                Advertisement ad = advertisements.get(adNumber - 1);
+
+                System.out.println("Select the attribute to update:");
+                System.out.println("1. Title");
+                System.out.println("2. Description");
+                System.out.println("3. Price");
+                System.out.print("Enter your choice: ");
+                int attributeChoice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (attributeChoice) {
+                    case 1:
+                        System.out.print("Enter new title: ");
+                        String newTitle = scanner.nextLine();
+                        if (newTitle != null && !newTitle.trim().isEmpty()) {
+                            ad.setTitle(newTitle);
+                            System.out.println("Title updated successfully.");
+                        } else {
+                            System.out.println("Title cannot be empty. Update failed.");
+                        }
+                        break;
+                    case 2:
+                        System.out.print("Enter new description: ");
+                        String newDescription = scanner.nextLine();
+                        if (newDescription != null && !newDescription.trim().isEmpty()) {
+                            ad.setDescription(newDescription);
+                            System.out.println("Description updated successfully.");
+                        } else {
+                            System.out.println("Description cannot be empty. Update failed.");
+                        }
+                        break;
+                    case 3:
+                        System.out.print("Enter new price: ");
+                        double newPrice = scanner.nextDouble();
+                        if (newPrice > 0) {
+                            ad.setPrice(newPrice);
+                            System.out.println("Price updated successfully.");
+                        } else {
+                            System.out.println("Invalid price. Price must be greater than 0. Update failed.");
+                        }
+                        break;
+                    default:
+                        System.out.println("Invalid attribute choice.");
+                }
+            } else {
+                System.out.println("Invalid advertisement number.");
             }
-        } else {
-            System.out.println("Invalid advertisement number.");
         }
+        
     }
 
 
     public static void deleteAdvertisement(ArrayList<Advertisement> advertisements, Scanner scanner) {
-        viewAdvertisements(advertisements);
-        System.out.print("Enter the number of the advertisement to delete: ");
-        int adNumber = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        
+        if(viewAdvertisements(advertisements, scanner)){
+            System.out.print("Enter the number of the advertisement to delete: ");
+            int adNumber = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-        if (adNumber >= 1 && adNumber <= advertisements.size()) {
-            Advertisement adToDelete = advertisements.get(adNumber - 1);
+            if (adNumber >= 1 && adNumber <= advertisements.size()) {
+                Advertisement adToDelete = advertisements.get(adNumber - 1);
 
-            System.out.print("Are you sure you want to delete this advertisement? (yes/no): ");
-            String confirmation = scanner.nextLine().trim().toLowerCase();
+                System.out.print("Are you sure you want to delete this advertisement? (yes/no): ");
+                String confirmation = scanner.nextLine().trim().toLowerCase();
 
-            if (confirmation.equals("yes")) {
-                advertisements.remove(adToDelete);
-                System.out.println("Advertisement deleted successfully.");
+                if (confirmation.equals("yes")) {
+                    advertisements.remove(adToDelete);
+                    System.out.println("Advertisement deleted successfully.");
+                } else {
+                    System.out.println("Advertisement was not deleted.");
+                }
             } else {
-                System.out.println("Advertisement was not deleted.");
+                System.out.println("Invalid advertisement number.");
             }
-        } else {
-            System.out.println("Invalid advertisement number.");
         }
+        
     }
 }
 

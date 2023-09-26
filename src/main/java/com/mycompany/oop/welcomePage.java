@@ -32,8 +32,8 @@ public class welcomePage {
         slot[4] = new Slot("S5","Dewan Wangsa Maju", "Wangsa Maju hall", "15:00:00", "19:00:00", "26/10/2023", Date.valueOf("2023-10-26"), Date.valueOf("2023-10-27"), 200, 220);
         
         //Sample data for monitoring and report
-        seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
-        seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
+        seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 20, "KL", new ArrayList<>());
+        seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 30, "KL", new ArrayList<>());       
         for(int i=0; i<5; i++){
 
             availableSlots.add(slot[i]);
@@ -138,8 +138,8 @@ public class welcomePage {
                 payment[1] = new Payment("Online Banking", 200);
 
                 attendee[0] = new Attendee("at", "at", "Attendee User", "attendee@example.com", "S1", payment[0]);
-                attendee[1] = new Attendee("at2", "at2", "Attendee User", "attendee@example.com", "S2", payment[1]);
-                attendee[2] = new Attendee("at3", "at3", "Attendee User", "attendee@example.com", "S2", payment[2]);
+                attendee[1] = new Attendee("at2", "at2", "Attendee User 2", "attendee@example.com", "S2", payment[1]);
+                attendee[2] = new Attendee("at3", "at3", "Attendee User 3", "attendee@example.com", "S2", payment[2]);
 
                 //seminarEnroll[0] = new SeminarEnroll(attendee[0], seminar[0]);
                 //seminarEnroll[1] = new SeminarEnroll(attendee[1], seminar[1]);
@@ -173,7 +173,7 @@ public class welcomePage {
                         if(monitorChoice != 0){
 
                             userCont = monitor.displayList(monitorChoice);           
-                            
+
                         }
 
                     }else if(choice == 2){
@@ -184,7 +184,6 @@ public class welcomePage {
 
                             userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
                         }
-                       
 
 
                     }else if(choice == 0){
@@ -260,8 +259,9 @@ public class welcomePage {
                         System.out.println("0 - EXIT");
                         System.out.println("");
                         System.out.println("===================================================");
-
-                            int advChoice = scanner.nextInt();
+                        System.out.print("Enter your choice: ");;
+                            int advChoice = 0;
+                            advChoice = scanner.nextInt();
                             scanner.nextLine(); // Consume newline
 
                             switch (advChoice) {
@@ -269,7 +269,7 @@ public class welcomePage {
                                     Advertisement.createAdvertisement(advertisements, scanner);
                                     break;
                                 case 2:
-                                    Advertisement.viewAdvertisements(advertisements);
+                                    Advertisement.viewAdvertisements(advertisements, scanner);
                                     break;
                                 case 3:
                                     Advertisement.updateAdvertisement(advertisements, scanner);
@@ -278,7 +278,8 @@ public class welcomePage {
                                     Advertisement.deleteAdvertisement(advertisements, scanner);
                                     break;
                                 case 0:
-                                    System.out.println("Goodbye!");
+                                    System.out.println("Thank you. Goodbye!");
+                                    System.out.println("\nPress any key to continue...");
                                     System.exit(0);
                                 default:
                                     System.out.println("Invalid choice. Try again.");

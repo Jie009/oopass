@@ -1,5 +1,6 @@
 package com.mycompany.oop;
 
+import static com.mycompany.oop.OOP.clScr;
 import java.util.Date;
 import java.sql.Time;
 import java.text.ParseException;
@@ -637,8 +638,10 @@ public class Monitoring extends MonitorAbstract {
         
         int count = 0;
         if(slotChoice == 1){
-
-            System.out.println("Input a Slot/Seminar ID (S1-S5): ");
+            clScr();
+            System.out.println("===================================================");
+            System.out.println("");
+            System.out.print("Input a Slot/Seminar ID: ");
             String userInput = scan.nextLine();
             
             for (int i = 0; i < slot.length; i++) {
@@ -650,10 +653,10 @@ public class Monitoring extends MonitorAbstract {
                     if(userInput.equals(slotID)){
                         
                         OOP.clScr();
-                        System.out.println("");
-
+                        System.out.println("===================================================");
+                        System.out.println("                    Slot Editor");
+                        System.out.println("");                 
                         System.out.println("What do you wanna change?");
-                        System.out.println("0 - EXIT");
                         System.out.println("1 - Venue");
                         System.out.println("2 - Time");
                         System.out.println("3 - Date");
@@ -661,18 +664,25 @@ public class Monitoring extends MonitorAbstract {
                         System.out.println("5 - Seat Number");
                         System.out.println("6 - Price");
                         System.out.println("");
-                        System.out.print("> ");
+                        System.out.println("0 - EXIT");
+                        System.out.println("===================================================");
+                        System.out.print("Enter your choice: ");
                         int updateChoice = scan.nextInt();
                         scan.nextLine();
                         
                         //Exit
                         if(updateChoice == 0){
+                            
                             break;
                             
                         //Venue
                         }else if(updateChoice == 1){
-                            
-                            System.out.println("Input the new venue: ");
+                            OOP.clScr();
+                            System.out.println("===================================================");
+                            System.out.println("                    Slot Editor");
+                            System.out.println("");  
+                            System.out.println("===================================================");
+                            System.out.print("Input the new venue: ");
                             String updateInput = scan.nextLine();
                             
                             String original = slot[i].getVenue();
@@ -687,11 +697,14 @@ public class Monitoring extends MonitorAbstract {
                         //Time
                         }else if(updateChoice == 2){
                             
-                            System.out.println("");
-                            System.out.println("");
+                            OOP.clScr();
+                            System.out.println("===================================================");
+                            System.out.println("                    Slot Editor");
+                            System.out.println("");  
                             System.out.println("Please choose an option.");
                             System.out.println("1 - Update Start Time");
                             System.out.println("2 - Update End Time");
+                            System.out.println("===================================================");
                             int choiceTime = scan.nextInt();
                             scan.nextLine();
                             String updateInput = "";
@@ -789,11 +802,15 @@ public class Monitoring extends MonitorAbstract {
                         //Date
                         }else if(updateChoice == 3){
                             
-                            System.out.println("");
-                            System.out.println("");
+                            OOP.clScr();
+                            System.out.println("===================================================");
+                            System.out.println("                    Slot Editor");
+                            System.out.println("");  
                             System.out.println("Please choose an option.");
                             System.out.println("1 - Update Start Date");
                             System.out.println("2 - Update End Date");
+                            System.out.println("===================================================");
+                            System.out.print("Enter your choice: ");
                             int choiceDate = scan.nextInt();
                             scan.nextLine();
                             String updateInput = "";                       
@@ -892,8 +909,12 @@ public class Monitoring extends MonitorAbstract {
                             
                         //Description    
                         }else if(updateChoice == 4){
-                            
-                            System.out.println("Input the new Description: ");
+                            OOP.clScr();
+                            System.out.println("===================================================");
+                            System.out.println("                    Slot Editor");
+                            System.out.println("");  
+                            System.out.println("===================================================");
+                            System.out.print("Input the new Description: ");
                             String updateInput = scan.nextLine();
                             
                             String original = slot[i].getDesc();
@@ -907,8 +928,12 @@ public class Monitoring extends MonitorAbstract {
                             
                         //Seat Number
                         }else if(updateChoice == 5){
-                            
-                            System.out.println("Input the new Number of Seat Numbers: ");
+                            OOP.clScr();
+                            System.out.println("===================================================");
+                            System.out.println("                    Slot Editor");
+                            System.out.println("");  
+                            System.out.println("===================================================");
+                            System.out.print("Input the new Number of Seat Numbers: ");
                             int updateInput = scan.nextInt();
                             
                             int original = slot[i].getSeatNo();
@@ -924,8 +949,12 @@ public class Monitoring extends MonitorAbstract {
                                                             
                         //Price   
                         }else if(updateChoice == 6){
-                            
-                            System.out.println("Input the new Price: ");
+                            OOP.clScr();
+                            System.out.println("===================================================");
+                            System.out.println("                    Slot Editor");
+                            System.out.println("");  
+                            System.out.println("===================================================");
+                            System.out.print("Input the new Price: ");
                             double updateInput = scan.nextDouble();
                             
                             double original = slot[i].getPrice();
