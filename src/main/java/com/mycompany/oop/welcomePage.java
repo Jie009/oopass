@@ -266,14 +266,17 @@ public class welcomePage {
 
                 slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
         //        eb.eventBooking(scanner, speaker, sb, payment, availableSlots);      
-                System.out.println(slotBooking);
+                
 
             //Report
             }else if(choice == 2){
                 
                 String nameCompare = Login.userId();
                 int reportChoice = report.generateList(userStatus);
-                report.generateReport(reportChoice, userStatus, nameCompare);                
+                if(reportChoice != 0){
+
+                    userCont = report.generateReport(reportChoice, userStatus, nameCompare);             
+                }               
 
             //Advertisement
             }else if(choice == 3){

@@ -342,6 +342,8 @@ public class Report extends ReportAbstract {
             }else if(reportChoice == 2){
 
                 checkSeminars(category, name);
+                
+                
 
             }else if(reportChoice == 0){
                 
@@ -368,68 +370,73 @@ public class Report extends ReportAbstract {
 
         if(paymentChoice == 1){
             
-            for(int k=0; k<attendee.length; k++){
-                
-                if(attendee[k] != null){
-                    
-                    count++;
-                    for(int i=0; i<attendee.length; i++){
 
+            count++;
+            for(int i=0; i<attendee.length; i++){
 
-                        for(int j=0; j<method.length; j++){
+                if(attendee[i] != null){
 
-//                            if(attendee[i].getMethod().equals(method[j])){
-//
-//                                    methodCount[j]++;
-//                            }
+                    System.out.println(attendee[i].getMethod());
+                    for(int j=0; j<method.length; j++){
+                        
+                        if(attendee[i].getMethod() != null){
+                            
+                            
+                            if(attendee[i].getMethod().equals(method[j])){
+                                    methodCount[j]++;
+                            }
                         }
+
                     }
-
-                    List<ReportPaymentComparable> paymentMethods = new ArrayList<>(); 
-                    paymentMethods.clear();
-
-                    paymentMethods = Arrays.asList(
-
-                       new ReportPaymentComparable("Credit card", methodCount[0]),
-                       new ReportPaymentComparable("Online Banking", methodCount[1]),
-                       new ReportPaymentComparable("Touch & Go", methodCount[2]),
-                       new ReportPaymentComparable("Cash", methodCount[3])
-
-                   );
-
-
-                   // Sort paymentMethods based on counts
-                   Collections.sort(paymentMethods);
-
-                    System.out.println("");
-                    System.out.printf("%-30s", "Top Payment Method for Attendee");
-                    System.out.println("");
-                   // Print the sorted payment methods
-                   for (ReportPaymentComparable methodObj : paymentMethods) {
-                       System.out.println(methodObj);
-                   }        
-
-
-                    System.out.println("\nPress enter to continue..");
-                    scan.nextLine();                    
-                    
-                }else{
-                    
-                    if(count<=0){
-                    
-                        System.out.println("There are no bookings at the moment..");
-                        System.out.println("\nPress enter to continue..");
-                        scan.nextLine();  
-                        break;
-                    }                              
                 }
+
             }
+
+            List<ReportPaymentComparable> paymentMethods = new ArrayList<>(); 
+            paymentMethods.clear();
+
+            paymentMethods = Arrays.asList(
+
+               new ReportPaymentComparable("Credit card", methodCount[0]),
+               new ReportPaymentComparable("Online Banking", methodCount[1]),
+               new ReportPaymentComparable("Touch & Go", methodCount[2]),
+               new ReportPaymentComparable("Cash", methodCount[3])
+
+           );
+
+
+           // Sort paymentMethods based on counts
+           Collections.sort(paymentMethods);
+
+            System.out.println("");
+            System.out.printf("%-30s", "Top Payment Method for Attendee");
+            System.out.println("");
+           // Print the sorted payment methods
+           for (ReportPaymentComparable methodObj : paymentMethods) {
+               System.out.println(methodObj);
+           }        
+
+
+            System.out.println("\nPress enter to continue..");
+            scan.nextLine();                    
+
+
+
+            if(count<=0){
+
+                System.out.println("There are no bookings at the moment..");
+                System.out.println("\nPress enter to continue..");
+                scan.nextLine();  
+
+            }                              
+                
+            
 
         }else if(paymentChoice == 2){
             
-            for(int k=0; k<slotbooking.length; k++){
+            
                 
-                if(slotbooking[k] != null){
+               
                     
                     count2++;
                     for(int i=0; i<slotbooking.length; i++){
@@ -472,18 +479,18 @@ public class Report extends ReportAbstract {
                     System.out.println("\nPress enter to continue..");
                     scan.nextLine();                    
                     
-                }else{
+                
                     
                     if(count<=0){
 
                         System.out.println("There are no bookings at the moment..");
                         System.out.println("\nPress enter to continue..");
                         scan.nextLine();  
-                        break;
+                        
                     }                                        
                     
-                }
-            }
+                
+            
 
         }                        
 
@@ -657,11 +664,28 @@ public class Report extends ReportAbstract {
 
             if(slotbooking[i] != null){
                 count++;
+                
+                if(userStatus == 1){
+                    
+                    speakerSlotID = slotbooking[i].getID();
+                    for(int j=0; j<seminars.length; j++){
+
+                        if(seminars[j] != null){
+
+                            if(seminars[j].getID().equals(speakerSlotID)){
+
+                                totalCost += seminars[j].getPrice();
+
+                            }
+                        }
+                    }
+                    
+                    
+                }
 
                 //1 is admin
                 if(userStatus == 2){
 
-                    System.out.println(slotbooking[i].getSpeaker());
                     if(slotbooking[i].getSpeaker().equals(name)){
 
                         speakerSlotID = slotbooking[i].getID();
@@ -723,13 +747,23 @@ public class Report extends ReportAbstract {
                     System.out.println("\nPress enter to continue..");
                     scan.nextLine();  
                     
-                }else if(attendeeCount <= 0){
+                }else if(userStatus == 2 && attendeeCount == 0){
  
                     System.out.println("There are no enrolling attendees.");
                     System.out.println("\nPress enter to continue..");
                     scan.nextLine();                   
                     
-                }else{
+                }
+                
+                if(userStatus == 1){
+                    
+                    OOP.clScr();
+                    System.out.println("==========================================================");
+                    System.out.printf("\n\t\tFinancial Report by %-30s", formattedDate);
+                    System.out.printf("\n\t\tTotal: RM%.2f", totalCost);
+                    System.out.println("\n\n==========================================================");
+                
+                }else if(userStatus == 2){
 
                     OOP.clScr();
                     System.out.println("==========================================================");
