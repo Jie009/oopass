@@ -7,6 +7,7 @@ package com.mycompany.oop;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -827,17 +828,41 @@ public class Report extends ReportAbstract {
                             venue[i] = slotbooking[i].getVenue();
                             slotStartDate[i] = slotbooking[i].getStartDate();
                             slotEndDate[i] = slotbooking[i].getEndDate();
-                           // slotStartTime[i] = slotbooking[i].getStartDate();
-                            //slotEndTime[i] = slotbooking[i].getEndTime();
+                            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
+                            java.sql.Time sqlTimes = null;
+                            java.sql.Time sqlTime2 = null;
+
+
+                            try {
+
+                                // Parse the string into a Date object
+                                Date parsedDate = dateFormat.parse(slotbooking[i].getStartTime());
+
+                                // Create a java.sql.Time object from the parsed Date
+                                sqlTimes = new java.sql.Time(parsedDate.getTime());
+
+                                // Parse the string into a Date object
+                                Date parsedDate2 = dateFormat.parse(slotbooking[i].getEndTime());
+
+                                // Create a java.sql.Time object from the parsed Date
+                                sqlTime2 = new java.sql.Time(parsedDate2.getTime());
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }                             
+                            
+                            
+                            
+                            
                             //Less than 0 means its before
                             int comparisonResult = currentDate.compareTo(slotStartDate[i]);
                             if(comparisonResult < 0){
 
                                 System.out.printf("\nNo: %-25s", i+1);
                                 System.out.printf("\nVenue:  %-25s ", venue[i]);
-                                System.out.printf("\nSlot Start Time:  %-25s ", slotStartTime[i]);
-                                System.out.printf("\nSlot End Time:  %-25s ", slotEndTime[i]);
+                                System.out.printf("\nSlot Start Time:  %-25s ", sqlTimes);
+                                System.out.printf("\nSlot End Time:  %-25s ", sqlTime2);
                                 System.out.printf("\nSlot Start Date:  %-25s ", slotStartDate[i]);
                                 System.out.printf("\nSlot End Date:  %-25s ", slotEndDate[i]);
                                 System.out.println("");

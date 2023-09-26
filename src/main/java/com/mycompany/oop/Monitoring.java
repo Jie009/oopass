@@ -138,10 +138,15 @@ public class Monitoring extends MonitorAbstract {
         
         for(Seminar seminard: seminars){
                
-            if(seminard.getID().equals(id)){
+            if(seminard != null){
                 
-                return seminard.getStartTime();
+                if(seminard.getID().equals(id)){
+
+                    return seminard.getStartTime();
+                }
+                
             }
+            
         }
         
         return null;
@@ -150,10 +155,14 @@ public class Monitoring extends MonitorAbstract {
     public Time getEndTimeByID(String id){
         
         for(Seminar seminard: seminars){
-           
-            if(seminard.getID().equals(id)){
+               
+            if(seminard != null){
                 
-                return seminard.getEndTime();
+                if(seminard.getID().equals(id)){
+
+                    return seminard.getEndTime();
+                }
+                
             }
         }
         
@@ -326,7 +335,7 @@ public class Monitoring extends MonitorAbstract {
             int count = 0;
             System.out.println("Current Time: " + currentTime);
             for(int i=0; i<seminarID.length; i++){
-
+                
                 seminarStartTime = getStartTimeByID(seminarID[i]);
                 seminarEndTime = getEndTimeByID(seminarID[i]); 
                 
@@ -449,30 +458,34 @@ public class Monitoring extends MonitorAbstract {
                     String formattedDate = convertDate.format(currentDate);
                     System.out.println("Current Date: " + formattedDate);
                     for(int i=0; i<slotbooking.length; i++){
+                        
+                        if(slotbooking[i] != null){
+                            
+                            slotStartDate = slotbooking[i].getStartDate();
+                            slotEndDate = slotbooking[i].getEndDate();
+                            slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
+                            slotEndTime = Time.valueOf(slotbooking[i].getEndTime());
 
-                        slotStartDate = slotbooking[i].getStartDate();
-                        slotEndDate = slotbooking[i].getEndDate();
-                        slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
-                        slotEndTime = Time.valueOf(slotbooking[i].getEndTime());
+                            int comparisonResult = currentDate.compareTo(slotStartDate);
+                            if(comparisonResult < 0){
 
-                        int comparisonResult = currentDate.compareTo(slotStartDate);
-                        if(comparisonResult < 0){
+                                if(slotbooking[i] != null){
 
-                            if(slotbooking[i] != null){
+                                    System.out.println("The time of " + slotbooking[i].getVenue() + " is " + slotStartTime + " until " + slotEndTime);
 
-                                System.out.println("The time of " + slotbooking[i].getVenue() + " is " + slotStartTime + " until " + slotEndTime);
+                                    if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
 
-                                if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
+                                        System.out.println(slotbooking[i].getVenue() + " is conducting.");
 
-                                    System.out.println(slotbooking[i].getVenue() + " is conducting.");
+                                    }
 
                                 }
 
+                            }else{
+
+                                System.out.println("No seminar is conducting on " + formattedDate + ".");
                             }
-
-                        }else{
-
-                            System.out.println("No seminar is conducting on " + formattedDate + ".");
+                            
                         }
 
                     }
@@ -502,30 +515,34 @@ public class Monitoring extends MonitorAbstract {
                             System.out.println("Current Date: " + formattedDate);
 
                             for(int i=0; i<slotbooking.length; i++){
+                                
+                                if(slotbooking[i] != null){
+                                    
+                                    slotStartDate = slotbooking[i].getStartDate();
+                                    slotEndDate = slotbooking[i].getEndDate();
+                                    slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
+                                    slotEndTime = Time.valueOf(slotbooking[i].getEndTime());                        
 
-                                slotStartDate = slotbooking[i].getStartDate();
-                                slotEndDate = slotbooking[i].getEndDate();
-                                slotStartTime = Time.valueOf(slotbooking[i].getStartTime());
-                                slotEndTime = Time.valueOf(slotbooking[i].getEndTime());                        
+                                    int comparisonResult = sqlDate.compareTo(slotStartDate);
+                                    if(comparisonResult < 0){
 
-                                int comparisonResult = sqlDate.compareTo(slotStartDate);
-                                if(comparisonResult < 0){
+                                        if(slotbooking[i] != null){
 
-                                    if(slotbooking[i] != null){
+                                            System.out.println("The time of " + slotbooking[i].getVenue() + " is " + slotStartTime + " until " + slotEndTime);
 
-                                        System.out.println("The time of " + slotbooking[i].getVenue() + " is " + slotStartTime + " until " + slotEndTime);
+                                            if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
 
-                                        if (sqlTime.compareTo(slotStartTime) >= 0 && sqlTime.compareTo(slotEndTime) <= 0) {
+                                                System.out.println(slotbooking[i].getVenue() + " is conducting.");
 
-                                            System.out.println(slotbooking[i].getVenue() + " is conducting.");
+                                            }
 
                                         }
 
+                                    }else{
+
+                                        System.out.println("No seminar is conducting on " + formattedDate + ".");
                                     }
-
-                                }else{
-
-                                    System.out.println("No seminar is conducting on " + formattedDate + ".");
+                                    
                                 }
                             }
 

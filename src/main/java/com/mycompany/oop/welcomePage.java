@@ -31,8 +31,8 @@ public class welcomePage {
         slot[3] = new Slot("S4","SMK Kawi", "Secondary school hall", "8:00:00", "11:00:00", "30/10/2023", Date.valueOf("2023-10-30"), Date.valueOf("2023-10-30"), 200, 150);
         slot[4] = new Slot("S5","Dewan Wangsa Maju", "Wangsa Maju hall", "15:00:00", "19:00:00", "26/10/2023", Date.valueOf("2023-10-26"), Date.valueOf("2023-10-27"), 200, 220);
 
-        seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
-        seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
+        //seminar[0] = new Seminar("S1", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("15:30:00"), Time.valueOf("17:30:00"), 200, "KL", new ArrayList<>());
+        //seminar[1] = new Seminar("S2", "", Date.valueOf("2023-10-21"), Date.valueOf("2023-10-22"), Time.valueOf("16:30:00"), Time.valueOf("18:30:00"), 200, "KL", new ArrayList<>());       
         
 
         
@@ -87,6 +87,8 @@ public class welcomePage {
                 
                 //Sample data for Report & Monitoring
 
+                /*
+                
                 
                     payment[0] = new Payment("Credit card", 200);
                     payment[1] = new Payment("Online Banking", 200);
@@ -103,7 +105,7 @@ public class welcomePage {
                     //change "test" to admin name
                     sb[0] = new SlotBooking("Speaker User", slot[0], payment[0]);
                     sb[1] = new SlotBooking("Speaker User", slot[1], payment[1]);
-
+*/
                 
                 if(cat.equals("Admin")){
                     clScr();
@@ -264,7 +266,7 @@ public class welcomePage {
 
         //        EventBooking eb = new EventBooking();
 
-                slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees);
+                slotBooking.eventBooking(scanner, speaker, sb, payment, availableSlots, admins, speakers, attendees, seminar, slot);
         //        eb.eventBooking(scanner, speaker, sb, payment, availableSlots);      
                 
 
